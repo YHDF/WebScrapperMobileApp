@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:ui';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:pfe_mobile/bottom_bar.dart';
@@ -24,6 +25,8 @@ class product_detailState extends State<product_detail> {
   Future<void> _launched;
   static double dev_width, dev_height;
   static String prv_name = '' ;
+  int favorite_color = 220;
+  bool is_favorite = false;
 
 
   void initState(){
@@ -36,6 +39,13 @@ class product_detailState extends State<product_detail> {
             prv_name = globals.MyGlobals.provider[j].name;
           }
         }
+      }
+    }
+    for(int i = 0; i < globals.MyGlobals.favourites.length; i++){
+      if(globals.MyGlobals.favourites[i].id_product == globals.MyGlobals.all_products[counter].id_product){
+        favorite_color = 200;
+        is_favorite = true;
+        break;
       }
     }
   }
@@ -70,6 +80,11 @@ class product_detailState extends State<product_detail> {
       } else {
         throw Exception('Failed to load Message');
       }
+    }).then((value) {
+      print('oy');
+      setState(() {
+
+      });
     });
   }
 
@@ -124,7 +139,7 @@ class product_detailState extends State<product_detail> {
                               child: Container(
                                 decoration: BoxDecoration(
                                   border: Border.all(
-                                      color: Colors.white, width: 1.0),
+                                      color: globals.MyGlobals.lightcolor, width: 1.0),
                                   borderRadius:
                                   BorderRadius.circular(dev_width / 8),
                                 ),
@@ -166,6 +181,7 @@ class product_detailState extends State<product_detail> {
                           ],
                         ),
                       ),
+                      VerticalDivider(width: dev_width / 24,),
                       Container(
                         alignment: Alignment(0.7, -0.8),
                         child: Container(
@@ -175,7 +191,7 @@ class product_detailState extends State<product_detail> {
                               border: Border.all(
                                   color: Colors.transparent, width: 0.0),
                               borderRadius: BorderRadius.circular(10),
-                              color: Colors.white.withOpacity(0.3),
+                              color: globals.MyGlobals.lightcolor.withOpacity(0.3),
                             ),
                             alignment: Alignment(-1, -0.9),
                             child: Column(
@@ -188,7 +204,7 @@ class product_detailState extends State<product_detail> {
                                       Text(
                                         globals.MyGlobals.all_products[counter].name,
                                         style: TextStyle(
-                                          color: Colors.white,
+                                          color: globals.MyGlobals.lightcolor,
                                           fontWeight: FontWeight.w900,
                                           fontSize: dev_height > dev_width
                                               ? dev_width / 16.44
@@ -200,7 +216,7 @@ class product_detailState extends State<product_detail> {
                                 ),
                                 Divider(
                                   height: 5,
-                                  color: Colors.white,
+                                  color: globals.MyGlobals.lightcolor,
                                   endIndent: 20,
                                   indent: 20,
                                 ),
@@ -210,7 +226,7 @@ class product_detailState extends State<product_detail> {
                                   child: Row(
                                     children: <Widget>[
                                       Container(
-                                        width: dev_width / 5,
+                                        width: dev_width / 3,
                                         child: Stack(
                                           children: <Widget>[
                                             Container(
@@ -225,7 +241,7 @@ class product_detailState extends State<product_detail> {
                                                           dev_width
                                                           ? dev_width / 20.55
                                                           : dev_height / 36.55,
-                                                      color: Colors.white,
+                                                      color: globals.MyGlobals.lightcolor,
                                                     ),
                                                   ),
                                                 ),
@@ -243,7 +259,7 @@ class product_detailState extends State<product_detail> {
                                                           dev_width
                                                           ? dev_width / 20.55
                                                           : dev_height / 36.55,
-                                                      color: Colors.white,
+                                                      color: globals.MyGlobals.lightcolor,
                                                     ),
                                                   ),
                                                 ),
@@ -253,50 +269,7 @@ class product_detailState extends State<product_detail> {
                                         ),
                                       ),
                                       Container(
-                                        width: dev_width / 5,
-                                        child: Stack(
-                                          children: <Widget>[
-                                            Container(
-                                              alignment: Alignment(0, -1),
-                                              child: Container(
-                                                height: dev_height / 24,
-                                                child: Center(
-                                                  child: Text(
-                                                    'Reviews',
-                                                    style: TextStyle(
-                                                      fontSize: dev_height >
-                                                          dev_width
-                                                          ? dev_width / 20.55
-                                                          : dev_height / 36.55,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            Container(
-                                              alignment: Alignment(0, 1),
-                                              child: Container(
-                                                height: dev_height / 24,
-                                                child: Center(
-                                                  child: Text(
-                                                    '100',
-                                                    style: TextStyle(
-                                                      fontSize: dev_height >
-                                                          dev_width
-                                                          ? dev_width / 20.55
-                                                          : dev_height / 36.55,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Container(
-                                        width: dev_width / 5,
+                                        width: dev_width / 3,
                                         child: Stack(
                                           children: <Widget>[
                                             Container(
@@ -311,7 +284,7 @@ class product_detailState extends State<product_detail> {
                                                           dev_width
                                                           ? dev_width / 20.55
                                                           : dev_height / 36.55,
-                                                      color: Colors.white,
+                                                      color: globals.MyGlobals.lightcolor,
                                                     ),
                                                   ),
                                                 ),
@@ -329,7 +302,7 @@ class product_detailState extends State<product_detail> {
                                                           dev_width
                                                           ? dev_width / 20.55
                                                           : dev_height / 36.55,
-                                                      color: Colors.white,
+                                                      color: globals.MyGlobals.lightcolor,
                                                     ),
                                                   ),
                                                 ),
@@ -357,7 +330,7 @@ class product_detailState extends State<product_detail> {
                               width: dev_width / 3,
                               alignment: Alignment(0, 0.5),
                               child: Divider(
-                                color: Colors.white,
+                                color: globals.MyGlobals.lightcolor,
                                 indent: 5,
                                 endIndent: 5,
                               ),
@@ -368,14 +341,14 @@ class product_detailState extends State<product_detail> {
                                   child: Text(
                                     'Actions :',
                                     style: TextStyle(
-                                        color: Colors.white, fontSize: 20),
+                                        color: globals.MyGlobals.lightcolor, fontSize: 20),
                                   ),
                                 )),
                             Container(
                               width: dev_width / 3,
                               alignment: Alignment(0, 0.5),
                               child: Divider(
-                                color: Colors.white,
+                                color: globals.MyGlobals.lightcolor,
                                 indent: 5,
                                 endIndent: 5,
                               ),
@@ -393,7 +366,7 @@ class product_detailState extends State<product_detail> {
                               border:
                               Border.all(color: Colors.transparent, width: 0.0),
                               borderRadius: BorderRadius.circular(10),
-                              color: Colors.white.withOpacity(0.3),
+                              color: globals.MyGlobals.lightcolor.withOpacity(0.3),
                             ),
                             child: Container(
                               height: dev_height / 12,
@@ -415,13 +388,13 @@ class product_detailState extends State<product_detail> {
                                               color: Colors.transparent,
                                               width: 0.0),
                                           borderRadius: BorderRadius.circular(20),
-                                          color: Color.fromRGBO(255, 141, 133, 1),
+                                          color: Color.fromRGBO(220, 120, 90, 1),
                                         ),
                                         child: Center(
                                           child: Text(
                                             'Visit Web Page',
                                             style: TextStyle(
-                                                color: Colors.white, fontSize: 20),
+                                                color: globals.MyGlobals.lightcolor, fontSize: 20),
                                           ),
                                         ),
                                       ),
@@ -430,7 +403,7 @@ class product_detailState extends State<product_detail> {
                                   Container(
                                     width: 0.9 * 0.25 * dev_width,
                                     child: FlatButton(
-                                      onPressed: () {
+                                      onPressed: is_favorite ? null : () {
                                         add_to_favorites();
                                       },
                                       child: Container(
@@ -442,13 +415,13 @@ class product_detailState extends State<product_detail> {
                                               width: 0.0),
                                           borderRadius:
                                           BorderRadius.circular(dev_width),
-                                          color: Color.fromRGBO(255, 141, 133, 1),
+                                          color: Color.fromRGBO(favorite_color, 120, 90, 1),
                                         ),
                                         child: Center(
                                           child: Icon(
                                             IconData(59517,
                                                 fontFamily: 'MaterialIcons'),
-                                            color: Colors.white,
+                                            color: globals.MyGlobals.lightcolor,
                                           ),
                                         ),
                                       ),
@@ -470,7 +443,7 @@ class product_detailState extends State<product_detail> {
                           width: dev_width / 3,
                           alignment: Alignment(0, 0.5),
                           child: Divider(
-                            color: Colors.white,
+                            color: globals.MyGlobals.lightcolor,
                             indent: 5,
                             endIndent: 5,
                           ),
@@ -481,14 +454,14 @@ class product_detailState extends State<product_detail> {
                               child: Text(
                                 'Similar Products :',
                                 style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
+                                    color: globals.MyGlobals.lightcolor, fontSize: 20),
                               ),
                             )),
                         Container(
                           width: dev_width / 3,
                           alignment: Alignment(0, 0.5),
                           child: Divider(
-                            color: Colors.white,
+                            color: globals.MyGlobals.lightcolor,
                             indent: 5,
                             endIndent: 5,
                           ),
@@ -500,57 +473,71 @@ class product_detailState extends State<product_detail> {
                     height: dev_height / 3,
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
-                      itemCount: 5,
+                      itemCount: 10,
                       itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                          width: dev_width / 2,
-                          child: Column(
-                            children: <Widget>[
-                              Container(
-                                width: dev_width / 2,
-                                height: dev_height / 8,
-                                child: Image.network(
-                                  globals.MyGlobals.all_products[index + 1].image,
-                                ),
+                        return FlatButton(
+                          onPressed: (){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => product_detail(counter + index + 1)),
+                            );
+                            counter -= index;
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: globals.MyGlobals.lightcolor.withOpacity(0.3),
+                              border: Border.all(
+                                width: 0,
+                                color: Colors.transparent,
                               ),
-                              Container(
-                                height: dev_height / 5,
-                                width: dev_width / 2,
-                                decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.3),
-                                  border: Border.all(
-                                    width: 0,
-                                    color: Colors.transparent,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            width: dev_width / 2,
+                            child: Column(
+                              children: <Widget>[
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: globals.MyGlobals.darkcolor,
+                                    border: Border.all(
+                                      width: 0,
+                                      color: Colors.transparent,
+                                    ),
+                                    borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
                                   ),
-                                  borderRadius: BorderRadius.circular(20),
+                                  width: dev_width / 2,
+                                  height: dev_height / 8,
+                                  child: Image.network(
+                                    globals.MyGlobals.all_products[HomeState.first_counter + index + 1].image,
+                                  ),
                                 ),
-                                child: Column(
-                                  children: <Widget>[
-                                    Container(
-                                      height: dev_height / 15,
-                                      child: Container(
-                                        width: dev_width / 2.5,
-                                        child: ListView(
-                                          children: <Widget>[
-                                            Center(
-                                              child: Text(globals.MyGlobals.all_products[index + 1].name,style: TextStyle(color: Colors.white),),
-                                            ),
-                                          ],
+                                Container(
+                                  height: dev_height / 5,
+                                  width: dev_width / 2,
+                                  child: Column(
+                                    children: <Widget>[
+                                      Divider(height: dev_height / 64,),
+                                      Container(
+                                        height: dev_height / 8,
+                                        child: Container(
+                                          width: dev_width / 2.5,
+                                          child: ListView(
+                                            children: <Widget>[
+                                              Center(
+                                                child: Text(globals.MyGlobals.all_products[HomeState.first_counter + index + 1 ].name,textAlign: TextAlign.center,style: TextStyle(color: globals.MyGlobals.lightcolor),),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    Container(
-                                      height: dev_height / 15,
-                                      child: Text('Price : ' + globals.MyGlobals.all_products[index + 1].price.toString() +'\$',style: TextStyle(color: Colors.white),),
-                                    ),
-                                    Container(
-                                      height: dev_height / 15,
-                                      child: Text('Reviews : 0',style: TextStyle(color: Colors.white),),
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ],
+                                      Container(
+                                        height: dev_height / 18,
+                                        child: Text('Price : ' + globals.MyGlobals.all_products[HomeState.first_counter + index + 1].price.toString() +'\$',style: TextStyle(color: globals.MyGlobals.lightcolor),),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         );
                       },

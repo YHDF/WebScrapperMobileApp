@@ -19,7 +19,7 @@ class MyGlobals{
   static List<Product> most_visited = List<Product>();
   static List<Product> all_products = List<Product>();
   static List<Product> search_result = List<Product>();
-  static String api_token = '';
+  static String api_token = ' ';
   static List<Favorite> favourites = List<Favorite>();
   static User current_user = User(name: '',email: '');
   static int favorite_count = 7;

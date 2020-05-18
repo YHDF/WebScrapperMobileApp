@@ -62,7 +62,7 @@ class _auth_dynamicState extends State<auth_dynamic> {
                     height: dev_height / 18.3,
                     child: Container(
                       decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.4),
+                          color: Colors.white.withOpacity(0.3),
                           border: Border.all(
                             width: 0,
                             color: Colors.transparent,
@@ -93,7 +93,7 @@ class _auth_dynamicState extends State<auth_dynamic> {
                                     fontSize: 25,
                                     color: isLogin == true
                                         ? Colors.white
-                                        : Colors.white.withOpacity(0.5),
+                                        : Colors.white.withOpacity(0.3),
                                   ),
                                 ),
                               ),
@@ -120,7 +120,7 @@ class _auth_dynamicState extends State<auth_dynamic> {
                                         : dev_height / 16.48,
                                     color: isSignup == true
                                         ? Colors.white
-                                        : Colors.white.withOpacity(0.5),
+                                        : Colors.white.withOpacity(0.3),
                                   ),
                                 ),
                               ),
@@ -181,7 +181,7 @@ class Login_Container extends StatefulWidget {
 class Login_ContainerState extends State<Login_Container> {
   static String email = '';
   static String password = '';
-  static final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   FocusScopeNode _focusScopeNode = FocusScopeNode();
   final _controller1 = TextEditingController();
   final _controller2 = TextEditingController();
@@ -189,7 +189,6 @@ class Login_ContainerState extends State<Login_Container> {
   static bool correct_credentials = true;
 
   void dispose() {
-    _focusScopeNode.dispose();
     _controller1.dispose();
     _controller2.dispose();
     super.dispose();
@@ -263,7 +262,7 @@ class Login_ContainerState extends State<Login_Container> {
         ),
         borderRadius: BorderRadius.circular(
             dev_height > dev_width ? dev_height / 73.2 : dev_height / 41.2),
-        color: Colors.white.withOpacity(0.5),
+        color: Colors.white.withOpacity(0.3),
       ),
       child: Form(
         key: _formKey,
@@ -410,7 +409,7 @@ class Login_ContainerState extends State<Login_Container> {
                             end: Alignment(1, 1),
                             colors: [
                               const Color.fromRGBO(255, 155, 112, 1),
-                              const Color.fromRGBO(255, 75, 112, 1)
+                              const Color.fromRGBO(255, 74, 112, 1),
                             ], // whitish to gray
                           ),
                         ),
@@ -449,35 +448,57 @@ class Signup_ContainerState extends State<Signup_Container> {
   static String email = '';
   static String password = '';
   static String name = '';
-  static final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   FocusScopeNode _focusScopeNode = FocusScopeNode();
   final _controller1 = TextEditingController();
   final _controller2 = TextEditingController();
   final _controller3 = TextEditingController();
+  static String verification_message = '';
+  static bool correct_credentials = true;
+
+  void initState() {
+    super.initState();
+    verification_message = '';
+  }
 
   void submit(BuildContext context) async {
     await Future<dynamic>(() async {
       final response = await http.post(
           "${globals.MyGlobals.link_start}/api/register?name=$name&email=$email&password=$password&password_confirmation=$password");
       if (response.statusCode == 200) {
-        return Register.fromJson(json.decode(response.body));
+        var reg =  Register.fromJson(json.decode(response.body));
+        if(reg.name == null || reg.email == null || reg.token == null){
+          correct_credentials = false;
+          return Message.fromJson(json.decode(response.body));
+        }
+        return reg;
       } else {
         throw Exception('Failed to load Register');
       }
     }).then((value) async {
-      await Future<dynamic>(() async {
-        globals.MyGlobals.api_token = value.token;
-        final response = await http.get(
-            "${globals.MyGlobals.link_start}/api/sendverify?api_token=${value.token}");
-        if (response.statusCode == 200) {
-          return Message.fromJson(json.decode(response.body));
-        } else {
-          throw Exception('Failed to load verify');
-        }
-      }).then((value) => Navigator.push(
+      if(!correct_credentials){
+        setState(() {
+          correct_credentials = true;
+          verification_message = value.message;
+        });
+      }else{
+        await Future<dynamic>(() async {
+          globals.MyGlobals.api_token = value.token;
+          final response = await http.get(
+              "${globals.MyGlobals.link_start}/api/sendverify?api_token=${value.token}");
+          if (response.statusCode == 200) {
+            return Message.fromJson(json.decode(response.body));
+          } else {
+            throw Exception('Failed to load verify');
+          }
+        }).then((value){
+          verification_message = value.message;
+          Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => Verify()),
-          ));
+          );
+        });
+      }
     });
   }
 
@@ -507,7 +528,7 @@ class Signup_ContainerState extends State<Signup_Container> {
           width: 0,
         ),
         borderRadius: BorderRadius.circular(10),
-        color: Colors.white.withOpacity(0.5),
+        color: Colors.white.withOpacity(0.3),
       ),
       child: Form(
         key: _formKey,
@@ -516,7 +537,18 @@ class Signup_ContainerState extends State<Signup_Container> {
           child: Column(
             children: <Widget>[
               Container(
-                height: dev_height / 7.32,
+                height: dev_height / 32,
+                alignment: Alignment(0,0),
+                child: Text(
+                  verification_message,
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontSize: 12,
+                  ),
+                ),
+              ),
+              Container(
+                height: dev_height / 8,
                 child: Row(
                   children: <Widget>[
                     Container(
@@ -560,7 +592,7 @@ class Signup_ContainerState extends State<Signup_Container> {
                 ),
               ),
               Container(
-                height: dev_height / 7.32,
+                height: dev_height / 8,
                 child: Row(
                   children: <Widget>[
                     Container(
@@ -602,7 +634,7 @@ class Signup_ContainerState extends State<Signup_Container> {
                 ),
               ),
               Container(
-                height: dev_height / 7.32,
+                height: dev_height / 8,
                 child: Row(
                   children: <Widget>[
                     Container(

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:pfe_mobile/succes.dart';
+import 'package:pfe_mobile/message.dart';
 import'bottom_bar.dart';
 import 'device_dimensions.dart';
 import 'side.dart';
@@ -18,7 +18,7 @@ class client_reclamationState extends State<client_reclamation> with TickerProvi
   AnimationController opacity_animator;
   Animation<double> opacity_animation;
   double opacity = 0;
-  String confirm_message = '';
+  static String confirm_message = '';
 
   @override
   void initState(){
@@ -49,16 +49,16 @@ class client_reclamationState extends State<client_reclamation> with TickerProvi
     if(_controller1.text == '' ||_controller2.text == ''){
       confirm_message = 'Subject and message are Required !';
     }else{
-      await Future<Succes>(() async {
+      await Future<Message>(() async {
         final response = await http.post('${globals.MyGlobals.link_start}/api/feedback?api_token=${globals.MyGlobals.api_token}&subject=${_controller1.text}&text=${_controller2.text}');
         if (response.statusCode == 200) {
-          return Succes.fromJson(json.decode(response.body));
+          return Message.fromJson(json.decode(response.body));
         } else {
           throw Exception('Failed to load Message');
         }
       }).then((value){
         setState(() {
-          confirm_message = value.success;
+          confirm_message = value.message;
           _controller1.text = '';
           _controller2.text = '';
         });

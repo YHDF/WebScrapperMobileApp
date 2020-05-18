@@ -17,7 +17,7 @@ class bottom_barState extends State<bottom_bar> with TickerProviderStateMixin{
 
   AnimationController bg_color_controller;
   Animation<double> bg_color_anim;
-  final double minG = 120;
+  final double minG = 100;
   static double G = 0;
   static double dev_width, dev_height;
   static int page_counter = 0;
@@ -36,7 +36,7 @@ class bottom_barState extends State<bottom_bar> with TickerProviderStateMixin{
     bg_color_controller = AnimationController(vsync: this, duration: Duration(seconds: 2));
     bg_color_anim = Tween<double>(begin: 0, end:60).animate(CurvedAnimation(
       parent: bg_color_controller,
-      curve: Interval(0,1,curve: Curves.linear),
+      curve: Interval(0, 1, curve: Curves.linear),
     ));
     bg_color_controller.addListener(() {
       setState(() {
@@ -54,7 +54,7 @@ class bottom_barState extends State<bottom_bar> with TickerProviderStateMixin{
     return
       Container(
         decoration: BoxDecoration(
-          color: Color.fromRGBO(230, G.round(), 120, 1),
+          color: Color.fromRGBO(220, G.round(), 90, 1),
         ),
         child: Stack(
           children: <Widget>[

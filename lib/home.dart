@@ -9,6 +9,9 @@ import 'dart:io';
 import 'package:url_launcher/url_launcher.dart';
 import 'Globals.dart' as globals;
 import 'package:pfe_mobile/side.dart';
+
+import 'favorite.dart';
+import 'favorites.dart';
 class Home extends StatefulWidget {
 
 
@@ -29,12 +32,14 @@ class HomeState extends State<Home> {
   static List<Color> lst_selectedchoicecolor = new List<Color>();
   static Color computer_color, phone_color;
   static bool computer_selected, phone_selected,phone_rotated;
-  static int j = 0;
+  static int counter = 0;
+  static int first_counter = 0;
 
 
   void initState() {
     super.initState();
     get_user_data();
+    getfavorites();
     lst_selectedchoice.insert(0, selected);
     lst_selectedchoice.insert(1, unselected);
     for (int i = 0; i < 2; i++) {
@@ -43,6 +48,21 @@ class HomeState extends State<Home> {
     }
     computer_selected = phone_selected = true;
     computer_color = phone_color =  globals.MyGlobals.darkcolor;
+  }
+  void getfavorites() async{
+    await Future<Favourites> (() async {
+      final response = await http.get('${globals.MyGlobals.link_start}/api/favourite?api_token=${globals.MyGlobals.api_token}');
+      if (response.statusCode == 200) {
+        return Favourites.fromJson(json.decode(response.body));
+      } else {
+        throw Exception('Failed to load Favourite');
+      }
+    }).then((value) {
+      globals.MyGlobals.favourites.clear();
+      value.favourites.forEach((element) {
+        globals.MyGlobals.favourites.add(Favorite.fromJson(element));
+      });
+    });
   }
 
   static void get_user_data() async{
@@ -112,7 +132,7 @@ class HomeState extends State<Home> {
                       width: 0.9 * dev_width,
                       height: dev_height / 18,
                       decoration: BoxDecoration(
-                        color: globals.MyGlobals.lightcolor.withOpacity(0.4),
+                        color: globals.MyGlobals.lightcolor.withOpacity(0.3),
                         border: Border.all(
                           color: Colors.transparent,
                           width: 0,
@@ -267,21 +287,22 @@ class HomeState extends State<Home> {
                               if(selected){
                                 for(int i =0; i < globals.MyGlobals.all_products.length; i++){
                                   if(globals.MyGlobals.all_products[i].id_product == globals.MyGlobals.best_products[index].id_product){
-                                    j = i;
+                                    counter = i;
                                     break;
                                   }
                                 }
                               }else{
                                 for(int i =0; i < globals.MyGlobals.all_products.length; i++){
                                   if(globals.MyGlobals.all_products[i].id_product == globals.MyGlobals.most_visited[index].id_product){
-                                    j = i;
+                                    counter = i;
                                     break;
                                   }
                                 }
                               }
+                              first_counter = index;
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => product_detail(j)),
+                                MaterialPageRoute(builder: (context) => product_detail(counter)),
                               );
                             },
                             child: Container(

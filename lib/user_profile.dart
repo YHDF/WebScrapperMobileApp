@@ -25,7 +25,6 @@ class user_profileState extends State<user_profile>
 
   @override
   void initState() {
-    print(editable);
     setState(() {
       super.initState();
       str = '';
@@ -195,9 +194,6 @@ class user_profileState extends State<user_profile>
                       Divider(),
                       viewable_container(globals.MyGlobals.feedback_count.toString(),
                           IconData(57534, fontFamily: 'MaterialIcons')),
-                      Divider(),
-                      viewable_container(
-                          '154 ', IconData(59448, fontFamily: 'MaterialIcons')),
                       Divider(),
                       Container(
                         alignment: Alignment(0, 0),

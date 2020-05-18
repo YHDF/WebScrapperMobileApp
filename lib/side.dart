@@ -1,15 +1,14 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:pfe_mobile/bottom_bar.dart';
-import 'package:pfe_mobile/favorite.dart';
-import 'package:pfe_mobile/favorites.dart';
+import 'package:pfe_mobile/device_dimensions.dart';
+import 'package:pfe_mobile/main.dart';
 import 'package:pfe_mobile/search.dart';
+import 'package:pfe_mobile/session_token.dart';
 import 'package:pfe_mobile/settings.dart';
 import 'package:pfe_mobile/user_favorites.dart';
 import 'package:pfe_mobile/user_profile.dart';
 import 'package:pfe_mobile/client_reclamations.dart';
 import 'Globals.dart' as globals;
-import 'package:http/http.dart' as http;
 
 class side_bar extends StatefulWidget {
   side_barState createState() => side_barState();
@@ -23,8 +22,9 @@ class side_barState extends State<side_bar> with TickerProviderStateMixin{
   static bool modified = false;
   AnimationController bg_color_controller;
   Animation<double> bg_color_anim;
-  final double minG = 130;
+  final double minG = 100;
   static double G = 0;
+  double dev_height;
 
   @override
   void initState() {
@@ -68,31 +68,6 @@ class side_barState extends State<side_bar> with TickerProviderStateMixin{
       }
     });
   }
-  void getfavorites() async{
-    await Future<Favourites> (() async {
-      final response = await http.get('${globals.MyGlobals.link_start}/api/favourite?api_token=${globals.MyGlobals.api_token}');
-      if (response.statusCode == 200) {
-        return Favourites.fromJson(json.decode(response.body));
-      } else {
-        throw Exception('Failed to load Favourite');
-      }
-    }).then((value) {
-      globals.MyGlobals.favourites.clear();
-      value.favourites.forEach((element) {
-        globals.MyGlobals.favourites.add(Favorite.fromJson(element));
-      });
-      visible = false;
-      for(int i = 0; i < 5; i++){
-        lst_selected_side[i] = false;
-      }
-      lst_selected_side[3] = true;
-      change_color_side();
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => user_favorite()),
-      );
-    });
-  }
   void change_visibility() {
     setState(() {
       if (drawer_width == 75) {
@@ -107,8 +82,18 @@ class side_barState extends State<side_bar> with TickerProviderStateMixin{
       }
     });
   }
+  void disconnect() async{
+    await session_token.defaultSessionWriter().then((value) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => MyHomePage()),
+      );
+    });
+
+  }
 
   Widget build(BuildContext context) {
+    dev_height = device_dimensions(context).dev_height;
     change_color_side();
     if (bottom_barState.page_counter == 1) {
       bottom_barState.page_counter = 0;
@@ -121,7 +106,7 @@ class side_barState extends State<side_bar> with TickerProviderStateMixin{
       child: Drawer(
         child: Container(
           decoration: BoxDecoration(
-            color: Color.fromRGBO(230, G.round(), 130, 1),
+            color: Color.fromRGBO(220, G.round(), 90, 1),
           ),
           child: ListView(
             children: <Widget>[
@@ -306,7 +291,16 @@ class side_barState extends State<side_bar> with TickerProviderStateMixin{
                   ],
                 ),
                 onTap: () {
-                  getfavorites();
+                  visible = false;
+                  for(int i = 0; i < 5; i++){
+                    lst_selected_side[i] = false;
+                  }
+                  lst_selected_side[3] = true;
+                  change_color_side();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => user_favorite()),
+                  );
                 },
               ),
               ListTile(
@@ -361,20 +355,43 @@ class side_barState extends State<side_bar> with TickerProviderStateMixin{
                 height: bottom_barState.dev_height / 2,
                 alignment: Alignment(1, 1),
                 child: Container(
-                  height: 75,
-                  child: ListTile(
-                    title: Icon(
-                      IconData(58391, fontFamily: 'MaterialIcons'),
-                      size: 35,
-                      color: globals.MyGlobals.lightcolor,
-                    ),
-                    onTap: () {
-                      setState(() {
-                        change_visibility();
-                      });
-                    },
+                  height: dev_height / 4.87,
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        height: dev_height / 9.74,
+                        child: ListTile(
+                          title: Icon(
+                            IconData(59513, fontFamily: 'MaterialIcons'),
+                            size: 35,
+                            color: globals.MyGlobals.lightcolor,
+                          ),
+                          onTap: () {
+                            setState(() {
+                              globals.MyGlobals.api_token = ' ';
+                              disconnect();
+                            });
+                          },
+                        ),
+                      ),
+                      Container(
+                        height: dev_height / 9.74,
+                        child: ListTile(
+                          title: Icon(
+                            IconData(58391, fontFamily: 'MaterialIcons'),
+                            size: 35,
+                            color: globals.MyGlobals.lightcolor,
+                          ),
+                          onTap: () {
+                            setState(() {
+                              change_visibility();
+                            });
+                          },
+                        ),
+                      ),
+                    ],
                   ),
-                ),
+                )
               )
             ],
           ),

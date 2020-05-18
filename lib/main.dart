@@ -88,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    if(globals.MyGlobals.api_token == ''){
+    if(globals.MyGlobals.api_token == ' '){
       return Scaffold(
         resizeToAvoidBottomPadding: false,
         appBar: null,

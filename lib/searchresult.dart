@@ -11,7 +11,6 @@ class Searchresult extends StatefulWidget {
 }
 class SearchresultState extends State<Searchresult>{
   double dev_width,dev_height;
-
   Future<bool> _onpress() async{
     setState(() {
       bottom_barState.page_counter = 1;
