@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:pfe_mobile/background.dart';
 import 'package:pfe_mobile/bottom_bar.dart';
 import 'package:pfe_mobile/product_detail.dart';
 import 'package:pfe_mobile/profile.dart';
@@ -123,7 +124,7 @@ class HomeState extends State<Home> {
         child: Scaffold(
           body: Stack(
             children: <Widget>[
-              bottom_bar(),
+              Background(),
               new Stack(
                 children: <Widget>[
                   Container(
@@ -158,7 +159,7 @@ class HomeState extends State<Home> {
                                   'Our Choice',
                                   style: TextStyle(
                                     fontSize: 15,
-                                    fontWeight: FontWeight.w500,
+                                    fontWeight: FontWeight.w200,
                                     color: lst_selectedchoicecolor[0],
                                   ),
                                 ),
@@ -182,7 +183,7 @@ class HomeState extends State<Home> {
                                   'Most Visited',
                                   style: TextStyle(
                                     fontSize: 15,
-                                    fontWeight: FontWeight.w500,
+                                    fontWeight: FontWeight.w200,
                                     color: lst_selectedchoicecolor[1],
                                   ),
                                 ),
@@ -194,90 +195,10 @@ class HomeState extends State<Home> {
                     ),
                   ),
                   Container(
-                    alignment: Alignment(0, -0.75),
-                    child: Container(
-                      width: 0.9 * dev_width,
-                      height: dev_height / 18,
-                      child: Center(
-                        child: Container(
-                          width: 0.5 * dev_width,
-                          child: Row(
-                            children: <Widget>[
-                              Container(
-                                width: 0.5 * dev_width / 2,
-                                alignment: Alignment(0, 0),
-                                child: FlatButton(
-                                  onPressed: (){
-                                    setState(() {
-                                      if(computer_selected){
-                                        computer_selected = false;
-                                        computer_color = globals.MyGlobals.lightcolor;
-                                      }else{
-                                        computer_selected = true;
-                                        computer_color = globals.MyGlobals.darkcolor;
-                                      }
-                                    });
-                                  },
-                                  child: Container(
-                                    width: 0.5 * dev_width / 4,
-                                    height: dev_height / 18,
-                                    decoration: BoxDecoration(
-                                      color: globals.MyGlobals.lightcolor.withOpacity(0.2),
-                                      border: Border.all(
-                                          color: Colors.transparent, width: 0),
-                                      borderRadius:
-                                      BorderRadius.circular(0.5 * dev_width),
-                                    ),
-                                    child: Icon(
-                                      IconData(58122, fontFamily: 'MaterialIcons'),
-                                      color: computer_color,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                width: 0.5 * dev_width / 2,
-                                alignment: Alignment(0, 0),
-                                child: FlatButton(
-                                  onPressed: (){
-                                    setState(() {
-                                      if(phone_selected){
-                                        phone_selected = false;
-                                        phone_color = globals.MyGlobals.lightcolor;
-                                      }else{
-                                        phone_selected = true;
-                                        phone_color = globals.MyGlobals.darkcolor;
-                                      }
-                                    });
-                                  },
-                                  child: Container(
-                                    width: 0.5 * dev_width / 4,
-                                    height: dev_height / 18,
-                                    decoration: BoxDecoration(
-                                      color: globals.MyGlobals.lightcolor.withOpacity(0.2),
-                                      border: Border.all(
-                                          color: Colors.transparent, width: 0),
-                                      borderRadius:
-                                      BorderRadius.circular(0.5 * dev_width),
-                                    ),
-                                    child: Icon(
-                                      IconData(58148, fontFamily: 'MaterialIcons'),
-                                      color: phone_color,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    alignment: Alignment(0, 0.3),
+                    alignment: Alignment(0, 0.2),
                     child: Container(
                       width: dev_width,
-                      height: 13 * dev_height / 18,
+                      height: 14 * dev_height / 18,
                       child: ListView.separated(
                         padding: const EdgeInsets.all(8),
                         itemCount: selected ? globals.MyGlobals.best_products.length : globals.MyGlobals.most_visited.length,
@@ -317,7 +238,7 @@ class HomeState extends State<Home> {
                               ),
                               child: Row(
                                 children: <Widget>[
-                                  VerticalDivider(width: 10,),
+                                  VerticalDivider(width: 10,color: Colors.transparent,),
                                   Container(
                                     width: dev_width / 5,
                                     height: 75,
@@ -325,7 +246,7 @@ class HomeState extends State<Home> {
                                       selected ? globals.MyGlobals.best_products[index].image : globals.MyGlobals.most_visited[index].image,
                                     ),
                                   ),
-                                  VerticalDivider(width: 10,),
+                                  VerticalDivider(width: 10,color: Colors.transparent,),
                                   Container(
                                     width: 2 * dev_width / 3.3,
                                     child: Column(
@@ -337,6 +258,7 @@ class HomeState extends State<Home> {
                                               selected ? globals.MyGlobals.best_products[index].name : globals.MyGlobals.most_visited[index].name,
                                               style: TextStyle(
                                                 color: globals.MyGlobals.lightcolor,
+                                                fontWeight: FontWeight.w300,
                                               ),
                                             ),
                                           ),
@@ -351,11 +273,12 @@ class HomeState extends State<Home> {
                                                 child: Text(
                                                   selected ? globals.MyGlobals.best_products[index].price.toString() + "\$" : globals.MyGlobals.most_visited[index].price.toString() + "\$",
                                                   style: TextStyle(
-                                                    color: globals.MyGlobals.lightcolor
+                                                    color: globals.MyGlobals.lightcolor,
+                                                    fontWeight: FontWeight.w300,
                                                   ),
                                                 ),
                                               ),
-                                              VerticalDivider(width : 40),
+                                              VerticalDivider(width : 40,color: Colors.transparent,),
                                               Container(
                                                 width: dev_width / 3,
                                                 alignment: Alignment(1,0),
@@ -373,6 +296,7 @@ class HomeState extends State<Home> {
                                                             'visit in website',
                                                           style: TextStyle(
                                                             color: globals.MyGlobals.lightcolor,
+                                                            fontWeight: FontWeight.w300,
                                                           ),
                                                         ),
                                                       ),
@@ -381,7 +305,7 @@ class HomeState extends State<Home> {
                                                         child: Icon(
                                                             IconData(58849, fontFamily: 'MaterialIcons', matchTextDirection: true),
                                                           color: globals.MyGlobals.lightcolor,
-                                                          size: 15,
+                                                          size: 10,
                                                         ),
                                                       )
                                                     ],
@@ -407,6 +331,7 @@ class HomeState extends State<Home> {
                   )
                 ],
               ),
+              bottom_bar(),
             ],
           ),
           drawer: side_bar(),

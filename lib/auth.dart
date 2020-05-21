@@ -91,6 +91,7 @@ class _auth_dynamicState extends State<auth_dynamic> {
                                   'Existing',
                                   style: TextStyle(
                                     fontSize: 25,
+                                    fontWeight: FontWeight.w200,
                                     color: isLogin == true
                                         ? Colors.white
                                         : Colors.white.withOpacity(0.3),
@@ -115,6 +116,7 @@ class _auth_dynamicState extends State<auth_dynamic> {
                                 child: Text(
                                   'New',
                                   style: TextStyle(
+                                    fontWeight: FontWeight.w200,
                                     fontSize: dev_height > dev_width
                                         ? dev_height / 29.28
                                         : dev_height / 16.48,
@@ -154,9 +156,11 @@ class _auth_dynamicState extends State<auth_dynamic> {
                         child: Text(
                           'forgot your password ?',
                           style: TextStyle(
+                              fontWeight: FontWeight.w100,
                               fontSize: 20,
                               color: Colors.white,
-                              decoration: TextDecoration.underline),
+                              decoration: TextDecoration.underline,
+                          ),
                         ),
                       ),
                     ),
@@ -319,6 +323,7 @@ class Login_ContainerState extends State<Login_Container> {
                               border: InputBorder.none,
                               hintText: 'Email Address',
                               hintStyle: TextStyle(
+                                fontWeight: FontWeight.w100,
                                 color: Colors.white,
                                 fontSize: dev_height > dev_width
                                     ? dev_height / 29.28
@@ -366,6 +371,7 @@ class Login_ContainerState extends State<Login_Container> {
                               border: InputBorder.none,
                               hintText: 'Password',
                               hintStyle: TextStyle(
+                                fontWeight: FontWeight.w100,
                                 color: Colors.white,
                                 fontSize: dev_height > dev_width
                                     ? dev_height / 29.28
@@ -417,11 +423,11 @@ class Login_ContainerState extends State<Login_Container> {
                           child: Text(
                             'SIGN IN',
                             style: TextStyle(
+                              fontWeight: FontWeight.w100,
                               color: Colors.white,
                               fontSize: dev_height > dev_width
                                   ? dev_height / 24.4
                                   : dev_height / 13.74,
-                              fontWeight: FontWeight.w900,
                             ),
                           ),
                         ),
@@ -581,6 +587,7 @@ class Signup_ContainerState extends State<Signup_Container> {
                               border: InputBorder.none,
                               hintText: 'Full  Name',
                               hintStyle: TextStyle(
+                                  fontWeight: FontWeight.w100,
                                   color: Colors.white,
                                   fontSize: dev_height > dev_width
                                       ? dev_height / 29.28
@@ -622,6 +629,7 @@ class Signup_ContainerState extends State<Signup_Container> {
                               border: InputBorder.none,
                               hintText: 'Email Address',
                               hintStyle: TextStyle(
+                                fontWeight: FontWeight.w100,
                                 color: Colors.white,
                                 fontSize: dev_height > dev_width
                                     ? dev_height / 29.28
@@ -663,6 +671,7 @@ class Signup_ContainerState extends State<Signup_Container> {
                               border: InputBorder.none,
                               hintText: 'Password',
                               hintStyle: TextStyle(
+                                fontWeight: FontWeight.w100,
                                 color: Colors.white,
                                 fontSize: dev_height > dev_width
                                     ? dev_height / 29.28
@@ -719,7 +728,7 @@ class Signup_ContainerState extends State<Signup_Container> {
                               fontSize: dev_width < dev_height
                                   ? dev_width / 13.73
                                   : dev_height / 24.4,
-                              fontWeight: FontWeight.w900,
+                              fontWeight: FontWeight.w100,
                             ),
                           ),
                         ),

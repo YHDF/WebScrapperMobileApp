@@ -195,7 +195,7 @@ class Startup extends StatelessWidget {
               "It's Hot out here. \nDon't you think ?",
               style: TextStyle(color: Colors.white.withOpacity(
                 wt_opacity
-              ), fontWeight: FontWeight.w500, fontSize: dev_height > dev_width ? dev_height/14.64 : dev_height/ 12.24),
+              ), fontWeight: FontWeight.w200, fontSize: dev_height > dev_width ? dev_height/14.64 : dev_height/ 12.24),
             ),
           ),
         ),
@@ -216,6 +216,7 @@ class Startup extends StatelessWidget {
                             'Get Started',
                             style: TextStyle(
                                 fontSize: dev_height > dev_width ? dev_height/36.6 : dev_height / 20.6,
+                                fontWeight: FontWeight.w100,
                                 color: Colors.white.withOpacity(txt_opacity)),
                           ),
                         )),

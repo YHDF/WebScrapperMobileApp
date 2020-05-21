@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:pfe_mobile/background.dart';
 import 'package:pfe_mobile/device_dimensions.dart';
 import 'package:pfe_mobile/home.dart';
 import 'package:pfe_mobile/message.dart';
@@ -21,7 +22,7 @@ class user_profileState extends State<user_profile>
   final _controller = TextEditingController();
   static bool editable = false;
   bool hidden = true;
-  String str ;
+  String str;
 
   @override
   void initState() {
@@ -44,22 +45,21 @@ class user_profileState extends State<user_profile>
   }
 
   void change_name() async {
-      await Future<Message>(() async {
+    await Future<Message>(() async {
       final response = await http.put(
-      '${globals.MyGlobals.link_start}/api/user?api_token=${globals.MyGlobals.api_token}&name=${globals.MyGlobals.current_user.name}');
+          '${globals.MyGlobals.link_start}/api/user?api_token=${globals.MyGlobals.api_token}&name=${globals.MyGlobals.current_user.name}');
       if (response.statusCode == 200) {
-      return Message.fromJson(json.decode(response.body));
+        return Message.fromJson(json.decode(response.body));
       } else {
-      throw Exception('Failed to load Profile');
+        throw Exception('Failed to load Profile');
       }
-      }).then((value) {
-        setState(() {
-          hidden = false;
-          str = 'Click the button down below to confirm changes!';
-        });
+    }).then((value) {
+      setState(() {
+        hidden = false;
+        str = 'Click the button down below to confirm changes!';
       });
+    });
   }
-
 
   @override
   void dispose() {
@@ -79,22 +79,22 @@ class user_profileState extends State<user_profile>
   @override
   Widget build(BuildContext context) {
     setState(() {
-      if(MediaQuery.of(context).viewInsets.bottom > 0){
+      if (MediaQuery.of(context).viewInsets.bottom > 0) {
         bottom_barState.visible = false;
-      }else{
+      } else {
         bottom_barState.visible = true;
       }
     });
     dev_width = device_dimensions(context).dev_width;
     dev_height = device_dimensions(context).dev_height;
     return WillPopScope(
-        onWillPop: _onpress,
-        child: Scaffold(
-          body: Stack(
-            children: <Widget>[
-              bottom_bar(),
-              GestureDetector(
-                  child: Container(
+      onWillPop: _onpress,
+      child: Scaffold(
+        body: Stack(
+          children: <Widget>[
+            Background(),
+            GestureDetector(
+              child: Container(
                 width: dev_width,
                 height: dev_height,
                 alignment: Alignment(0, 0),
@@ -105,12 +105,14 @@ class user_profileState extends State<user_profile>
                     children: <Widget>[
                       Container(
                         alignment: Alignment(0, 0),
-                        child: Text(' HELLO, ',
-                            style: TextStyle(
-                                fontSize: 40,
-                                fontWeight: FontWeight.w700,
-                                color: Color.fromRGBO(255, 167, 143, 1),
-                                fontFamily: 'CoolFont')),
+                        child: Text(
+                          ' HELLO, ',
+                          style: TextStyle(
+                            fontSize: 40,
+                            fontWeight: FontWeight.w200,
+                            color: globals.MyGlobals.darkcolor,
+                          ),
+                        ),
                       ),
                       Divider(),
                       new editablecontainer(
@@ -135,7 +137,7 @@ class user_profileState extends State<user_profile>
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
                                     hintStyle: TextStyle(
-                                      color: Colors.white,
+                                      color: globals.MyGlobals.lightcolor,
                                       fontSize: dev_height > dev_width
                                           ? dev_height / 29.28
                                           : dev_height / 16.48,
@@ -152,7 +154,8 @@ class user_profileState extends State<user_profile>
                                   onPressed: () {
                                     setState(() {
                                       editable = false;
-                                      globals.MyGlobals.current_user.name = _controller.text;
+                                      globals.MyGlobals.current_user.name =
+                                          _controller.text;
                                       change_name();
                                     });
                                   },
@@ -160,14 +163,14 @@ class user_profileState extends State<user_profile>
                                     alignment: Alignment(0, 0),
                                     width: dev_width / 3,
                                     decoration: BoxDecoration(
-                                      color: Colors.black,
-                                      border: Border.all(color: Colors.black),
+                                      color: globals.MyGlobals.darkcolor,
+                                      border: Border.all(color: globals.MyGlobals.darkcolor),
                                       borderRadius: BorderRadius.circular(20),
                                     ),
                                     child: Text(
                                       'Edit',
                                       style: TextStyle(
-                                        color: Colors.white,
+                                        color: globals.MyGlobals.lightcolor,
                                         fontSize: 20,
                                       ),
                                     ),
@@ -181,19 +184,23 @@ class user_profileState extends State<user_profile>
                       Divider(),
                       Container(
                         alignment: Alignment(0, 0),
-                        child: Text(' YOU HAVE, ',
-                            style: TextStyle(
-                                fontSize: 40,
-                                fontWeight: FontWeight.w700,
-                                color: Color.fromRGBO(255, 167, 143, 1),
-                                fontFamily: 'CoolFont')),
+                        child: Text(
+                          ' YOU HAVE, ',
+                          style: TextStyle(
+                            fontSize: 40,
+                            fontWeight: FontWeight.w200,
+                            color: globals.MyGlobals.darkcolor,
+                          ),
+                        ),
                       ),
                       Divider(),
-                      viewable_container(globals.MyGlobals.favorite_count.toString(),
+                      viewable_container(
+                          globals.MyGlobals.favorite_count.toString(),
                           IconData(59517, fontFamily: 'MaterialIcons')),
                       Divider(),
-                      viewable_container(globals.MyGlobals.feedback_count.toString(),
-                          IconData(57534, fontFamily: 'MaterialIcons')),
+                      viewable_container(
+                          globals.MyGlobals.feedback_count.toString(),
+                          IconData(57534, fontFamily: 'MaterialIcons',),),
                       Divider(),
                       Container(
                         alignment: Alignment(0, 0),
@@ -201,21 +208,20 @@ class user_profileState extends State<user_profile>
                           'WITH EMAIL',
                           style: TextStyle(
                             fontSize: 40,
-                            fontWeight: FontWeight.w700,
-                            color: Color.fromRGBO(255, 167, 143, 1),
-                            fontFamily: 'CoolFont',
+                            fontWeight: FontWeight.w200,
+                            color: globals.MyGlobals.darkcolor,
                           ),
                         ),
                       ),
                       Divider(),
-                      viewable_container(globals.MyGlobals.current_user.email, null),
-                      Divider(),
+                      viewable_container(
+                          globals.MyGlobals.current_user.email, null),
                       Container(
                         height: dev_height / 12,
                         child: Visibility(
                           visible: !hidden,
                           child: Container(
-                            alignment: Alignment(0,1),
+                            alignment: Alignment(0, 1),
                             child: Text(
                               str,
                               style: TextStyle(
@@ -225,6 +231,10 @@ class user_profileState extends State<user_profile>
                             ),
                           ),
                         ),
+                      ),
+                      Divider(
+                        height: dev_height / 12,
+                        color: Colors.transparent,
                       ),
                       Container(
                         height: dev_height / 12,
@@ -246,21 +256,25 @@ class user_profileState extends State<user_profile>
                               color: globals.MyGlobals.lightcolor,
                             ),
                             child: Center(
-                                child: Icon(
-                              IconData(58139, fontFamily: 'MaterialIcons'),
-                              color: Color.fromRGBO(255, 167, 143, 1),
-                            )),
+                              child: Icon(
+                                IconData(58139, fontFamily: 'MaterialIcons'),
+                                color: globals.MyGlobals.darkcolor,
+                              ),
+                            ),
                           ),
                         ),
                       ),
                     ],
                   ),
                 ),
-              )),
-            ],
-          ),
-          drawer: side_bar(),
-        ));
+              ),
+            ),
+            bottom_bar(),
+          ],
+        ),
+        drawer: side_bar(),
+      ),
+    );
   }
 }
 
@@ -299,11 +313,11 @@ class editablecontainerState extends State<editablecontainer> {
                     data,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                        fontSize: 25.0,
-                        color: globals.MyGlobals.lightcolor
-                            .withOpacity(user_profileState.opacity),
-                        fontWeight: FontWeight.w900,
-                        fontFamily: 'CoolFont'),
+                      fontSize: 25.0,
+                      color: globals.MyGlobals.lightcolor
+                          .withOpacity(user_profileState.opacity),
+                      fontWeight: FontWeight.w300,
+                    ),
                   ),
                 ),
               ),
@@ -314,7 +328,8 @@ class editablecontainerState extends State<editablecontainer> {
               child: FlatButton(
                 onPressed: () {
                   setState(() {
-                    user_profileState.editable = user_profileState.editable ? false : true;
+                    user_profileState.editable =
+                        user_profileState.editable ? false : true;
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => user_profile()),
@@ -383,8 +398,7 @@ class viewable_containerState extends State<viewable_container> {
                               fontSize: 20.0,
                               color: globals.MyGlobals.lightcolor
                                   .withOpacity(user_profileState.opacity),
-                              fontWeight: FontWeight.w900,
-                              fontFamily: 'CoolFont',
+                              fontWeight: FontWeight.w300,
                             ),
                           ),
                         ),
@@ -408,8 +422,7 @@ class viewable_containerState extends State<viewable_container> {
               child: Container(
                 width: device_dimensions(context).dev_width / 8,
                 child: FlatButton(
-                  onPressed: () {
-                  },
+                  onPressed: () {},
                   child: Container(
                     width: device_dimensions(context).dev_width / 8,
                     child: Icon(

@@ -92,7 +92,7 @@ class authMethod_static extends StatelessWidget{
                 child: Text(
                   ' Drop down the price.\n    Turn up the heat.',
                   style: TextStyle(color: Colors.white.withOpacity(qt_opacity),
-                      fontWeight: FontWeight.w500, fontSize: dev_height > dev_width ? dev_height/14.64 : dev_height/ 8.24),
+                      fontWeight: FontWeight.w200, fontSize: dev_height > dev_width ? dev_height/14.64 : dev_height/ 8.24),
                 ),
               )
             ),
@@ -120,7 +120,7 @@ class authMethod_static extends StatelessWidget{
                         height: dev_height / 14.64,
                         decoration: BoxDecoration(
                           border: Border.all(
-                            width: 2.0,
+                            width: 1.0,
                             color: Color.fromRGBO(235, G.round(), 74, 0.8),
                           ),
                           borderRadius: BorderRadius.circular(20.0)
@@ -130,6 +130,7 @@ class authMethod_static extends StatelessWidget{
                               "Set up your account",
                             style: TextStyle(
                               color: Color.fromRGBO(235, G.round(), 74, 0.8),
+                              fontWeight: FontWeight.w200,
                               fontSize: dev_height > dev_width ? dev_height/36.6 : dev_height / 20.6,
                             ),
                           ),

@@ -3,11 +3,14 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:pfe_mobile/background.dart';
 import 'package:pfe_mobile/bottom_bar.dart';
 import 'package:pfe_mobile/message.dart';
 import 'package:pfe_mobile/side.dart';
 import 'Globals.dart' as globals;
 import 'device_dimensions.dart';
+import 'favorite.dart';
+import 'favorites.dart';
 import 'home.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -25,7 +28,7 @@ class product_detailState extends State<product_detail> {
   Future<void> _launched;
   static double dev_width, dev_height;
   static String prv_name = '' ;
-  int favorite_color = 220;
+  double favorite_color = 0.7;
   bool is_favorite = false;
 
 
@@ -41,9 +44,14 @@ class product_detailState extends State<product_detail> {
         }
       }
     }
+    change_favorite_color();
+  }
+
+
+  void change_favorite_color(){
     for(int i = 0; i < globals.MyGlobals.favourites.length; i++){
       if(globals.MyGlobals.favourites[i].id_product == globals.MyGlobals.all_products[counter].id_product){
-        favorite_color = 200;
+        favorite_color = 0.3;
         is_favorite = true;
         break;
       }
@@ -72,6 +80,26 @@ class product_detailState extends State<product_detail> {
     });
   }
 
+  void getfavorites() async{
+    await Future<Favourites> (() async {
+      final response = await http.get('${globals.MyGlobals.link_start}/api/favourite?api_token=${globals.MyGlobals.api_token}');
+      if (response.statusCode == 200) {
+        return Favourites.fromJson(json.decode(response.body));
+      } else {
+        throw Exception('Failed to load Favourite');
+      }
+    }).then((value) {
+      globals.MyGlobals.favourites.clear();
+      value.favourites.forEach((element) {
+        globals.MyGlobals.favourites.add(Favorite.fromJson(element));
+      });
+    }).then((value){
+      setState(() {
+        change_favorite_color();
+      });
+    });
+  }
+
   void add_to_favorites() async{
     await Future<Message>(() async{
       final response = await http.post('${globals.MyGlobals.link_start}/api/favourite?api_token=${globals.MyGlobals.api_token}&product_id=${globals.MyGlobals.all_products[counter].id_product}');
@@ -80,11 +108,8 @@ class product_detailState extends State<product_detail> {
       } else {
         throw Exception('Failed to load Message');
       }
-    }).then((value) {
-      print('oy');
-      setState(() {
-
-      });
+    }).then((value){
+        getfavorites();
     });
   }
 
@@ -117,7 +142,7 @@ class product_detailState extends State<product_detail> {
       child: Scaffold(
         body: Stack(
           children: <Widget>[
-            bottom_bar(),
+            Background(),
             Container(
               height: dev_height * 0.9,
               padding: EdgeInsets.only(top: 25),
@@ -125,6 +150,7 @@ class product_detailState extends State<product_detail> {
                 children: <Widget>[
                   Row(
                     children: <Widget>[
+                      VerticalDivider(width: dev_width / 64,),
                       Visibility(
                         visible: true,
                         child: Column(
@@ -203,9 +229,10 @@ class product_detailState extends State<product_detail> {
                                     children: <Widget>[
                                       Text(
                                         globals.MyGlobals.all_products[counter].name,
+                                        textAlign: TextAlign.center,
                                         style: TextStyle(
                                           color: globals.MyGlobals.lightcolor,
-                                          fontWeight: FontWeight.w900,
+                                          fontWeight: FontWeight.w300,
                                           fontSize: dev_height > dev_width
                                               ? dev_width / 16.44
                                               : dev_height / 29.24,
@@ -242,6 +269,7 @@ class product_detailState extends State<product_detail> {
                                                           ? dev_width / 20.55
                                                           : dev_height / 36.55,
                                                       color: globals.MyGlobals.lightcolor,
+                                                      fontWeight: FontWeight.w300,
                                                     ),
                                                   ),
                                                 ),
@@ -260,6 +288,7 @@ class product_detailState extends State<product_detail> {
                                                           ? dev_width / 20.55
                                                           : dev_height / 36.55,
                                                       color: globals.MyGlobals.lightcolor,
+                                                      fontWeight: FontWeight.w300,
                                                     ),
                                                   ),
                                                 ),
@@ -285,6 +314,7 @@ class product_detailState extends State<product_detail> {
                                                           ? dev_width / 20.55
                                                           : dev_height / 36.55,
                                                       color: globals.MyGlobals.lightcolor,
+                                                      fontWeight: FontWeight.w300,
                                                     ),
                                                   ),
                                                 ),
@@ -303,6 +333,7 @@ class product_detailState extends State<product_detail> {
                                                           ? dev_width / 20.55
                                                           : dev_height / 36.55,
                                                       color: globals.MyGlobals.lightcolor,
+                                                      fontWeight: FontWeight.w300,
                                                     ),
                                                   ),
                                                 ),
@@ -341,7 +372,7 @@ class product_detailState extends State<product_detail> {
                                   child: Text(
                                     'Actions :',
                                     style: TextStyle(
-                                        color: globals.MyGlobals.lightcolor, fontSize: 20),
+                                        color: globals.MyGlobals.lightcolor, fontSize: 20,fontWeight: FontWeight.w300,),
                                   ),
                                 )),
                             Container(
@@ -388,13 +419,15 @@ class product_detailState extends State<product_detail> {
                                               color: Colors.transparent,
                                               width: 0.0),
                                           borderRadius: BorderRadius.circular(20),
-                                          color: Color.fromRGBO(220, 120, 90, 1),
+                                          color: Color.fromRGBO(255, 148, 115, 1),
                                         ),
                                         child: Center(
                                           child: Text(
                                             'Visit Web Page',
                                             style: TextStyle(
-                                                color: globals.MyGlobals.lightcolor, fontSize: 20),
+                                                color: globals.MyGlobals.lightcolor, fontSize: 20,
+                                              fontWeight: FontWeight.w300,
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -415,7 +448,7 @@ class product_detailState extends State<product_detail> {
                                               width: 0.0),
                                           borderRadius:
                                           BorderRadius.circular(dev_width),
-                                          color: Color.fromRGBO(favorite_color, 120, 90, 1),
+                                          color: Color.fromRGBO(255, 148, 115, favorite_color),
                                         ),
                                         child: Center(
                                           child: Icon(
@@ -454,9 +487,12 @@ class product_detailState extends State<product_detail> {
                               child: Text(
                                 'Similar Products :',
                                 style: TextStyle(
-                                    color: globals.MyGlobals.lightcolor, fontSize: 20),
+                                    color: globals.MyGlobals.lightcolor, fontSize: 20,
+                                  fontWeight: FontWeight.w300,
+                                ),
                               ),
-                            )),
+                            ),
+                        ),
                         Container(
                           width: dev_width / 3,
                           alignment: Alignment(0, 0.5),
@@ -479,9 +515,8 @@ class product_detailState extends State<product_detail> {
                           onPressed: (){
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => product_detail(counter + index + 1)),
+                              MaterialPageRoute(builder: (context) => product_detail(HomeState.first_counter + index + 1)),
                             );
-                            counter -= index;
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -523,7 +558,7 @@ class product_detailState extends State<product_detail> {
                                           child: ListView(
                                             children: <Widget>[
                                               Center(
-                                                child: Text(globals.MyGlobals.all_products[HomeState.first_counter + index + 1 ].name,textAlign: TextAlign.center,style: TextStyle(color: globals.MyGlobals.lightcolor),),
+                                                child: Text(globals.MyGlobals.all_products[HomeState.first_counter + index + 1 ].name,textAlign: TextAlign.center,style: TextStyle(color: globals.MyGlobals.lightcolor,fontWeight: FontWeight.w300,),),
                                               ),
                                             ],
                                           ),
@@ -531,7 +566,7 @@ class product_detailState extends State<product_detail> {
                                       ),
                                       Container(
                                         height: dev_height / 18,
-                                        child: Text('Price : ' + globals.MyGlobals.all_products[HomeState.first_counter + index + 1].price.toString() +'\$',style: TextStyle(color: globals.MyGlobals.lightcolor),),
+                                        child: Text('Price : ' + globals.MyGlobals.all_products[HomeState.first_counter + index + 1].price.toString() +'\$',style: TextStyle(color: globals.MyGlobals.lightcolor,fontWeight: FontWeight.w300,),),
                                       ),
                                     ],
                                   ),
@@ -552,6 +587,7 @@ class product_detailState extends State<product_detail> {
               ),
             ),
             FutureBuilder<void>(future: _launched, builder: _launchStatus),
+            bottom_bar(),
           ],
         ),
         drawer: side_bar(),

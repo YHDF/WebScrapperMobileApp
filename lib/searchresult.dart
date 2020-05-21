@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pfe_mobile/background.dart';
 import 'package:pfe_mobile/product_detail.dart';
 import 'package:pfe_mobile/side.dart';
 import 'bottom_bar.dart';
@@ -28,7 +29,7 @@ class SearchresultState extends State<Searchresult>{
       child: Scaffold(
         body: Stack(
           children: <Widget>[
-            bottom_bar(),
+            Background(),
             Stack(
               children: <Widget>[
                 Container(
@@ -182,7 +183,8 @@ class SearchresultState extends State<Searchresult>{
                   ),
                 ),
               ],
-            )
+            ),
+            bottom_bar(),
           ],
         ),
         drawer: side_bar(),

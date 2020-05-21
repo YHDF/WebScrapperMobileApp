@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:pfe_mobile/background.dart';
 import 'package:pfe_mobile/device_dimensions.dart';
 import 'package:pfe_mobile/setting_variables.dart';
 import 'package:pfe_mobile/side.dart';
@@ -104,7 +105,7 @@ $isdark""";
           child: Scaffold(
             body: Stack(
               children: <Widget>[
-                bottom_bar(),
+                Background(),
                 Container(
                   width: dev_width,
                   height: dev_height * 0.9,
@@ -118,13 +119,13 @@ $isdark""";
                               width : dev_width / 3,
                               alignment: Alignment(0,0),
                               child: Text(
-                                'Theme and Style :',style: TextStyle(fontSize: 20,color: globals.MyGlobals.lightcolor),
+                                'Theme and Style :',style: TextStyle(fontSize: 20,color: globals.MyGlobals.lightcolor,fontWeight: FontWeight.w300),
                               ),
                             ),
                             Container(
                               width: 2 * dev_width / 3,
                               alignment: Alignment(0,0.1),
-                              child: Divider(color: globals.MyGlobals.lightcolor,endIndent: 5,thickness: 1,),
+                              child: Divider(color: globals.MyGlobals.lightcolor,endIndent: 5,thickness: 0.5,),
                             )
                           ],
                         ),
@@ -152,7 +153,7 @@ $isdark""";
                                       globals.MyGlobals.isdarkmode = isdark;
                                       _changeColor();
                                   },
-                                  child: Text('Light mode', style: TextStyle(color: islight ? globals.MyGlobals.darkcolor : globals.MyGlobals.lightcolor),),
+                                  child: Text('Light mode', style: TextStyle(color: islight ? globals.MyGlobals.darkcolor : globals.MyGlobals.lightcolor,fontWeight: FontWeight.w300,),),
                                 ),
                               ),
                               Container(
@@ -165,7 +166,7 @@ $isdark""";
                                       globals.MyGlobals.isdarkmode = isdark;
                                       _changeColor();
                                   },
-                                  child: Text('Dark mode', style: TextStyle(color: isdark ? globals.MyGlobals.darkcolor : globals.MyGlobals.lightcolor),),
+                                  child: Text('Dark mode', style: TextStyle(color: isdark ? globals.MyGlobals.darkcolor : globals.MyGlobals.lightcolor,fontWeight: FontWeight.w300),),
                                 ),
                               ),
                             ],
@@ -175,6 +176,7 @@ $isdark""";
                     ],
                   ),
                 ),
+                bottom_bar(),
               ],
             ),
             drawer: side_bar(),

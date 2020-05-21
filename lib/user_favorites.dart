@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pfe_mobile/background.dart';
 import 'package:pfe_mobile/device_dimensions.dart';
 import 'package:pfe_mobile/favorite.dart';
 import 'package:pfe_mobile/favorites.dart';
@@ -78,7 +80,7 @@ class user_favoriteState extends State<user_favorite>{
       child: Scaffold(
         body: Stack(
           children: <Widget>[
-            bottom_bar(),
+            Background(),
             Stack(
               children: <Widget>[
                 Container(
@@ -93,7 +95,7 @@ class user_favoriteState extends State<user_favorite>{
                           width: dev_height > dev_width ? dev_width / 7 : dev_height / 7,
                           height: dev_height > dev_width ? dev_width / 7 : dev_height / 7,
                           decoration: BoxDecoration(
-                            color: globals.MyGlobals.lightcolor.withOpacity(0.5),
+                            color: globals.MyGlobals.lightcolor.withOpacity(0.3),
                             border:  Border.all(color: Colors.transparent,width: 0.0),
                             borderRadius: BorderRadius.circular(dev_width),
                           ),
@@ -101,7 +103,7 @@ class user_favoriteState extends State<user_favorite>{
                             child: Icon(
                                 IconData(59517, fontFamily: 'MaterialIcons'),
                               color: globals.MyGlobals.lightcolor,
-                              size: 30,
+                              size: 25,
                             ),
                           ),
                         ),
@@ -111,13 +113,13 @@ class user_favoriteState extends State<user_favorite>{
                           width:  dev_width /  1.8,
                           height: dev_height / 20,
                           decoration: BoxDecoration(
-                            color: globals.MyGlobals.lightcolor.withOpacity(0.5),
+                            color: globals.MyGlobals.lightcolor.withOpacity(0.3),
                             border:  Border.all(color: Colors.transparent,width: 0.0),
                             borderRadius: BorderRadius.circular(5),
                           ),
                           child: Text(
                             'Favorites',
-                            style: TextStyle(fontSize: 20, color: globals.MyGlobals.lightcolor,),
+                            style: TextStyle(fontSize: 25, color: globals.MyGlobals.lightcolor,fontWeight: FontWeight.w200),
                           ),
                         ),
                       ],
@@ -156,29 +158,33 @@ class user_favoriteState extends State<user_favorite>{
                                   ),
                                   child: Row(
                                     children: <Widget>[
+                                      VerticalDivider(width: dev_width / 64,),
                                       Container(
-                                        width: dev_width / 5,
+                                        width: dev_width / 6,
+                                        height: dev_height / 10,
                                         child: Image.network(
                                           globals.MyGlobals.favourites[index].image,
                                         ),
                                       ),
+                                      VerticalDivider(width: dev_width / 32,),
                                       Container(
                                         width: dev_width / 2,
                                         child: Column(
                                           children: <Widget>[
                                             Container(
-                                              height: 35,
-                                              child: Center(
-                                                child: Text(
-                                                  globals.MyGlobals.favourites[index].name,
-                                                  style: TextStyle(
-                                                    color: globals.MyGlobals.lightcolor,
-                                                  ),
+                                              height: dev_height / 16,
+                                              alignment: Alignment(0,0),
+                                              child: Text(
+                                                globals.MyGlobals.favourites[index].name,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                  color: globals.MyGlobals.lightcolor,
+                                                  fontWeight: FontWeight.w300,
                                                 ),
                                               ),
                                             ),
                                             Container(
-                                              height: 35,
+                                              height: dev_height / 26,
                                               child: Row(
                                                 children: <Widget>[
                                                   Container(
@@ -187,7 +193,8 @@ class user_favoriteState extends State<user_favorite>{
                                                     child: Text(
                                                       globals.MyGlobals.favourites[index].price.toString() + '\$' ,
                                                       style: TextStyle(
-                                                          color: globals.MyGlobals.lightcolor
+                                                          color: globals.MyGlobals.lightcolor,
+                                                          fontWeight: FontWeight.w300,
                                                       ),
                                                     ),
                                                   ),
@@ -202,6 +209,7 @@ class user_favoriteState extends State<user_favorite>{
                                                             'visit in website',
                                                             style: TextStyle(
                                                               color: globals.MyGlobals.lightcolor,
+                                                              fontWeight: FontWeight.w300,
                                                             ),
                                                           ),
                                                         ),
@@ -232,7 +240,7 @@ class user_favoriteState extends State<user_favorite>{
                               height : 75,
                               decoration: BoxDecoration(
                                 border : Border.all(color: Colors.transparent, width: 0.0),
-                                color: globals.MyGlobals.lightcolor.withOpacity(0.5),
+                                color: globals.MyGlobals.lightcolor.withOpacity(0.3),
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: FlatButton(
@@ -240,6 +248,7 @@ class user_favoriteState extends State<user_favorite>{
                                   IconData(57675, fontFamily: 'MaterialIcons'),
                                   size: 30,
                                   color: globals.MyGlobals.lightcolor,
+
                                 ),
                                 onPressed: (){
                                   delete_favorite(index);
@@ -258,7 +267,8 @@ class user_favoriteState extends State<user_favorite>{
                   ),
                 ),
               ],
-            )
+            ),
+            bottom_bar(),
           ],
         ),
         drawer: side_bar(),
