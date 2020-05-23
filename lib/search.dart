@@ -6,6 +6,7 @@ import 'package:pfe_mobile/home.dart';
 import 'package:pfe_mobile/side.dart';
 import 'package:pfe_mobile/simple_search.dart';
 import 'side.dart';
+import 'Globals.dart' as globals;
 
 class search extends StatefulWidget {
   @override
@@ -19,11 +20,25 @@ class searchState extends State<search> {
     initialPage: 0,
   );
 
-
   void initState(){
     super.initState();
     customized = false;
     Custom_SearchState.price_range.clear();
+    if(!customized){
+      for (int i = 0; i < globals.MyGlobals.categorie_length; i++) {
+        Custom_SearchState.categorie_choice.insert(i, true);
+      }
+      for (int i = 0; i < globals.MyGlobals.provider_length; i++) {
+        Custom_SearchState.provider_choice.insert(i, true);
+      }
+      for (int i = 0; i < globals.MyGlobals.price_range_length ; i++ ){
+        Custom_SearchState.price_range.insert(i, i == 0 ? 'less than 500' : i == 1 ? '500 to 100' : i == 2 ? '1000 to 2000' : 'above 2000');
+      }
+      for (int i = 0; i < globals.MyGlobals.price_range_length ; i++ ){
+        Custom_SearchState.price_selected.insert(i, false);
+      }
+      searchState.customized = true;
+    }
   }
 
   _onPageViewChange(int page){
