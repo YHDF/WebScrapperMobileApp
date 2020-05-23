@@ -28,7 +28,7 @@ class product_detailState extends State<product_detail> {
   Future<void> _launched;
   static double dev_width, dev_height;
   static String prv_name = '' ;
-  double favorite_color = 0.7;
+  double favorite_color = 1;
   bool is_favorite = false;
 
 
@@ -51,7 +51,7 @@ class product_detailState extends State<product_detail> {
   void change_favorite_color(){
     for(int i = 0; i < globals.MyGlobals.favourites.length; i++){
       if(globals.MyGlobals.favourites[i].id_product == globals.MyGlobals.all_products[counter].id_product){
-        favorite_color = 0.3;
+        favorite_color = 0.5;
         is_favorite = true;
         break;
       }
@@ -217,7 +217,7 @@ class product_detailState extends State<product_detail> {
                               border: Border.all(
                                   color: Colors.transparent, width: 0.0),
                               borderRadius: BorderRadius.circular(10),
-                              color: globals.MyGlobals.lightcolor.withOpacity(0.3),
+                              color: globals.MyGlobals.lightcolor.withOpacity(0),
                             ),
                             alignment: Alignment(-1, -0.9),
                             child: Column(
@@ -397,7 +397,7 @@ class product_detailState extends State<product_detail> {
                               border:
                               Border.all(color: Colors.transparent, width: 0.0),
                               borderRadius: BorderRadius.circular(10),
-                              color: globals.MyGlobals.lightcolor.withOpacity(0.3),
+                              color: globals.MyGlobals.lightcolor.withOpacity(0),
                             ),
                             child: Container(
                               height: dev_height / 12,
@@ -416,10 +416,10 @@ class product_detailState extends State<product_detail> {
                                         height: dev_height / 16,
                                         decoration: BoxDecoration(
                                           border: Border.all(
-                                              color: Colors.transparent,
-                                              width: 0.0),
+                                              color: globals.MyGlobals.lightcolor,
+                                              width: 0.7),
                                           borderRadius: BorderRadius.circular(20),
-                                          color: Color.fromRGBO(255, 148, 115, 1),
+                                          color: Colors.transparent,
                                         ),
                                         child: Center(
                                           child: Text(
@@ -444,17 +444,17 @@ class product_detailState extends State<product_detail> {
                                         height: dev_width / 7,
                                         decoration: BoxDecoration(
                                           border: Border.all(
-                                              color: Colors.transparent,
-                                              width: 0.0),
+                                              color: globals.MyGlobals.lightcolor,
+                                              width: 0.7),
                                           borderRadius:
                                           BorderRadius.circular(dev_width),
-                                          color: Color.fromRGBO(255, 148, 115, favorite_color),
+                                          color: Colors.transparent,
                                         ),
                                         child: Center(
                                           child: Icon(
                                             IconData(59517,
                                                 fontFamily: 'MaterialIcons'),
-                                            color: globals.MyGlobals.lightcolor,
+                                            color: globals.MyGlobals.lightcolor.withOpacity(favorite_color),
                                           ),
                                         ),
                                       ),
@@ -520,10 +520,10 @@ class product_detailState extends State<product_detail> {
                           },
                           child: Container(
                             decoration: BoxDecoration(
-                              color: globals.MyGlobals.lightcolor.withOpacity(0.3),
+                              color: globals.MyGlobals.lightcolor.withOpacity(0),
                               border: Border.all(
-                                width: 0,
-                                color: Colors.transparent,
+                                width: 0.7,
+                                color: globals.MyGlobals.lightcolor,
                               ),
                               borderRadius: BorderRadius.circular(20),
                             ),

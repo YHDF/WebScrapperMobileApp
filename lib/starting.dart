@@ -251,11 +251,13 @@ class Startup extends StatelessWidget {
                               ),
                             ),
                           ],
-                        )),
+                        ),
+                    ),
                   ),
                 ],
               ),
-            ))
+            ),
+        ),
       ],
     );
   }

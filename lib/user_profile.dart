@@ -23,6 +23,7 @@ class user_profileState extends State<user_profile>
   static bool editable = false;
   bool hidden = true;
   String str;
+  static double icon_opacity = 1;
 
   @override
   void initState() {
@@ -126,16 +127,21 @@ class user_profileState extends State<user_profile>
                             children: <Widget>[
                               Container(
                                 width: 2 * dev_width / 3,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: globals.MyGlobals.lightcolor,
-                                      width: 1),
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
                                 child: TextFormField(
                                   controller: _controller,
                                   decoration: InputDecoration(
-                                    border: InputBorder.none,
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: globals.MyGlobals.lightcolor,
+                                          width: 0.5),
+                                      borderRadius: BorderRadius.circular(25.0),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: globals.MyGlobals.lightcolor,
+                                          width: 0.5),
+                                      borderRadius: BorderRadius.circular(25.0),
+                                    ),
                                     hintStyle: TextStyle(
                                       color: globals.MyGlobals.lightcolor,
                                       fontSize: dev_height > dev_width
@@ -163,8 +169,8 @@ class user_profileState extends State<user_profile>
                                     alignment: Alignment(0, 0),
                                     width: dev_width / 3,
                                     decoration: BoxDecoration(
-                                      color: globals.MyGlobals.darkcolor,
-                                      border: Border.all(color: globals.MyGlobals.darkcolor),
+                                      color: Colors.transparent,
+                                      border: Border.all(color: globals.MyGlobals.lightcolor, width: 0.5),
                                       borderRadius: BorderRadius.circular(20),
                                     ),
                                     child: Text(
@@ -172,6 +178,7 @@ class user_profileState extends State<user_profile>
                                       style: TextStyle(
                                         color: globals.MyGlobals.lightcolor,
                                         fontSize: 20,
+                                        fontWeight: FontWeight.w200
                                       ),
                                     ),
                                   ),
@@ -185,7 +192,7 @@ class user_profileState extends State<user_profile>
                       Container(
                         alignment: Alignment(0, 0),
                         child: Text(
-                          ' YOU HAVE, ',
+                          ' YOU HAVE : ',
                           style: TextStyle(
                             fontSize: 40,
                             fontWeight: FontWeight.w200,
@@ -205,7 +212,7 @@ class user_profileState extends State<user_profile>
                       Container(
                         alignment: Alignment(0, 0),
                         child: Text(
-                          'WITH EMAIL',
+                          'WITH EMAIL :',
                           style: TextStyle(
                             fontSize: 40,
                             fontWeight: FontWeight.w200,
@@ -226,6 +233,7 @@ class user_profileState extends State<user_profile>
                               str,
                               style: TextStyle(
                                 color: globals.MyGlobals.lightcolor,
+                                fontWeight: FontWeight.w300,
                                 fontSize: 17,
                               ),
                             ),
@@ -251,14 +259,14 @@ class user_profileState extends State<user_profile>
                             height: dev_height / 16,
                             decoration: BoxDecoration(
                               border: Border.all(
-                                  color: Colors.transparent, width: 0),
+                                  color: globals.MyGlobals.lightcolor, width: 0.5),
                               borderRadius: BorderRadius.circular(50),
-                              color: globals.MyGlobals.lightcolor,
+                              color: Colors.transparent,
                             ),
                             child: Center(
                               child: Icon(
                                 IconData(58139, fontFamily: 'MaterialIcons'),
-                                color: globals.MyGlobals.darkcolor,
+                                color: globals.MyGlobals.lightcolor.withOpacity(icon_opacity),
                               ),
                             ),
                           ),
@@ -314,9 +322,8 @@ class editablecontainerState extends State<editablecontainer> {
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontSize: 25.0,
-                      color: globals.MyGlobals.lightcolor
-                          .withOpacity(user_profileState.opacity),
-                      fontWeight: FontWeight.w300,
+                      color: globals.MyGlobals.lightcolor,
+                      fontWeight: FontWeight.w200,
                     ),
                   ),
                 ),
@@ -338,10 +345,14 @@ class editablecontainerState extends State<editablecontainer> {
                 },
                 child: Container(
                   width: device_dimensions(context).dev_width / 8,
-                  child: Icon(
-                    IconData(57680, fontFamily: 'MaterialIcons'),
-                    color: globals.MyGlobals.lightcolor
-                        .withOpacity(user_profileState.opacity),
+                  alignment: Alignment(1,0),
+                  child: Container(
+                    width: device_dimensions(context).dev_width / 28,
+                    child: Icon(
+                      IconData(57680, fontFamily: 'MaterialIcons'),
+                      size: 20,
+                      color: globals.MyGlobals.lightcolor,
+                    ),
                   ),
                 ),
               ),
@@ -396,9 +407,8 @@ class viewable_containerState extends State<viewable_container> {
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontSize: 20.0,
-                              color: globals.MyGlobals.lightcolor
-                                  .withOpacity(user_profileState.opacity),
-                              fontWeight: FontWeight.w300,
+                              color: globals.MyGlobals.lightcolor,
+                              fontWeight: FontWeight.w200,
                             ),
                           ),
                         ),
@@ -407,8 +417,7 @@ class viewable_containerState extends State<viewable_container> {
                           alignment: Alignment(0.1, 0),
                           child: Icon(
                             icondata,
-                            color: globals.MyGlobals.lightcolor
-                                .withOpacity(user_profileState.opacity),
+                            color: globals.MyGlobals.lightcolor,
                             size: 25,
                           ),
                         )
@@ -427,8 +436,8 @@ class viewable_containerState extends State<viewable_container> {
                     width: device_dimensions(context).dev_width / 8,
                     child: Icon(
                       IconData(58391, fontFamily: 'MaterialIcons'),
-                      color: globals.MyGlobals.lightcolor
-                          .withOpacity(user_profileState.opacity),
+                      size: 20,
+                      color: globals.MyGlobals.lightcolor,
                     ),
                   ),
                 ),

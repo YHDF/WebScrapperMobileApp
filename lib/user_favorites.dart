@@ -88,181 +88,138 @@ class user_favoriteState extends State<user_favorite>{
                   child: Container(
                     width: 3 * dev_width / 4,
                     height:  dev_height / 12,
-                    alignment: Alignment(1,0),
-                      child: Row(
-                      children: <Widget>[
-                        Container(
-                          width: dev_height > dev_width ? dev_width / 7 : dev_height / 7,
-                          height: dev_height > dev_width ? dev_width / 7 : dev_height / 7,
-                          decoration: BoxDecoration(
-                            color: globals.MyGlobals.lightcolor.withOpacity(0.3),
-                            border:  Border.all(color: Colors.transparent,width: 0.0),
-                            borderRadius: BorderRadius.circular(dev_width),
-                          ),
-                          child: Center(
-                            child: Icon(
-                                IconData(59517, fontFamily: 'MaterialIcons'),
-                              color: globals.MyGlobals.lightcolor,
-                              size: 25,
-                            ),
-                          ),
+                    alignment: Alignment(0,0),
+                      child: Container(
+                        alignment: Alignment(0,0),
+                        height: dev_height / 18,
+                        width: 2 * dev_width / 3,
+                        decoration: BoxDecoration(
+                          color: globals.MyGlobals.lightcolor.withOpacity(0),
+                          border:  Border.all(color: globals.MyGlobals.lightcolor,width: 0.5),
+                          borderRadius: BorderRadius.circular(20),
                         ),
-                        VerticalDivider(width: 5,color: Colors.transparent,),
-                        Container(
-                          alignment: Alignment(0,0),
-                          width:  dev_width /  1.8,
-                          height: dev_height / 20,
-                          decoration: BoxDecoration(
-                            color: globals.MyGlobals.lightcolor.withOpacity(0.3),
-                            border:  Border.all(color: Colors.transparent,width: 0.0),
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          child: Text(
-                            'Favorites',
-                            style: TextStyle(fontSize: 25, color: globals.MyGlobals.lightcolor,fontWeight: FontWeight.w200),
-                          ),
+                        child: Text(
+                          'Favourites :',
+                          style: TextStyle(fontSize: 30, color: globals.MyGlobals.lightcolor,fontWeight: FontWeight.w200),
                         ),
-                      ],
-                    ),
+                      ),
                   ),
                 ),
                 Container(
-                  alignment: Alignment(-1, 0.3),
+                  alignment: Alignment(-1, 0.1),
                   child: Container(
                     width:  dev_width,
                     height: 14 * dev_height / 18,
                     child: ListView.separated(
-                      padding: const EdgeInsets.all(8),
+                      separatorBuilder: (BuildContext context, int index) =>
+                          Divider(color: globals.MyGlobals.lightcolor,endIndent: 25,indent: 25,),
                       itemCount: globals.MyGlobals.favourites.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return Row(
-                          children: <Widget>[
-                            Container(
-                              width : 0.8 * dev_width,
-                              child: FlatButton(
-                                onPressed: (){
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => product_detail(index)),
-                                  );
-                                },
-                                child: Container(
-                                  height: 75,
-                                  decoration: BoxDecoration(
-                                    color: globals.MyGlobals.lightcolor.withOpacity(0.3),
-                                    border: Border.all(
-                                      color: Colors.transparent,
-                                      width: 0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Row(
-                                    children: <Widget>[
-                                      VerticalDivider(width: dev_width / 64,),
-                                      Container(
-                                        width: dev_width / 6,
-                                        height: dev_height / 10,
-                                        child: Image.network(
-                                          globals.MyGlobals.favourites[index].image,
-                                        ),
+                        return Container(
+                          height: dev_height / 9,
+                          child: Row(
+                            children: <Widget>[
+                              Container(
+                                width : 0.75 * dev_width,
+                                child: FlatButton(
+                                  onPressed: (){
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => product_detail(index)),
+                                    );
+                                  },
+                                  child: Container(
+                                    height: 75,
+                                    decoration: BoxDecoration(
+                                      color: globals.MyGlobals.lightcolor.withOpacity(0),
+                                      border: Border.all(
+                                        color: Colors.transparent,
+                                        width: 0,
                                       ),
-                                      VerticalDivider(width: dev_width / 32,),
-                                      Container(
-                                        width: dev_width / 2,
-                                        child: Column(
-                                          children: <Widget>[
-                                            Container(
-                                              height: dev_height / 16,
-                                              alignment: Alignment(0,0),
-                                              child: Text(
-                                                globals.MyGlobals.favourites[index].name,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
-                                                  color: globals.MyGlobals.lightcolor,
-                                                  fontWeight: FontWeight.w300,
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Row(
+                                      children: <Widget>[
+                                        Container(
+                                          width: dev_width / 7,
+                                          height: dev_height / 10,
+                                          child: Image.network(
+                                            globals.MyGlobals.favourites[index].image,
+                                          ),
+                                        ),
+                                        VerticalDivider(width: dev_width / 64,),
+                                        Container(
+                                          width: dev_width / 2,
+                                          child: Column(
+                                            children: <Widget>[
+                                              Container(
+                                                height: dev_height / 16,
+                                                alignment: Alignment(0,0),
+                                                child: Text(
+                                                  globals.MyGlobals.favourites[index].name,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    color: globals.MyGlobals.lightcolor,
+                                                    fontWeight: FontWeight.w300,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            Container(
-                                              height: dev_height / 26,
-                                              child: Row(
-                                                children: <Widget>[
-                                                  Container(
-                                                    width: dev_width / 6,
-                                                    alignment: Alignment(1,0),
-                                                    child: Text(
-                                                      globals.MyGlobals.favourites[index].price.toString() + '\$' ,
-                                                      style: TextStyle(
+                                              Container(
+                                                height: dev_height / 26,
+                                                child: Row(
+                                                  children: <Widget>[
+                                                    Container(
+                                                      width: dev_width / 2,
+                                                      alignment: Alignment(0, 0),
+                                                      child: Text(
+                                                        'Price: ${globals.MyGlobals.favourites[index].price.toString()}' + '\$',
+                                                        textAlign: TextAlign.end,
+                                                        style: TextStyle(
                                                           color: globals.MyGlobals.lightcolor,
                                                           fontWeight: FontWeight.w300,
+                                                        ),
                                                       ),
                                                     ),
-                                                  ),
-                                                  Container(
-                                                    width: dev_width / 3,
-                                                    alignment: Alignment(1,0),
-                                                    child: Stack(
-                                                      children: <Widget>[
-                                                        Container(
-                                                          alignment: Alignment(0,0),
-                                                          child: Text(
-                                                            'visit in website',
-                                                            style: TextStyle(
-                                                              color: globals.MyGlobals.lightcolor,
-                                                              fontWeight: FontWeight.w300,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        Container(
-                                                          alignment: Alignment(1,0),
-                                                          child: Icon(
-                                                            IconData(58849, fontFamily: 'MaterialIcons', matchTextDirection: true),
-                                                            color: globals.MyGlobals.lightcolor,
-                                                            size: 15,
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            )
-                                          ],
+                                                  ],
+                                                ),
+                                              )
+                                            ],
+                                          ),
                                         ),
-                                      )
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Container(
-                              width: 0.15 * dev_width,
-                              height : 75,
-                              decoration: BoxDecoration(
-                                border : Border.all(color: Colors.transparent, width: 0.0),
-                                color: globals.MyGlobals.lightcolor.withOpacity(0.3),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: FlatButton(
-                                child: Icon(
-                                  IconData(57675, fontFamily: 'MaterialIcons'),
-                                  size: 30,
-                                  color: globals.MyGlobals.lightcolor,
-
+                              VerticalDivider(width: dev_width / 16,color: globals.MyGlobals.lightcolor,indent: 25,endIndent: 25,),
+                              Container(
+                                width: 0.15 * dev_width,
+                                height : 75,
+                                decoration: BoxDecoration(
+                                  border : Border.all(color: Colors.transparent, width: 0.0),
+                                  color: globals.MyGlobals.lightcolor.withOpacity(0),
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
-                                onPressed: (){
-                                  delete_favorite(index);
-                                  setState(() {
-                                    isFavorite[index] = false;
-                                  });
-                                },
+                                child: FlatButton(
+                                  child: Icon(
+                                    IconData(57675, fontFamily: 'MaterialIcons'),
+                                    size: 30,
+                                    color: globals.MyGlobals.lightcolor,
+
+                                  ),
+                                  onPressed: (){
+                                    delete_favorite(index);
+                                    setState(() {
+                                      isFavorite[index] = false;
+                                    });
+                                  },
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         );
                       },
-                      separatorBuilder: (BuildContext context, int index) =>
-                      const Divider(),
                     ),
                   ),
                 ),

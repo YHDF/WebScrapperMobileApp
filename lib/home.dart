@@ -128,78 +128,86 @@ class HomeState extends State<Home> {
               new Stack(
                 children: <Widget>[
                   Container(
-                    alignment: Alignment(0, -0.9),
+                    height: dev_height / 10,
+                    alignment: Alignment(0,1),
                     child: Container(
-                      width: 0.9 * dev_width,
                       height: dev_height / 18,
-                      decoration: BoxDecoration(
-                        color: globals.MyGlobals.lightcolor.withOpacity(0.3),
-                        border: Border.all(
-                          color: Colors.transparent,
-                          width: 0,
+                      alignment: Alignment(0,1),
+                      child: Container(
+                        width: 0.9 * dev_width,
+                        height: dev_height / 18,
+                        decoration: BoxDecoration(
+                          color: globals.MyGlobals.lightcolor.withOpacity(0),
+                          border: Border.all(
+                            color: globals.MyGlobals.lightcolor,
+                            width: 0.3,
+                          ),
+                          borderRadius: BorderRadius.circular(20),
                         ),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Row(
-                        children: <Widget>[
-                          Container(
-                            width: 0.9 * dev_width / 2,
-                            child: FlatButton(
-                              onPressed: () {
-                                selected = true;
-                                unselected = false;
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Home()),
-                                );
-                              },
-                              child: Center(
-                                child: Text(
-                                  'Our Choice',
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w200,
-                                    color: lst_selectedchoicecolor[0],
+                        child: Row(
+                          children: <Widget>[
+                            Container(
+                              width: 0.9 * dev_width / 2.1,
+                              child: FlatButton(
+                                onPressed: () {
+                                  selected = true;
+                                  unselected = false;
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Home()),
+                                  );
+                                },
+                                child:Center(
+                                  child: Text(
+                                    'Our Choice',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w300,
+                                      color: lst_selectedchoicecolor[0],
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                          Container(
-                            width: 0.9 * dev_width / 2,
-                            child: FlatButton(
-                              onPressed: () {
-                                selected = false;
-                                unselected = true;
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Home()),
-                                );
-                              },
-                              child: Center(
-                                child: Text(
-                                  'Most Visited',
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w200,
-                                    color: lst_selectedchoicecolor[1],
+                            VerticalDivider(width: 10,color: globals.MyGlobals.lightcolor,indent: 8,endIndent: 8,),
+                            Container(
+                              width: 0.9 * dev_width / 2.1,
+                              child: FlatButton(
+                                onPressed: () {
+                                  selected = false;
+                                  unselected = true;
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Home()),
+                                  );
+                                },
+                                child: Center(
+                                  child: Text(
+                                    'Most Visited',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w300,
+                                      color: lst_selectedchoicecolor[1],
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
                   Container(
-                    alignment: Alignment(0, 0.2),
+                    alignment: Alignment(0, 0.25),
                     child: Container(
                       width: dev_width,
-                      height: 14 * dev_height / 18,
+                      height: 14.5 * dev_height / 18,
                       child: ListView.separated(
+                        separatorBuilder: (BuildContext context, int index) =>
+                            Divider(color: globals.MyGlobals.lightcolor,indent: 25,endIndent: 25,),
                         padding: const EdgeInsets.all(8),
                         itemCount: selected ? globals.MyGlobals.best_products.length : globals.MyGlobals.most_visited.length,
                         itemBuilder: (BuildContext context, int index) {
@@ -229,7 +237,7 @@ class HomeState extends State<Home> {
                             child: Container(
                               height: 90,
                               decoration: BoxDecoration(
-                                color: globals.MyGlobals.lightcolor.withOpacity(0.3),
+                                color: globals.MyGlobals.lightcolor.withOpacity(0),
                                 border: Border.all(
                                   color: Colors.transparent,
                                   width: 0,
@@ -324,8 +332,7 @@ class HomeState extends State<Home> {
                             ),
                           );
                         },
-                        separatorBuilder: (BuildContext context, int index) =>
-                        const Divider(),
+
                       ),
                     ),
                   )

@@ -24,6 +24,9 @@ class MyGlobals{
   static User current_user = User(name: '',email: '');
   static int favorite_count = 7;
   static int feedback_count = 7;
+  static int categorie_length = 2;
+  static int provider_length = 4;
+  static int price_range_length = 4;
   static String link_start = 'http://192.168.1.3:8000';
   String toString(){
     return

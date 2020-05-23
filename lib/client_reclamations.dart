@@ -153,7 +153,7 @@ class client_reclamationState extends State<client_reclamation> with TickerProvi
                                 child: Text(
                                   'Your Feedback:',
                                   style: TextStyle(
-                                      color: globals.MyGlobals.lightcolor, fontSize: 20,fontWeight: FontWeight.w300,),
+                                      color: globals.MyGlobals.lightcolor, fontSize: 20,fontWeight: FontWeight.w200,),
                                 ),
                               )),
                           Container(
@@ -178,7 +178,7 @@ class client_reclamationState extends State<client_reclamation> with TickerProvi
                           style: TextStyle(
                             fontSize: 20,
                             color: globals.MyGlobals.lightcolor,
-                            fontWeight: FontWeight.w300,
+                            fontWeight: FontWeight.w200,
                           ),
                         ),
                       ),
@@ -195,14 +195,14 @@ class client_reclamationState extends State<client_reclamation> with TickerProvi
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: globals.MyGlobals.lightcolor,
-                                    width: 1.0),
-                                borderRadius: BorderRadius.circular(25.0),
+                                    width: 0.5),
+                                borderRadius: BorderRadius.circular(20.0),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: globals.MyGlobals.lightcolor,
-                                    width: 1.0),
-                                borderRadius: BorderRadius.circular(25.0),
+                                    width: 0.5),
+                                borderRadius: BorderRadius.circular(20.0),
                               ),
                               labelText: '   ',
                             ),
@@ -222,7 +222,7 @@ class client_reclamationState extends State<client_reclamation> with TickerProvi
                           style: TextStyle(
                             fontSize: 20,
                             color: globals.MyGlobals.lightcolor,
-                            fontWeight: FontWeight.w300,
+                            fontWeight: FontWeight.w200,
                           ),
                         ),
                       ),
@@ -240,14 +240,14 @@ class client_reclamationState extends State<client_reclamation> with TickerProvi
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: globals.MyGlobals.lightcolor,
-                                    width: 1.0),
-                                borderRadius: BorderRadius.circular(25.0),
+                                    width: 0.5),
+                                borderRadius: BorderRadius.circular(20.0),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: globals.MyGlobals.lightcolor,
-                                    width: 1.0),
-                                borderRadius: BorderRadius.circular(25.0),
+                                    width: 0.5),
+                                borderRadius: BorderRadius.circular(20.0),
                               ),
                               labelText: '   ',
                             ),
@@ -268,7 +268,7 @@ class client_reclamationState extends State<client_reclamation> with TickerProvi
                             child: Visibility(
                               visible: msgvisible,
                               child: Text(confirm_message,
-                                style: TextStyle(color: globals.MyGlobals.lightcolor,fontSize: 20),
+                                style: TextStyle(color: globals.MyGlobals.lightcolor,fontSize: 20,fontWeight: FontWeight.w200),
                               ),
                             ),
                           ),
@@ -287,11 +287,11 @@ class client_reclamationState extends State<client_reclamation> with TickerProvi
                                 width: dev_width / 3,
                                 height: dev_height / 16,
                                 decoration: BoxDecoration(
-                                  color: globals.MyGlobals.lightcolor.withOpacity(0.3),
-                                  border: Border.all(color: Colors.transparent,width: 0),
+                                  color: Colors.transparent,
+                                  border: Border.all(color: globals.MyGlobals.lightcolor,width: 0.5),
                                   borderRadius: BorderRadius.circular(20),
                                 ),
-                                child: Text('Submit',style: TextStyle(color: globals.MyGlobals.lightcolor,fontSize: 20,fontWeight: FontWeight.w300,),),
+                                child: Text('Submit',style: TextStyle(color: globals.MyGlobals.lightcolor,fontSize: 20,fontWeight: FontWeight.w200,),),
                               ),
                             ),
                           ),

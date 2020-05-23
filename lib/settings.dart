@@ -119,13 +119,13 @@ $isdark""";
                               width : dev_width / 3,
                               alignment: Alignment(0,0),
                               child: Text(
-                                'Theme and Style :',style: TextStyle(fontSize: 20,color: globals.MyGlobals.lightcolor,fontWeight: FontWeight.w300),
+                                'Theme and Style :',style: TextStyle(fontSize: 20,color: globals.MyGlobals.lightcolor,fontWeight: FontWeight.w200),
                               ),
                             ),
                             Container(
                               width: 2 * dev_width / 3,
                               alignment: Alignment(0,0.1),
-                              child: Divider(color: globals.MyGlobals.lightcolor,endIndent: 5,thickness: 0.5,),
+                              child: Divider(color: globals.MyGlobals.lightcolor,endIndent: 15,thickness: 0.25,),
                             )
                           ],
                         ),
@@ -134,11 +134,11 @@ $isdark""";
                         height: dev_height / 8,
                         alignment: Alignment(0,0),
                         child: Container(
-                          width: 0.9 * dev_width,
+                          width: 0.95 * dev_width,
                           height: dev_height / 16,
                           decoration: BoxDecoration(
-                            color: globals.MyGlobals.lightcolor.withOpacity(0.3),
-                            border: Border.all(color: Colors.transparent,width: 0.0),
+                            color: Colors.transparent,
+                            border: Border.all(color: globals.MyGlobals.lightcolor,width: 0.5),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Row(
@@ -156,6 +156,7 @@ $isdark""";
                                   child: Text('Light mode', style: TextStyle(color: islight ? globals.MyGlobals.darkcolor : globals.MyGlobals.lightcolor,fontWeight: FontWeight.w300,),),
                                 ),
                               ),
+                              VerticalDivider(width: dev_width / 64,color: globals.MyGlobals.lightcolor,endIndent: 10,indent: 10,),
                               Container(
                                 width: 0.9 * dev_width / 2,
                                 child: FlatButton(
