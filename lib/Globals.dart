@@ -27,7 +27,7 @@ class MyGlobals{
   static int categorie_length = 2;
   static int provider_length = 4;
   static int price_range_length = 4;
-  static String link_start = 'http://192.168.1.3:8000';
+  static String link_start = 'http://41.249.169.68';
   String toString(){
     return
       """$islightmode

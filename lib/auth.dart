@@ -1,16 +1,21 @@
 import 'dart:convert';
 import 'package:pfe_mobile/message.dart';
 import 'package:pfe_mobile/password_reset.dart';
+import 'package:pfe_mobile/product.dart';
 import 'package:pfe_mobile/session_token.dart';
 import 'package:pfe_mobile/verify_register.dart';
+import 'Category.dart';
 import 'Globals.dart' as globals;
 import 'package:flutter/material.dart';
 import 'package:pfe_mobile/device_dimensions.dart';
 import 'package:pfe_mobile/home.dart';
 import 'package:http/http.dart' as http;
 import 'package:pfe_mobile/register.dart';
+import 'Provider.dart';
+import 'load.dart';
 import 'login.dart';
 import 'setting_variables.dart';
+import 'package:pfe_mobile/Group.dart';
 
 class auth_dynamic extends StatefulWidget {
   @override
@@ -224,9 +229,26 @@ class Login_ContainerState extends State<Login_Container> {
           correct_credentials = true;
         });
       } else {
+        await Future<Load> (() async {
+          final response = await http.get('${globals.MyGlobals.link_start}/api/load');
+          if (response.statusCode == 200) {
+            return Load.fromJson(json.decode(response.body));
+          } else {
+            throw Exception('Failed to load Load');
+          }
+        }).then((value) {
+          value.group.forEach((element) { globals.MyGlobals.group_list.add(Group.fromJson(element));});
+          value.product.forEach((element) { globals.MyGlobals.all_products.add(Product.fromJson(element));});
+          value.product_by_visits.forEach((element) { globals.MyGlobals.most_visited.add(Product.fromJson(element));});
+          value.best_product.forEach((element) { globals.MyGlobals.best_products.add(Product.fromJson(element));});
+          value.category.forEach((element) { globals.MyGlobals.category.add(Category.fromJson(element)); });
+          value.provider.forEach((element) { globals.MyGlobals.provider.add(Provider.fromJson(element)); });
+        }).then((value){
+        });
         globals.MyGlobals.api_token = value.token;
         await session_token.defaultSessionWriter();
         await setting_variables.defaultConfigWriter().then((value) {
+
           Future<setting_variables>(() {
             return setting_variables.configReader();
           }).then((value) {
@@ -238,6 +260,7 @@ class Login_ContainerState extends State<Login_Container> {
               globals.MyGlobals.lightcolor = Colors.black;
               globals.MyGlobals.darkcolor = Colors.white;
             }
+
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => Home()),
