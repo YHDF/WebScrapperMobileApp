@@ -6,9 +6,11 @@ import 'package:pfe_mobile/starting.dart';
 import 'package:pfe_mobile/authMethod.dart';
 import 'dart:async';
 import 'Globals.dart' as globals;
+import 'package:flutter/services.dart';
 
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setEnabledSystemUIOverlays([]);
   //await setting_variables.defaultConfigWriter();
   //await session_token.SessionReader();
   await session_token.SessionReader();

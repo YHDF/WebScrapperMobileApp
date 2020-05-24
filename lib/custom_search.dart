@@ -141,272 +141,68 @@ class Custom_SearchState extends State<Custom_Search> {
     return Stack(
       children: <Widget>[
         Background(),
-        Column(
-          children: <Widget>[
-            Divider(
-              height: dev_height / 32,
-              color: Colors.transparent,
-            ),
-            Container(
-              height: dev_height / 32,
-              alignment: Alignment(0, 0),
-              child: Row(
-                children: <Widget>[
-                  Container(
-                    width: dev_width / 3,
-                    child: Divider(
-                      indent: 25,
-                      endIndent: 10,
-                      color: globals.MyGlobals.lightcolor,
-                    ),
-                  ),
-                  Container(
-                    width: dev_width / 3,
-                    alignment: Alignment(0, 0),
-                    child: Text(
-                      'Choose Category :',
-                      style: TextStyle(
+        Container(
+          child: Column(
+            children: <Widget>[
+              Divider(
+                height: dev_height / 32,
+                color: Colors.transparent,
+              ),
+              Container(
+                height: dev_height / 32,
+                alignment: Alignment(0, 0),
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                      width: dev_width / 4,
+                      child: Divider(
+                        indent: dev_height > dev_width ? dev_width / 19 : dev_height / 19,
+                        endIndent: dev_height > dev_width ? dev_width / 41.2 : dev_height / 41.2,
                         color: globals.MyGlobals.lightcolor,
-                        fontWeight: FontWeight.w200,
-                        fontSize: 20,
                       ),
                     ),
-                  ),
-                  Container(
-                    width: dev_width / 3,
-                    child: Divider(
-                      indent: 10,
-                      endIndent: 25,
-                      color: globals.MyGlobals.lightcolor,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              height: dev_height / 6,
-              child: ListView.separated(
-                separatorBuilder: (BuildContext context, int index) => Divider(
-                  endIndent: dev_width / 3,
-                  indent: 10,
-                  height: dev_height / 64,
-                ),
-                itemCount: globals.MyGlobals.categorie_length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    height: dev_height / 28,
-                    child: Row(
-                      children: <Widget>[
-                        Container(
-                          width: dev_width / 2,
-                          alignment: Alignment(-0.8,0),
-                          child: Text(
-                            '- ' + globals.MyGlobals.category[index].name,
-                            style: TextStyle(
-                              color: globals.MyGlobals.lightcolor,
-                              fontWeight: FontWeight.w200,
-                              fontSize: 18,
-                            ),
-                          ),
+                    Container(
+                      width: dev_width / 2,
+                      alignment: Alignment(0, 0),
+                      child: Text(
+                        'Choose Category :',
+                        style: TextStyle(
+                          color: globals.MyGlobals.lightcolor,
+                          fontWeight: FontWeight.w200,
+                          fontSize: dev_height > dev_width ? dev_width / 20.6 : dev_height / 20.6,
                         ),
-                        Container(
-                          width: dev_width / 2,
-                          alignment: Alignment(0.9,0),
-                          child: Container(
-                            child: Container(
-                              width: dev_width / 7,
-                              height: dev_height / 20.9,
-                              decoration: BoxDecoration(
-                                border: Border.all(color:globals.MyGlobals.lightcolor, width: 1),
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: Switch(
-                                onChanged: (bool value){
-                                  setState(() {
-                                    categorie_choice[index] = value;
-                                  });
-                                },
-                                value: categorie_choice[index],
-                                inactiveTrackColor: Colors.transparent,
-                                inactiveThumbColor: globals.MyGlobals.lightcolor,
-                                activeTrackColor: Colors.transparent,
-                                activeColor: globals.MyGlobals.lightcolor,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ),
-            Divider(
-              height: dev_height / 64,
-              color: Colors.transparent,
-            ),
-            Container(
-              height: dev_height / 48,
-              alignment: Alignment(0, 0),
-              child: Row(
-                children: <Widget>[
-                  Container(
-                    width: dev_width / 3,
-                    child: Divider(
-                      indent: 25,
-                      endIndent: 10,
-                      color: globals.MyGlobals.lightcolor,
-                    ),
-                  ),
-                  Container(
-                    width: dev_width / 3,
-                    alignment: Alignment(0, 0),
-                    child: Text(
-                      'Choose Provider :',
-                      style: TextStyle(
-                        color: globals.MyGlobals.lightcolor,
-                        fontWeight: FontWeight.w200,
-                        fontSize: 20,
                       ),
                     ),
-                  ),
-                  Container(
-                    width: dev_width / 3,
-                    child: Divider(
-                      indent: 10,
-                      endIndent: 25,
-                      color: globals.MyGlobals.lightcolor,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              height: dev_height / 3.5,
-              child: ListView.separated(
-                separatorBuilder: (BuildContext context, int index) => Divider(
-                  endIndent: dev_width / 3,
-                  indent: 10,
-                  height: dev_height / 32,
-                ),
-                itemCount: globals.MyGlobals.provider_length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    height: dev_height / 28,
-                    child: Row(
-                      children: <Widget>[
-                        Container(
-                          width: dev_width / 2,
-                          alignment: Alignment(-0.8,0),
-                          child: Text(
-                            '- ' + globals.MyGlobals.provider[index].name,
-                            style: TextStyle(
-                              color: globals.MyGlobals.lightcolor,
-                              fontWeight: FontWeight.w200,
-                              fontSize: 18,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: dev_width / 2,
-                          alignment: Alignment(0.9,0),
-                          child: Container(
-                            child: Container(
-                              width: dev_width / 7,
-                              height: dev_height / 20.9,
-                              decoration: BoxDecoration(
-                                border: Border.all(color: globals.MyGlobals.lightcolor, width: 1),
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: Switch(
-                                onChanged: (bool value){
-                                  setState(() {
-                                    provider_choice[index] = value;
-                                  });
-                                },
-                                value: provider_choice[index],
-                                inactiveTrackColor: Colors.transparent,
-                                inactiveThumbColor: globals.MyGlobals.lightcolor,                                activeTrackColor: Colors.transparent,
-                                activeColor: globals.MyGlobals.lightcolor,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ),
-            Divider(
-              height: dev_height / 64,
-              color: Colors.transparent,
-            ),
-            Container(
-              height: dev_height / 32,
-              alignment: Alignment(0, 0),
-              child: Row(
-                children: <Widget>[
-                  Container(
-                    width: dev_width / 3,
-                    child: Divider(
-                      indent: 25,
-                      endIndent: 10,
-                      color: globals.MyGlobals.lightcolor,
-                    ),
-                  ),
-                  Container(
-                    width: dev_width / 3,
-                    alignment: Alignment(0, 0),
-                    child: Text(
-                      'Choose Price :',
-                      style: TextStyle(
+                    Container(
+                      width: dev_width / 4,
+                      child: Divider(
+                        indent: dev_height > dev_width ? dev_width / 19 : dev_height / 19,
+                        endIndent: dev_height > dev_width ? dev_width / 41.2 : dev_height / 41.2,
                         color: globals.MyGlobals.lightcolor,
-                        fontWeight: FontWeight.w200,
-                        fontSize: 20,
                       ),
                     ),
-                  ),
-                  Container(
-                    width: dev_width / 3,
-                    child: Divider(
-                      indent: 10,
-                      endIndent: 25,
-                      color: globals.MyGlobals.lightcolor,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              height: dev_height / 3,
-              child: ListView.separated(
-                separatorBuilder: (BuildContext context, int index) => Divider(
-                  endIndent: 25,
-                  indent: 25,
-                  height: dev_height / 32,
+                  ],
                 ),
-                itemCount: price_range.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    height: dev_height / 20,
-                    child: FlatButton(
-                      onPressed: (){
-                        setState(() {
-                          for(int i = 0; i < globals.MyGlobals.price_range_length; i++ ){
-                            price_selected[i] = false;
-                          }
-                          price_selected[index] = !price_selected[index];
-
-                        });
-                      },
+              ),
+              Container(
+                height: dev_height / 6,
+                child: ListView.separated(
+                  separatorBuilder: (BuildContext context, int index) => Divider(
+                    endIndent: dev_width / 3,
+                    indent: 10,
+                    height: dev_height / 64,
+                  ),
+                  itemCount: globals.MyGlobals.categorie_length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Container(
+                      height: dev_height / 28,
                       child: Row(
                         children: <Widget>[
                           Container(
-                            width: dev_width / 3,
+                            width: dev_width / 2,
                             alignment: Alignment(-0.8,0),
                             child: Text(
-                              price_range[index],
+                              '- ' + globals.MyGlobals.category[index].name,
                               style: TextStyle(
                                 color: globals.MyGlobals.lightcolor,
                                 fontWeight: FontWeight.w200,
@@ -416,23 +212,228 @@ class Custom_SearchState extends State<Custom_Search> {
                           ),
                           Container(
                             width: dev_width / 2,
-                            alignment: Alignment(1,0),
-                            child: Visibility(
-                              visible: price_selected[index],
-                              child: Icon(
-                                  IconData(58826, fontFamily: 'MaterialIcons'),
-                                color: globals.MyGlobals.lightcolor,
+                            alignment: Alignment(0.9,0),
+                            child: Container(
+                              child: Container(
+                                width: dev_width / 7,
+                                height: dev_height / 20.9,
+                                decoration: BoxDecoration(
+                                  border: Border.all(color:globals.MyGlobals.lightcolor, width: 1),
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Transform.scale(
+                                  scale: 0.9,
+                                  child: Switch(
+                                    onChanged: (bool value){
+                                      setState(() {
+                                        categorie_choice[index] = value;
+                                      });
+                                    },
+                                    value: categorie_choice[index],
+                                    inactiveTrackColor: Colors.transparent,
+                                    inactiveThumbColor: globals.MyGlobals.lightcolor,
+                                    activeTrackColor: Colors.transparent,
+                                    activeColor: globals.MyGlobals.lightcolor,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
                         ],
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
-            ),
-          ],
+              Container(
+                height: dev_height / 32,
+                alignment: Alignment(0, 0),
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                      width: dev_width / 4,
+                      child: Divider(
+                        indent: dev_height > dev_width ? dev_width / 19 : dev_height / 19,
+                        endIndent: dev_height > dev_width ? dev_width / 41.2 : dev_height / 41.2,
+                        color: globals.MyGlobals.lightcolor,
+                      ),
+                    ),
+                    Container(
+                      width: dev_width / 2,
+                      alignment: Alignment(0, 0),
+                      child: Text(
+                        'Choose Provider :',
+                        style: TextStyle(
+                          color: globals.MyGlobals.lightcolor,
+                          fontWeight: FontWeight.w200,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: dev_width / 4,
+                      child: Divider(
+                        indent: dev_height > dev_width ? dev_width / 19 : dev_height / 19,
+                        endIndent: dev_height > dev_width ? dev_width / 41.2 : dev_height / 41.2,
+                        color: globals.MyGlobals.lightcolor,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                height: dev_height / 3.5,
+                child: ListView.separated(
+                  separatorBuilder: (BuildContext context, int index) => Divider(
+                    indent: dev_height > dev_width ? dev_width / 19 : dev_height / 19,
+                    endIndent: dev_height > dev_width ? dev_width / 41.2 : dev_height / 41.2,
+                    height: dev_height / 32,
+                  ),
+                  itemCount: globals.MyGlobals.provider_length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Container(
+                      height: dev_height / 28,
+                      child: Row(
+                        children: <Widget>[
+                          Container(
+                            width: dev_width / 2,
+                            alignment: Alignment(-0.8,0),
+                            child: Text(
+                              '- ' + globals.MyGlobals.provider[index].name,
+                              style: TextStyle(
+                                color: globals.MyGlobals.lightcolor,
+                                fontWeight: FontWeight.w200,
+                                fontSize: 18,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: dev_width / 2,
+                            alignment: Alignment(0.9,0),
+                            child: Container(
+                              child: Container(
+                                width: dev_width / 7,
+                                height: dev_height / 20.9,
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: globals.MyGlobals.lightcolor, width: 1),
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Transform.scale(
+                                  scale: 0.9,
+                                  child: Switch(
+                                    onChanged: (bool value){
+                                      setState(() {
+                                        provider_choice[index] = value;
+                                      });
+                                    },
+                                    value: provider_choice[index],
+                                    inactiveTrackColor: Colors.transparent,
+                                    inactiveThumbColor: globals.MyGlobals.lightcolor,                                activeTrackColor: Colors.transparent,
+                                    activeColor: globals.MyGlobals.lightcolor,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+
+              Container(
+                height: dev_height / 32,
+                alignment: Alignment(0, 0),
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                      width: dev_width / 4,
+                      child: Divider(
+                        indent: dev_height > dev_width ? dev_width / 19 : dev_height / 19,
+                        endIndent: dev_height > dev_width ? dev_width / 41.2 : dev_height / 41.2,
+                        color: globals.MyGlobals.lightcolor,
+                      ),
+                    ),
+                    Container(
+                      width: dev_width / 2,
+                      alignment: Alignment(0, 0),
+                      child: Text(
+                        'Choose Price :',
+                        style: TextStyle(
+                          color: globals.MyGlobals.lightcolor,
+                          fontWeight: FontWeight.w200,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: dev_width / 4,
+                      child: Divider(
+                        indent: dev_height > dev_width ? dev_width / 19 : dev_height / 19,
+                        endIndent: dev_height > dev_width ? dev_width / 41.2 : dev_height / 41.2,
+                        color: globals.MyGlobals.lightcolor,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                height: dev_height / 3,
+                child: ListView.separated(
+                  separatorBuilder: (BuildContext context, int index) => Divider(
+                    indent: dev_height > dev_width ? dev_width / 41.2 : dev_height / 41.2,
+                    endIndent: dev_height > dev_width ? dev_width / 41.2 : dev_height / 41.2,
+                    height: dev_height / 32,
+                  ),
+                  itemCount: price_range.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Container(
+                      height: dev_height / 20,
+                      child: FlatButton(
+                        onPressed: (){
+                          setState(() {
+                            for(int i = 0; i < globals.MyGlobals.price_range_length; i++ ){
+                              price_selected[i] = false;
+                            }
+                            price_selected[index] = !price_selected[index];
+
+                          });
+                        },
+                        child: Row(
+                          children: <Widget>[
+                            Container(
+                              width: dev_width / 3,
+                              alignment: Alignment(-0.8,0),
+                              child: Text(
+                                price_range[index],
+                                style: TextStyle(
+                                  color: globals.MyGlobals.lightcolor,
+                                  fontWeight: FontWeight.w200,
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              width: dev_width / 2,
+                              alignment: Alignment(1,0),
+                              child: Visibility(
+                                visible: price_selected[index],
+                                child: Icon(
+                                    IconData(58826, fontFamily: 'MaterialIcons'),
+                                  color: globals.MyGlobals.lightcolor,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
         bottom_bar(),
       ],

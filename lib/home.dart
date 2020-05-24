@@ -170,7 +170,7 @@ class HomeState extends State<Home> {
                                 ),
                               ),
                             ),
-                            VerticalDivider(width: 10,color: globals.MyGlobals.lightcolor,indent: 8,endIndent: 8,),
+                            VerticalDivider(width: dev_width / 41.2,color: globals.MyGlobals.lightcolor,indent: 8,endIndent: 8,),
                             Container(
                               width: 0.9 * dev_width / 2.1,
                               child: FlatButton(
@@ -187,7 +187,7 @@ class HomeState extends State<Home> {
                                   child: Text(
                                     'Most Visited',
                                     style: TextStyle(
-                                      fontSize: 15,
+                                      fontSize: dev_height > dev_width ? dev_width / 27.46 : dev_height / 27.46,
                                       fontWeight: FontWeight.w300,
                                       color: lst_selectedchoicecolor[1],
                                     ),
@@ -207,8 +207,9 @@ class HomeState extends State<Home> {
                       height: 14.5 * dev_height / 18,
                       child: ListView.separated(
                         separatorBuilder: (BuildContext context, int index) =>
-                            Divider(color: globals.MyGlobals.lightcolor,indent: 25,endIndent: 25,),
-                        padding: const EdgeInsets.all(8),
+                            Divider(color: globals.MyGlobals.lightcolor,indent: dev_height > dev_width ? dev_width / 16.48
+                              : dev_height / 16.48 ,endIndent: dev_height > dev_width ? dev_width / 16.48
+                                : dev_height / 16.48,),
                         itemCount: selected ? globals.MyGlobals.best_products.length : globals.MyGlobals.most_visited.length,
                         itemBuilder: (BuildContext context, int index) {
                           return FlatButton(
@@ -235,44 +236,44 @@ class HomeState extends State<Home> {
                               );
                             },
                             child: Container(
-                              height: 90,
+                              height: dev_height / 8.13,
                               decoration: BoxDecoration(
                                 color: globals.MyGlobals.lightcolor.withOpacity(0),
                                 border: Border.all(
                                   color: Colors.transparent,
                                   width: 0,
                                 ),
-                                borderRadius: BorderRadius.circular(10),
+                                borderRadius: BorderRadius.circular(dev_width / 41.2),
                               ),
                               child: Row(
                                 children: <Widget>[
-                                  VerticalDivider(width: 10,color: Colors.transparent,),
+                                  VerticalDivider(width: dev_width / 41.2,color: Colors.transparent,),
                                   Container(
                                     width: dev_width / 5,
-                                    height: 75,
+                                    height: dev_height / 9.76,
                                     child: Image.network(
                                       selected ? globals.MyGlobals.best_products[index].image : globals.MyGlobals.most_visited[index].image,
                                     ),
                                   ),
-                                  VerticalDivider(width: 10,color: Colors.transparent,),
+                                  VerticalDivider(width: dev_width / 41.2,color: Colors.transparent,),
                                   Container(
                                     width: 2 * dev_width / 3.3,
                                     child: Column(
                                       children: <Widget>[
                                         Container(
-                                          height: 50,
+                                          height: dev_height / 14.64,
                                           child: Center(
                                             child: Text(
                                               selected ? globals.MyGlobals.best_products[index].name : globals.MyGlobals.most_visited[index].name,
                                               style: TextStyle(
-                                                color: globals.MyGlobals.lightcolor,
+                                                color: globals.MyGlobals.lightcolor.withOpacity(0.7),
                                                 fontWeight: FontWeight.w300,
                                               ),
                                             ),
                                           ),
                                         ),
                                         Container(
-                                          height: 35,
+                                          height: dev_height / 20.91,
                                           child: Row(
                                             children: <Widget>[
                                               Container(
@@ -281,12 +282,12 @@ class HomeState extends State<Home> {
                                                 child: Text(
                                                   selected ? globals.MyGlobals.best_products[index].price.toString() + "\$" : globals.MyGlobals.most_visited[index].price.toString() + "\$",
                                                   style: TextStyle(
-                                                    color: globals.MyGlobals.lightcolor,
+                                                    color: globals.MyGlobals.lightcolor.withOpacity(0.7),
                                                     fontWeight: FontWeight.w300,
                                                   ),
                                                 ),
                                               ),
-                                              VerticalDivider(width : 40,color: Colors.transparent,),
+                                              VerticalDivider(width : dev_height / 22,color: Colors.transparent,),
                                               Container(
                                                 width: dev_width / 3,
                                                 alignment: Alignment(1,0),
@@ -303,7 +304,7 @@ class HomeState extends State<Home> {
                                                         child: Text(
                                                             'visit in website',
                                                           style: TextStyle(
-                                                            color: globals.MyGlobals.lightcolor,
+                                                            color: globals.MyGlobals.lightcolor.withOpacity(0.7),
                                                             fontWeight: FontWeight.w300,
                                                           ),
                                                         ),
@@ -312,8 +313,8 @@ class HomeState extends State<Home> {
                                                         alignment: Alignment(1,0),
                                                         child: Icon(
                                                             IconData(58849, fontFamily: 'MaterialIcons', matchTextDirection: true),
-                                                          color: globals.MyGlobals.lightcolor,
-                                                          size: 10,
+                                                          color: globals.MyGlobals.lightcolor.withOpacity(0.7),
+                                                          size: dev_width / 41.2,
                                                         ),
                                                       )
                                                     ],

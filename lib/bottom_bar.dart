@@ -41,87 +41,97 @@ class bottom_barState extends State<bottom_bar> with TickerProviderStateMixin{
           child: Visibility(
             visible: visible,
             child: Container(
+              width: dev_width,
+              height: dev_height / 13,
+              alignment: Alignment(0,1),
               child: Container(
                 width: dev_width,
-                height: dev_height / 11,
                 child: Row(
                   children: <Widget>[
-                    FlatButton(
-                      onPressed: () {
-                        Scaffold.of(context).openDrawer();
-                      },
-                      child: Container(
-                        width: dev_width / 6,
-                        child: Icon(
-                          IconData(58834, fontFamily: 'MaterialIcons'),
-                          color: globals.MyGlobals.lightcolor,
+                    Container(
+                      width: dev_width / 4,
+                      child: FlatButton(
+                        onPressed: () {
+                          Scaffold.of(context).openDrawer();
+                        },
+                        child: Container(
+                          child: Icon(
+                            IconData(58834, fontFamily: 'MaterialIcons'),
+                            color: globals.MyGlobals.lightcolor.withOpacity(0.8),
+                          ),
                         ),
                       ),
                     ),
-                    FlatButton(
-                      onPressed: () {
-                        if(!side_barState.modified){
-                          for(int i = 0; i < 5; i++){
-                            side_barState.lst_selected_side.insert(i, false);
-                          }
-                        }else{
-                          for(int i = 0; i < 5; i++){
-                            side_barState.lst_selected_side[i] = false;
-                          }
-                        }
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Home()),
-                        );
-                      },
-                      child: Container(
-                        width: dev_width / 6,
-                        child: Icon(
-                          IconData(59530, fontFamily: 'MaterialIcons'),
-                          color: globals.MyGlobals.lightcolor,
-                        ),
-                      ),
-                    ),
-                    FlatButton(
-                      onPressed: () {
-                        setState(() {
-                          HomeState.selected = true;
-                          HomeState.unselected = false;
-                          ishomepage = false;
-                          bottomsearchclicked = true;
+                    Container(
+                      width: dev_width / 4,
+                      child: FlatButton(
+                        onPressed: () {
                           if(!side_barState.modified){
                             for(int i = 0; i < 5; i++){
-                              side_barState.lst_selected_side.insert(i, i == 1 ? true : false);
+                              side_barState.lst_selected_side.insert(i, false);
                             }
                           }else{
                             for(int i = 0; i < 5; i++){
-                              side_barState.lst_selected_side[i] =  i == 1 ? true : false;
+                              side_barState.lst_selected_side[i] = false;
                             }
                           }
-                        });
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => search()),
-                        );
-                      },
-                      child: Container(
-                        width: dev_width / 6,
-                        child: Icon(
-                          IconData(59574, fontFamily: 'MaterialIcons'),
-                          color: globals.MyGlobals.lightcolor,
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Home()),
+                          );
+                        },
+                        child: Container(
+                          child: Icon(
+                            IconData(59530, fontFamily: 'MaterialIcons'),
+                            color: globals.MyGlobals.lightcolor.withOpacity(0.8),
+                          ),
                         ),
                       ),
                     ),
-                    FlatButton(
-                      onPressed: () {
-                        exit(0);
-                      },
-                      child: Container(
-                        width: dev_width / 6,
-                        child: Icon(
-                          IconData(59564, fontFamily: 'MaterialIcons'),
-                          color: globals.MyGlobals.lightcolor,
+                    Container(
+                      width: dev_width / 4,
+                      child: FlatButton(
+                        onPressed: () {
+                          setState(() {
+                            HomeState.selected = true;
+                            HomeState.unselected = false;
+                            ishomepage = false;
+                            bottomsearchclicked = true;
+                            if(!side_barState.modified){
+                              for(int i = 0; i < 5; i++){
+                                side_barState.lst_selected_side.insert(i, i == 1 ? true : false);
+                              }
+                            }else{
+                              for(int i = 0; i < 5; i++){
+                                side_barState.lst_selected_side[i] =  i == 1 ? true : false;
+                              }
+                            }
+                          });
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => search()),
+                          );
+                        },
+                        child: Container(
+                          child: Icon(
+                            IconData(59574, fontFamily: 'MaterialIcons'),
+                            color: globals.MyGlobals.lightcolor.withOpacity(0.8),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: dev_width / 5,
+                      child: FlatButton(
+                        onPressed: () {
+                          exit(0);
+                        },
+                        child: Container(
+                          child: Icon(
+                            IconData(59564, fontFamily: 'MaterialIcons'),
+                            color: globals.MyGlobals.lightcolor.withOpacity(0.8),
+                          ),
                         ),
                       ),
                     ),

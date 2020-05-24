@@ -107,7 +107,7 @@ class Simple_SearchState extends State<Simple_Search> with TickerProviderStateMi
                         style: TextStyle(
                           fontSize: 50,
                           fontWeight: FontWeight.w100,
-                          color: globals.MyGlobals.lightcolor,
+                          color: globals.MyGlobals.lightcolor.withOpacity(0.5),
                         ),
                       ),
                     ),
@@ -197,7 +197,7 @@ class Simple_SearchState extends State<Simple_Search> with TickerProviderStateMi
                                       child: Center(
                                           child: Text(
                                             '${stringresult[index]}',
-                                            //overflow: TextOverflow.ellipsis,
+                                            overflow: TextOverflow.fade,
                                             style: TextStyle(
                                               fontSize: 15,
                                               fontWeight: FontWeight.w200,
@@ -276,7 +276,7 @@ class Simple_SearchState extends State<Simple_Search> with TickerProviderStateMi
                               size: dev_height > dev_width
                                   ? dev_width / 14.3
                                   : dev_height / 14.3,
-                              color: globals.MyGlobals.lightcolor,
+                              color: globals.MyGlobals.lightcolor.withOpacity(0.5),
                             ),
                           ),
                         ],

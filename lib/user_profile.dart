@@ -109,9 +109,9 @@ class user_profileState extends State<user_profile>
                         child: Text(
                           ' HELLO, ',
                           style: TextStyle(
-                            fontSize: 40,
+                            fontSize: dev_height > dev_width ? dev_width / 10.3 : dev_height / 10.3,
                             fontWeight: FontWeight.w200,
-                            color: globals.MyGlobals.lightcolor,
+                            color: globals.MyGlobals.lightcolor.withOpacity(0.6),
                           ),
                         ),
                       ),
@@ -178,7 +178,7 @@ class user_profileState extends State<user_profile>
                                       'Edit',
                                       style: TextStyle(
                                         color: globals.MyGlobals.lightcolor,
-                                        fontSize: 20,
+                                        fontSize: dev_height > dev_width ? dev_width / 20.6 : dev_height / 20.6,
                                         fontWeight: FontWeight.w200
                                       ),
                                     ),
@@ -195,9 +195,9 @@ class user_profileState extends State<user_profile>
                         child: Text(
                           ' YOU HAVE : ',
                           style: TextStyle(
-                            fontSize: 40,
+                            fontSize: dev_height > dev_width ? dev_width / 10.3 : dev_height / 10.3,
                             fontWeight: FontWeight.w200,
-                            color: globals.MyGlobals.lightcolor,
+                            color: globals.MyGlobals.lightcolor.withOpacity(0.6),
                           ),
                         ),
                       ),
@@ -215,9 +215,9 @@ class user_profileState extends State<user_profile>
                         child: Text(
                           'WITH EMAIL :',
                           style: TextStyle(
-                            fontSize: 40,
+                            fontSize: dev_height > dev_width ? dev_width / 10.3 : dev_height / 10.3,
                             fontWeight: FontWeight.w200,
-                            color: globals.MyGlobals.lightcolor,
+                            color: globals.MyGlobals.lightcolor.withOpacity(0.6),
                           ),
                         ),
                       ),
@@ -267,7 +267,7 @@ class user_profileState extends State<user_profile>
                             child: Center(
                               child: Icon(
                                 IconData(58139, fontFamily: 'MaterialIcons'),
-                                color: globals.MyGlobals.lightcolor.withOpacity(icon_opacity),
+                                color: globals.MyGlobals.lightcolor..withOpacity(0.7),
                               ),
                             ),
                           ),
@@ -352,7 +352,7 @@ class editablecontainerState extends State<editablecontainer> {
                     child: Icon(
                       IconData(57680, fontFamily: 'MaterialIcons'),
                       size: 20,
-                      color: globals.MyGlobals.lightcolor,
+                      color: globals.MyGlobals.lightcolor.withOpacity(0.7),
                     ),
                   ),
                 ),
@@ -418,7 +418,7 @@ class viewable_containerState extends State<viewable_container> {
                           alignment: Alignment(0.1, 0),
                           child: Icon(
                             icondata,
-                            color: globals.MyGlobals.lightcolor,
+                            color: globals.MyGlobals.lightcolor.withOpacity(0.7),
                             size: 25,
                           ),
                         )
@@ -438,7 +438,7 @@ class viewable_containerState extends State<viewable_container> {
                     child: Icon(
                       IconData(58391, fontFamily: 'MaterialIcons'),
                       size: 20,
-                      color: globals.MyGlobals.lightcolor,
+                      color: globals.MyGlobals.lightcolor.withOpacity(0.7),
                     ),
                   ),
                 ),

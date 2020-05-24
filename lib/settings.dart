@@ -112,18 +112,18 @@ $isdark""";
                   child: ListView(
                     children: <Widget>[
                       Container(
-                        height: dev_height / 16,
+                        height: dev_height / 12,
                         child: Row(
                           children: <Widget>[
                             Container(
-                              width : dev_width / 3,
+                              width : dev_width / 2,
                               alignment: Alignment(0,0),
                               child: Text(
                                 'Theme and Style :',style: TextStyle(fontSize: 20,color: globals.MyGlobals.lightcolor,fontWeight: FontWeight.w200),
                               ),
                             ),
                             Container(
-                              width: 2 * dev_width / 3,
+                              width: dev_width / 2,
                               alignment: Alignment(0,0.1),
                               child: Divider(color: globals.MyGlobals.lightcolor,endIndent: 15,thickness: 0.25,),
                             )

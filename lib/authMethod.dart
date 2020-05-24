@@ -12,7 +12,7 @@ class _authMethod_dynamicState extends State<authMethod_dynamic> with TickerProv
   AnimationController quoteTextController;
   Animation<double> BgColorAnim;
   Animation<double> quoteTextAnim;
-  final double minG = 75;
+  final double minG = 120;
   final double maxOpacity = 1;
   double G = 0;
   double qt_opacity = 0;
@@ -36,7 +36,7 @@ class _authMethod_dynamicState extends State<authMethod_dynamic> with TickerProv
     ));
     BgColor_controller.addListener(() {
       setState(() {
-        G = minG +  4 * BgColorAnim.value / 3;
+        G = minG +   BgColorAnim.value / 2;
       });
     });
     BgColor_controller.repeat(reverse: true);
@@ -84,15 +84,16 @@ class authMethod_static extends StatelessWidget{
             clipper: clipping_auth(),
             child: Container(
               alignment: Alignment(0, -0.8),
-              color: Color.fromRGBO(255, G.round(), 112, 0.8),
+              color: Color.fromRGBO(255, G.round(), 107, 0.8),
               child : Container(
                 alignment: Alignment(0,-0.8),
                 width: dev_width * 0.95 ,
                 height: dev_height / 1.2,
                 child: Text(
-                  ' Drop down the price.\n    Turn up the heat.',
+                  ' Drop down the price.\nTurn up the heat.',
+                  textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.white.withOpacity(qt_opacity),
-                      fontWeight: FontWeight.w200, fontSize: dev_height > dev_width ? dev_height/14.64 : dev_height/ 8.24),
+                      fontWeight: FontWeight.w200, fontSize: dev_height > dev_width ? dev_height/15.64 : dev_width/ 15.64),
                 ),
               )
             ),

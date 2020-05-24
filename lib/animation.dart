@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pfe_mobile/device_dimensions.dart';
 import 'package:pfe_mobile/product.dart';
 import 'package:pfe_mobile/Category.dart';
 import 'package:pfe_mobile/Provider.dart';
@@ -82,8 +83,8 @@ class LoadingAnimationState extends State<LoadingAnimation> with TickerProviderS
   }
 
   Widget build(BuildContext context){
-    dev_width = 412;
-    dev_height = 732;
+    dev_width = device_dimensions(context).dev_width;
+    dev_height = device_dimensions(context).dev_height;
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(

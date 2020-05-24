@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   Animation<double> secondico_Anim;
   Animation<double> welcomeAnim;
   Animation<double> BgColorAnim;
-  final double minG = 75;
+  final double minG = 120;
   final double maxheight = 200;
   final double maxwidth = 500;
   final double maxOpacity = 1;
@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     ));
     BgColor_controller.addListener(() {
       setState(() {
-        G = minG + 4 * BgColorAnim.value / 3;
+        G = minG + BgColorAnim.value / 2;
       });
     });
     BgColor_controller.repeat(reverse: true);
@@ -183,7 +183,7 @@ class Startup extends StatelessWidget {
           child: Container(
             width: dev_width,
             height: dev_height,
-            color: Color.fromRGBO(255, BgColorG.round(), 112, 0.8),
+            color: Color.fromRGBO(255, BgColorG.round(), 107, 0.8),
           ),
         ),
         Container(

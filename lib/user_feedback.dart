@@ -19,7 +19,7 @@ class User_FeedbackState extends State<User_Feedback> with TickerProviderStateMi
   void initState(){
     super.initState();
     opacity_animator = AnimationController(vsync: this, duration: Duration(seconds: 2));
-    opacity_animation = Tween<double>(begin: 0,end: 1).animate(
+    opacity_animation = Tween<double>(begin: 0,end: 0.6).animate(
         CurvedAnimation(
           parent: opacity_animator,
           curve: Interval(0.5, 1, curve: Curves.linear),
@@ -51,8 +51,9 @@ class User_FeedbackState extends State<User_Feedback> with TickerProviderStateMi
                 height: dev_height / 12,
                 alignment: Alignment(0,0),
                 child: Text("What's on your mind ?",
+                    textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 40,
+                      fontSize: dev_height > dev_width ?  dev_height / 20.91 : dev_width / 20.91,
                       fontWeight: FontWeight.w100,
                       color: globals.MyGlobals.lightcolor.withOpacity(opacity),
                     )
@@ -63,8 +64,9 @@ class User_FeedbackState extends State<User_Feedback> with TickerProviderStateMi
                 alignment: Alignment(0,0),
                 child: Text("We care about your feedback.",
                     textAlign: TextAlign.center,
+                    overflow: TextOverflow.fade,
                     style: TextStyle(
-                      fontSize: 40,
+                      fontSize: dev_height > dev_width ?  dev_height / 20.91 : dev_width / 20.91,
                       fontWeight: FontWeight.w100,
                       color: globals.MyGlobals.lightcolor.withOpacity(opacity),
                     )
@@ -74,8 +76,9 @@ class User_FeedbackState extends State<User_Feedback> with TickerProviderStateMi
                 height: dev_height / 10,
                 alignment: Alignment(0,0),
                 child: Text("So help us improve.",
+                    textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 40,
+                      fontSize: dev_height > dev_width ?  dev_height / 20.91 : dev_width / 20.91,
                       fontWeight: FontWeight.w100,
                       color: globals.MyGlobals.lightcolor.withOpacity(opacity),
                     )
@@ -90,7 +93,7 @@ class User_FeedbackState extends State<User_Feedback> with TickerProviderStateMi
                     alignment: Alignment(0,0),
                     child: Container(
                       height: dev_height / 4,
-                      width: dev_width / 2.2,
+                      width: dev_width / 2.1,
                       decoration: BoxDecoration(
                         border: Border.all(color: globals.MyGlobals.lightcolor,width: 0.5),
                         borderRadius: BorderRadius.circular(20),
@@ -103,30 +106,26 @@ class User_FeedbackState extends State<User_Feedback> with TickerProviderStateMi
                                 builder: (context) => Create_Feedback()),
                           );
                         },
-                        child: Container(
-                          height: dev_height / 8,
-                          alignment: Alignment(0,0),
-                          child: Column(
-                            children: <Widget>[
-                              Text(
-                                'Post Feedbacks !',style: TextStyle(
-                                color: globals.MyGlobals.lightcolor,
-                                fontSize: 30,
-                                fontWeight: FontWeight.w100,
-                              ),
-                                textAlign: TextAlign.center,
-                              ),
-                              Divider(color: Colors.transparent,),
-                              Text(
-                                'Create a new feedback !',style: TextStyle(
-                                color: globals.MyGlobals.lightcolor,
-                                fontSize: 15,
-                                fontWeight: FontWeight.w200,
-                              ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
+                        child: Column(
+                          children: <Widget>[
+                            Text(
+                              'Post Feedbacks !',style: TextStyle(
+                              color: globals.MyGlobals.lightcolor.withOpacity(0.7),
+                              fontSize: dev_height > dev_width ? dev_height / 25 : dev_width / 25,
+                              fontWeight: FontWeight.w100,
+                            ),
+                              textAlign: TextAlign.center,
+                            ),
+                            Divider(color: Colors.transparent,),
+                            Text(
+                              'Create a new feedback !',style: TextStyle(
+                              color: globals.MyGlobals.lightcolor,
+                              fontSize: dev_height > dev_width ?  dev_height / 48.8 : dev_width / 48.8,
+                              fontWeight: FontWeight.w200,
+                            ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -136,7 +135,7 @@ class User_FeedbackState extends State<User_Feedback> with TickerProviderStateMi
                     height: dev_height / 2,
                     alignment: Alignment(0,0),
                     child: Container(
-                      width: dev_width / 2.2,
+                      width: dev_width / 2.1,
                       height: dev_height / 4,
                       decoration: BoxDecoration(
                         border: Border.all(color: globals.MyGlobals.lightcolor,width: 0.5),
@@ -145,30 +144,26 @@ class User_FeedbackState extends State<User_Feedback> with TickerProviderStateMi
                       child: FlatButton(
                         onPressed: (){
                         },
-                        child: Container(
-                          height: dev_height / 8,
-                          alignment: Alignment(0,0),
-                          child: Column(
-                            children: <Widget>[
-                              Text(
-                                'Get Feedbacks !',style: TextStyle(
-                                color: globals.MyGlobals.lightcolor,
-                                fontSize: 30,
-                                fontWeight: FontWeight.w100,
-                              ),
-                                textAlign: TextAlign.center,
-                              ),
-                              Divider(color: Colors.transparent,),
-                              Text(
-                                'View your feedback history !',style: TextStyle(
-                                color: globals.MyGlobals.lightcolor,
-                                fontSize: 15,
-                                fontWeight: FontWeight.w200,
-                              ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
+                        child: Column(
+                          children: <Widget>[
+                            Text(
+                              'Check Feedbacks !',style: TextStyle(
+                              color: globals.MyGlobals.lightcolor.withOpacity(0.7),
+                              fontSize: dev_height > dev_width ?  dev_height / 25 : dev_width / 25,
+                              fontWeight: FontWeight.w100,
+                            ),
+                              textAlign: TextAlign.center,
+                            ),
+                            Divider(color: Colors.transparent,),
+                            Text(
+                              'View your feedback history !',style: TextStyle(
+                              color: globals.MyGlobals.lightcolor,
+                              fontSize: dev_height > dev_width ?  dev_height / 48.8 : dev_width / 48.8,
+                              fontWeight: FontWeight.w200,
+                            ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
                         ),
                       ),
                     ),

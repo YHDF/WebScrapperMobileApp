@@ -130,7 +130,7 @@ class side_barState extends State<side_bar> with TickerProviderStateMixin{
                         child: Icon(
                           IconData(59475, fontFamily: 'MaterialIcons'),
                           size: 40,
-                          color: lst_colors_side[0],
+                          color: lst_colors_side[0].withOpacity(0.8),
                         ),
                       ),
                       Container(
@@ -177,7 +177,7 @@ class side_barState extends State<side_bar> with TickerProviderStateMixin{
                       child: Icon(
                         IconData(59574, fontFamily: 'MaterialIcons'),
                         size: 40,
-                        color: lst_colors_side[1],
+                        color: lst_colors_side[1].withOpacity(0.8),
                       ),
                     ),
                     Container(
@@ -226,7 +226,7 @@ class side_barState extends State<side_bar> with TickerProviderStateMixin{
                       child: Icon(
                         IconData(57344, fontFamily: 'MaterialIcons'),
                         size: 40,
-                        color: lst_colors_side[2],
+                        color: lst_colors_side[2].withOpacity(0.8),
                       ),
                     ),
                     Container(
@@ -275,7 +275,7 @@ class side_barState extends State<side_bar> with TickerProviderStateMixin{
                       child: Icon(
                         IconData(59517, fontFamily: 'MaterialIcons'),
                         size: 40,
-                        color: lst_colors_side[3],
+                        color: lst_colors_side[3].withOpacity(0.8),
                       ),
                     ),
                     Container(
@@ -321,7 +321,7 @@ class side_barState extends State<side_bar> with TickerProviderStateMixin{
                       child: Icon(
                         IconData(59576, fontFamily: 'MaterialIcons'),
                         size: 40,
-                        color: lst_colors_side[4],
+                        color: lst_colors_side[4].withOpacity(0.8),
                       ),
                     ),
                     Container(
@@ -371,7 +371,7 @@ class side_barState extends State<side_bar> with TickerProviderStateMixin{
                           title: Icon(
                             IconData(59513, fontFamily: 'MaterialIcons'),
                             size: 35,
-                            color: globals.MyGlobals.lightcolor,
+                            color: globals.MyGlobals.lightcolor.withOpacity(0.8),
                           ),
                           onTap: () {
                             setState(() {
@@ -387,7 +387,7 @@ class side_barState extends State<side_bar> with TickerProviderStateMixin{
                           title: Icon(
                             IconData(58391, fontFamily: 'MaterialIcons'),
                             size: 35,
-                            color: globals.MyGlobals.lightcolor,
+                            color: globals.MyGlobals.lightcolor.withOpacity(0.8),
                           ),
                           onTap: () {
                             setState(() {

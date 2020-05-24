@@ -10,7 +10,7 @@ import 'Provider.dart';
 class MyGlobals{
   static bool islightmode = true;
   static bool isdarkmode = false;
-  static Color lightcolor ;
+  static Color lightcolor;
   static Color darkcolor;
   static List<Group> group_list = List<Group>();
   static List<Product> best_products = List<Product>();
