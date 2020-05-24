@@ -106,19 +106,20 @@ class SearchresultState extends State<Searchresult>{
                                     child: Column(
                                       children: <Widget>[
                                         Container(
-                                          height: 35,
+                                          height: dev_height / 18,
                                           child: Center(
                                             child: Text(
                                               globals.MyGlobals.search_result[index].name,
                                               style: TextStyle(
-                                                color: globals.MyGlobals.lightcolor,
-                                                fontWeight: FontWeight.w200,
+                                                color: globals.MyGlobals.lightcolor.withOpacity(0.8),
+                                                fontWeight: FontWeight.w300,
+                                                fontSize: dev_height > dev_width ? dev_height / 48.8 : dev_width / 48.8,
                                               ),
                                             ),
                                           ),
                                         ),
                                         Container(
-                                          height: 35,
+                                          height: dev_height / 20.80,
                                           child: Row(
                                             children: <Widget>[
                                               Container(
@@ -127,8 +128,9 @@ class SearchresultState extends State<Searchresult>{
                                                 child: Text(
                                                   'Price : ' + globals.MyGlobals.search_result[index].price.toString() + '\$',
                                                   style: TextStyle(
-                                                      color: globals.MyGlobals.lightcolor,
-                                                    fontWeight: FontWeight.w200,
+                                                    fontSize: dev_height > dev_width ? dev_height / 48.8 : dev_width / 48.8,
+                                                    color: globals.MyGlobals.lightcolor.withOpacity(0.8),
+                                                    fontWeight: FontWeight.w300,
 
                                                   ),
                                                 ),
@@ -139,8 +141,9 @@ class SearchresultState extends State<Searchresult>{
                                                 child: Text(
                                                   'Provider : ${globals.MyGlobals.all_products[index].group_id}',
                                                   style: TextStyle(
-                                                    color: globals.MyGlobals.lightcolor,
-                                                    fontWeight: FontWeight.w200,
+                                                    fontSize: dev_height > dev_width ? dev_height / 48.8 : dev_width / 48.8,
+                                                    color: globals.MyGlobals.lightcolor.withOpacity(0.8),
+                                                    fontWeight: FontWeight.w300,
                                                   ),
                                                 ),
                                               ),

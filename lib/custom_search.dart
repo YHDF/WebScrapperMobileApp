@@ -138,6 +138,7 @@ class Custom_SearchState extends State<Custom_Search> {
   Widget build(BuildContext context) {
     dev_width = device_dimensions(context).dev_width;
     dev_height = device_dimensions(context).dev_height;
+    print(dev_height);
     return Stack(
       children: <Widget>[
         Background(),
@@ -169,7 +170,7 @@ class Custom_SearchState extends State<Custom_Search> {
                         style: TextStyle(
                           color: globals.MyGlobals.lightcolor,
                           fontWeight: FontWeight.w200,
-                          fontSize: dev_height > dev_width ? dev_width / 20.6 : dev_height / 20.6,
+                          fontSize: dev_height > dev_width ? dev_height / 36.8 : dev_height / 36.8,
                         ),
                       ),
                     ),
@@ -215,7 +216,7 @@ class Custom_SearchState extends State<Custom_Search> {
                             alignment: Alignment(0.9,0),
                             child: Container(
                               child: Container(
-                                width: dev_width / 7,
+                                width: dev_height > dev_width ? dev_width / 7 : dev_height / 7,
                                 height: dev_height / 20.9,
                                 decoration: BoxDecoration(
                                   border: Border.all(color:globals.MyGlobals.lightcolor, width: 1),
@@ -266,7 +267,7 @@ class Custom_SearchState extends State<Custom_Search> {
                         style: TextStyle(
                           color: globals.MyGlobals.lightcolor,
                           fontWeight: FontWeight.w200,
-                          fontSize: 20,
+                          fontSize: dev_height > dev_width ? dev_height / 36.8 : dev_height / 36.8,
                         ),
                       ),
                     ),
@@ -282,7 +283,8 @@ class Custom_SearchState extends State<Custom_Search> {
                 ),
               ),
               Container(
-                height: dev_height / 3.5,
+                width:  dev_width,
+                height: dev_height / 3.3,
                 child: ListView.separated(
                   separatorBuilder: (BuildContext context, int index) => Divider(
                     indent: dev_height > dev_width ? dev_width / 19 : dev_height / 19,
@@ -312,7 +314,7 @@ class Custom_SearchState extends State<Custom_Search> {
                             alignment: Alignment(0.9,0),
                             child: Container(
                               child: Container(
-                                width: dev_width / 7,
+                                width: dev_height > dev_width ? dev_width / 7 : dev_height / 7,
                                 height: dev_height / 20.9,
                                 decoration: BoxDecoration(
                                   border: Border.all(color: globals.MyGlobals.lightcolor, width: 1),
@@ -363,7 +365,7 @@ class Custom_SearchState extends State<Custom_Search> {
                         style: TextStyle(
                           color: globals.MyGlobals.lightcolor,
                           fontWeight: FontWeight.w200,
-                          fontSize: 20,
+                          fontSize: dev_height > dev_width ? dev_height / 36.8 : dev_height / 36.8,
                         ),
                       ),
                     ),

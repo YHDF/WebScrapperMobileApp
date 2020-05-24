@@ -20,10 +20,10 @@ Future<void> main() async{
     if(value != null){
       if(value.lightmode == true && value.darkmode == false){
         globals.MyGlobals.lightcolor = Colors.white;
-        globals.MyGlobals.darkcolor = Colors.black;
+        globals.MyGlobals.darkcolor = Color.fromRGBO(59, 59, 59, 1);
       }
       if(value.lightmode == false && value.darkmode == true){
-        globals.MyGlobals.lightcolor = Colors.black;
+        globals.MyGlobals.lightcolor = Color.fromRGBO(59, 59, 59, 1);
         globals.MyGlobals.darkcolor = Colors.white;
       }
     }else{

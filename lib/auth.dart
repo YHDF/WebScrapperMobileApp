@@ -254,11 +254,11 @@ class Login_ContainerState extends State<Login_Container> {
           }).then((value) {
             if (value.lightmode == true && value.darkmode == false) {
               globals.MyGlobals.lightcolor = Colors.white;
-              globals.MyGlobals.darkcolor = Colors.black;
+              globals.MyGlobals.darkcolor = Color.fromRGBO(33, 33, 33, 1);
             }
             if (value.lightmode == false && value.darkmode == true) {
               globals.MyGlobals.lightcolor = Colors.black;
-              globals.MyGlobals.darkcolor = Colors.white;
+              globals.MyGlobals.darkcolor = Color.fromRGBO(33, 33, 33, 1);
             }
 
             Navigator.push(

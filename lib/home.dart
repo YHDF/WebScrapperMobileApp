@@ -266,7 +266,7 @@ class HomeState extends State<Home> {
                                             child: Text(
                                               selected ? globals.MyGlobals.best_products[index].name : globals.MyGlobals.most_visited[index].name,
                                               style: TextStyle(
-                                                color: globals.MyGlobals.lightcolor.withOpacity(0.7),
+                                                color: globals.MyGlobals.lightcolor,
                                                 fontWeight: FontWeight.w300,
                                               ),
                                             ),
@@ -282,7 +282,7 @@ class HomeState extends State<Home> {
                                                 child: Text(
                                                   selected ? globals.MyGlobals.best_products[index].price.toString() + "\$" : globals.MyGlobals.most_visited[index].price.toString() + "\$",
                                                   style: TextStyle(
-                                                    color: globals.MyGlobals.lightcolor.withOpacity(0.7),
+                                                    color: globals.MyGlobals.lightcolor,
                                                     fontWeight: FontWeight.w300,
                                                   ),
                                                 ),
@@ -304,7 +304,7 @@ class HomeState extends State<Home> {
                                                         child: Text(
                                                             'visit in website',
                                                           style: TextStyle(
-                                                            color: globals.MyGlobals.lightcolor.withOpacity(0.7),
+                                                            color: globals.MyGlobals.lightcolor,
                                                             fontWeight: FontWeight.w300,
                                                           ),
                                                         ),
@@ -313,7 +313,7 @@ class HomeState extends State<Home> {
                                                         alignment: Alignment(1,0),
                                                         child: Icon(
                                                             IconData(58849, fontFamily: 'MaterialIcons', matchTextDirection: true),
-                                                          color: globals.MyGlobals.lightcolor.withOpacity(0.7),
+                                                          color: globals.MyGlobals.lightcolor,
                                                           size: dev_width / 41.2,
                                                         ),
                                                       )

@@ -40,32 +40,32 @@ class LoadingAnimationState extends State<LoadingAnimation> with TickerProviderS
       value.category.forEach((element) { globals.MyGlobals.category.add(Category.fromJson(element)); });
       value.provider.forEach((element) { globals.MyGlobals.provider.add(Provider.fromJson(element)); });
     }).then((value){
-    });
-  }
-  void initState(){
-    super.initState();
-    line_controller = AnimationController(vsync: this, duration: Duration(seconds: 6),);
-    line_animation = Tween<double>(begin: 0, end: 3 / 4).animate(CurvedAnimation(
-      parent: line_controller,
-      curve: Interval(0.25, 1, curve: Curves.linear),
-    ));
-    line_controller.addListener(() {
-      setState(() {
-          line_length = line_animation.value;
-      });
-    });
-    line_controller.forward().then((value) {
       Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => Home()),
       );
     });
+  }
+  void initState(){
+    super.initState();
+    Starter();
+    line_controller = AnimationController(vsync: this, duration: Duration(seconds: 1),);
+    line_animation = Tween<double>(begin: 0, end: 3 / 4).animate(CurvedAnimation(
+      parent: line_controller,
+      curve: Interval(0.5, 1, curve: Curves.linear),
+    ));
+    line_controller.addListener(() {
+      setState(() {
+          line_length = line_animation.value;
+      });
+    });
+    line_controller.forward();
 
-    logo_controller = AnimationController(vsync: this, duration: Duration(seconds: 2),);
+    logo_controller = AnimationController(vsync: this, duration: Duration(seconds: 1),);
     logo_animation_popup = Tween<double>(begin: -3, end: 1).animate(CurvedAnimation(
       parent: logo_controller,
-      curve: Interval(0, 1, curve: Curves.elasticInOut),
+      curve: Interval(0, 0.5, curve: Curves.elasticInOut),
     ));
     logo_controller.addListener(() {
       setState(() {
@@ -73,7 +73,7 @@ class LoadingAnimationState extends State<LoadingAnimation> with TickerProviderS
       });
     });
     logo_controller.forward();
-    Starter();
+
   }
   @override
   void dispose(){

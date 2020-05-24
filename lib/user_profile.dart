@@ -32,7 +32,7 @@ class user_profileState extends State<user_profile>
       str = '';
       opacity_controller =
           AnimationController(vsync: this, duration: Duration(seconds: 2));
-      opacity_anim = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(
+      opacity_anim = Tween<double>(begin: 0, end: 0.9).animate(CurvedAnimation(
         parent: opacity_controller,
         curve: Interval(0.5, 1, curve: Curves.linear),
       ));
@@ -323,7 +323,7 @@ class editablecontainerState extends State<editablecontainer> {
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontSize: 25.0,
-                      color: globals.MyGlobals.lightcolor,
+                      color: globals.MyGlobals.lightcolor.withOpacity(user_profileState.opacity),
                       fontWeight: FontWeight.w200,
                     ),
                   ),
@@ -352,7 +352,7 @@ class editablecontainerState extends State<editablecontainer> {
                     child: Icon(
                       IconData(57680, fontFamily: 'MaterialIcons'),
                       size: 20,
-                      color: globals.MyGlobals.lightcolor.withOpacity(0.7),
+                      color: globals.MyGlobals.lightcolor.withOpacity(user_profileState.opacity),
                     ),
                   ),
                 ),
@@ -408,7 +408,7 @@ class viewable_containerState extends State<viewable_container> {
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontSize: 20.0,
-                              color: globals.MyGlobals.lightcolor,
+                              color: globals.MyGlobals.lightcolor.withOpacity(user_profileState.opacity),
                               fontWeight: FontWeight.w200,
                             ),
                           ),
@@ -418,7 +418,7 @@ class viewable_containerState extends State<viewable_container> {
                           alignment: Alignment(0.1, 0),
                           child: Icon(
                             icondata,
-                            color: globals.MyGlobals.lightcolor.withOpacity(0.7),
+                            color: globals.MyGlobals.lightcolor.withOpacity(user_profileState.opacity),
                             size: 25,
                           ),
                         )
@@ -438,7 +438,7 @@ class viewable_containerState extends State<viewable_container> {
                     child: Icon(
                       IconData(58391, fontFamily: 'MaterialIcons'),
                       size: 20,
-                      color: globals.MyGlobals.lightcolor.withOpacity(0.7),
+                      color: globals.MyGlobals.lightcolor.withOpacity(user_profileState.opacity),
                     ),
                   ),
                 ),

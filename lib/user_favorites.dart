@@ -100,7 +100,7 @@ class user_favoriteState extends State<user_favorite>{
                         ),
                         child: Text(
                           'Favourites :',
-                          style: TextStyle(fontSize: 30, color: globals.MyGlobals.lightcolor,fontWeight: FontWeight.w200),
+                          style: TextStyle(fontSize: dev_height / 24.4, color: globals.MyGlobals.lightcolor,fontWeight: FontWeight.w200),
                         ),
                       ),
                   ),
