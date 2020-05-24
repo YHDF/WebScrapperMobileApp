@@ -111,7 +111,7 @@ class user_profileState extends State<user_profile>
                           style: TextStyle(
                             fontSize: 40,
                             fontWeight: FontWeight.w200,
-                            color: globals.MyGlobals.darkcolor,
+                            color: globals.MyGlobals.lightcolor,
                           ),
                         ),
                       ),
@@ -196,7 +196,7 @@ class user_profileState extends State<user_profile>
                           style: TextStyle(
                             fontSize: 40,
                             fontWeight: FontWeight.w200,
-                            color: globals.MyGlobals.darkcolor,
+                            color: globals.MyGlobals.lightcolor,
                           ),
                         ),
                       ),
@@ -216,7 +216,7 @@ class user_profileState extends State<user_profile>
                           style: TextStyle(
                             fontSize: 40,
                             fontWeight: FontWeight.w200,
-                            color: globals.MyGlobals.darkcolor,
+                            color: globals.MyGlobals.lightcolor,
                           ),
                         ),
                       ),

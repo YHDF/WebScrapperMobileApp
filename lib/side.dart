@@ -6,8 +6,8 @@ import 'package:pfe_mobile/search.dart';
 import 'package:pfe_mobile/session_token.dart';
 import 'package:pfe_mobile/settings.dart';
 import 'package:pfe_mobile/user_favorites.dart';
+import 'package:pfe_mobile/user_feedback.dart';
 import 'package:pfe_mobile/user_profile.dart';
-import 'package:pfe_mobile/client_reclamations.dart';
 import 'Globals.dart' as globals;
 
 class side_bar extends StatefulWidget {
@@ -260,7 +260,7 @@ class side_barState extends State<side_bar> with TickerProviderStateMixin{
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => client_reclamation()),
+                        builder: (context) => User_Feedback()),
                   );
                 },
               ),

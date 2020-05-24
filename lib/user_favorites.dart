@@ -105,7 +105,7 @@ class user_favoriteState extends State<user_favorite>{
                       ),
                   ),
                 ),
-                Container(
+                globals.MyGlobals.favourites.length > 0 ? Container(
                   alignment: Alignment(-1, 0.1),
                   child: Container(
                     width:  dev_width,
@@ -206,7 +206,6 @@ class user_favoriteState extends State<user_favorite>{
                                     IconData(57675, fontFamily: 'MaterialIcons'),
                                     size: 30,
                                     color: globals.MyGlobals.lightcolor,
-
                                   ),
                                   onPressed: (){
                                     delete_favorite(index);
@@ -222,7 +221,10 @@ class user_favoriteState extends State<user_favorite>{
                       },
                     ),
                   ),
-                ),
+                ) : Center(child: Text(
+                  'No Favourites Found !',
+                  style: TextStyle(color: globals.MyGlobals.lightcolor,fontWeight: FontWeight.w100,fontSize: 25),
+                ),),
               ],
             ),
             bottom_bar(),

@@ -30,7 +30,6 @@ class SearchresultState extends State<Searchresult>{
   }
   @override
   Widget build(BuildContext context) {
-    print(globals.MyGlobals.search_result.length);
     dev_width = device_dimensions(context).dev_width;
     dev_height = device_dimensions(context).dev_height;
     return WillPopScope(
@@ -63,7 +62,7 @@ class SearchresultState extends State<Searchresult>{
                     ),
                   ),
                 ),
-                Container(
+                globals.MyGlobals.search_result.length > 0 ? Container(
                   alignment: Alignment(-1, 0.3),
                   child: Container(
                     width:  dev_width,
@@ -161,7 +160,10 @@ class SearchresultState extends State<Searchresult>{
                           Divider(color: globals.MyGlobals.lightcolor,indent: dev_width / 41.2,endIndent: dev_width / 41.2,),
                     ),
                   ),
-                ),
+                ) : Center(child: Text(
+                  'No Products found !',
+                  style: TextStyle(color: globals.MyGlobals.lightcolor,fontWeight: FontWeight.w100,fontSize: 25),
+                ),),
               ],
             ),
             bottom_bar(),
