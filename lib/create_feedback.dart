@@ -127,6 +127,7 @@ class Create_FeedbackState extends State<Create_Feedback> with TickerProviderSta
                       height: dev_height / 18,
                       width: 2 * dev_width / 3,
                       child: TextField(
+                        style: TextStyle(color: Colors.white,fontWeight: FontWeight.w100),
                         controller: _controller1,
                         cursorColor: globals.MyGlobals.lightcolor,
                         decoration: InputDecoration(
@@ -192,6 +193,7 @@ class Create_FeedbackState extends State<Create_Feedback> with TickerProviderSta
                       height: dev_height / 2.5,
                       width: 0.9 * dev_width,
                       child: TextField(
+                        style: TextStyle(color: Colors.white,fontWeight: FontWeight.w100),
                         controller: _controller2,
                         cursorColor: globals.MyGlobals.lightcolor,
                         decoration: InputDecoration(

@@ -21,7 +21,6 @@ class _auth_dynamicState extends State<auth_dynamic> {
   double dev_width, dev_height;
   bool forgot_password_visible = true;
 
-
   var isLogin = true;
   var isSignup = false;
   static bool istopbarvisible = true;
@@ -44,10 +43,10 @@ class _auth_dynamicState extends State<auth_dynamic> {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment(-1, -1),
-              end: Alignment(-1, 1),
+              end: Alignment(1, 1),
               colors: [
-                const Color.fromRGBO(255, 155, 112, 1),
-                const Color.fromRGBO(255, 74, 105, 1),
+                const Color.fromRGBO(236, 111, 102, 1),
+                const Color.fromRGBO(243, 161, 131, 1),
               ], // whitish to gray
             ),
           ),
@@ -62,7 +61,7 @@ class _auth_dynamicState extends State<auth_dynamic> {
                     height: dev_height / 18.3,
                     child: Container(
                       decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.3),
+                          color: Colors.transparent,
                           border: Border.all(
                             width: 0,
                             color: Colors.transparent,
@@ -74,7 +73,7 @@ class _auth_dynamicState extends State<auth_dynamic> {
                       child: Row(
                         children: <Widget>[
                           Container(
-                            width: dev_width / 2.75,
+                            width: dev_width / 3,
                             alignment: Alignment(-1, 0),
                             child: FlatButton(
                               splashColor: Colors.transparent,
@@ -100,8 +99,14 @@ class _auth_dynamicState extends State<auth_dynamic> {
                               ),
                             ),
                           ),
+                          VerticalDivider(color: isLogin == true
+                              ? Colors.white
+                              : Colors.transparent,width: 10,),
+                          VerticalDivider(color: isSignup == true
+                              ? Colors.white
+                              : Colors.transparent,width: 10,),
                           Container(
-                            width: dev_width / 2.75,
+                            width: dev_width / 3,
                             child: FlatButton(
                               splashColor: Colors.transparent,
                               highlightColor: Colors.transparent,
@@ -156,10 +161,10 @@ class _auth_dynamicState extends State<auth_dynamic> {
                         child: Text(
                           'forgot your password ?',
                           style: TextStyle(
-                              fontWeight: FontWeight.w100,
-                              fontSize: 20,
-                              color: Colors.white,
-                              decoration: TextDecoration.underline,
+                            fontWeight: FontWeight.w100,
+                            fontSize: 20,
+                            color: Colors.white,
+                            decoration: TextDecoration.underline,
                           ),
                         ),
                       ),
@@ -204,7 +209,7 @@ class Login_ContainerState extends State<Login_Container> {
           "${globals.MyGlobals.link_start}/api/login?email=$email&password=$password");
       if (response.statusCode == 200) {
         var logs = Login.fromJson(json.decode(response.body));
-        if(logs.name == null || logs.email == null ||logs.token == null){
+        if (logs.name == null || logs.email == null || logs.token == null) {
           correct_credentials = false;
           return Message.fromJson(json.decode(response.body));
         }
@@ -213,12 +218,12 @@ class Login_ContainerState extends State<Login_Container> {
         throw Exception('Failed to load Login');
       }
     }).then((value) async {
-      if(!correct_credentials){
+      if (!correct_credentials) {
         setState(() {
           verification_message = value.message;
           correct_credentials = true;
         });
-      }else{
+      } else {
         globals.MyGlobals.api_token = value.token;
         await session_token.defaultSessionWriter();
         await setting_variables.defaultConfigWriter().then((value) {
@@ -250,184 +255,212 @@ class Login_ContainerState extends State<Login_Container> {
   @override
   Widget build(BuildContext context) {
     setState(() {
-      if(_controller1.text == '' && _controller2.text == ''){
+      if (_controller1.text == '' && _controller2.text == '') {
         verification_message = '';
       }
     });
     double dev_width = device_dimensions(context).dev_width;
     double dev_height = device_dimensions(context).dev_height;
     return Container(
-      width: dev_width / 1.18,
-      height: dev_height / 2,
-      decoration: BoxDecoration(
-        border: Border.all(
+      height: 2 * dev_height / 3,
+      alignment: Alignment(0,1),
+      child: Container(
+        width: dev_width / 1.18,
+        height: dev_height / 2,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.white,
+            width: 0.5,
+          ),
+          borderRadius: BorderRadius.circular(
+              dev_height > dev_width ? dev_height / 73.2 : dev_height / 41.2),
           color: Colors.transparent,
-          width: 0,
         ),
-        borderRadius: BorderRadius.circular(
-            dev_height > dev_width ? dev_height / 73.2 : dev_height / 41.2),
-        color: Colors.white.withOpacity(0.3),
-      ),
-      child: Form(
-        key: _formKey,
-        child: FocusScope(
-          node: _focusScopeNode,
-          child: Column(
-            children: <Widget>[
-              Container(
-                height: dev_height / 18,
-                alignment: Alignment(0,0),
-                child: Text(
-                  verification_message,
-                  style: TextStyle(
-                    color: Colors.red,
-                    fontSize: 12,
+        child: Form(
+          key: _formKey,
+          child: FocusScope(
+            node: _focusScopeNode,
+            child: Column(
+              children: <Widget>[
+                Container(
+                  height: dev_height / 18,
+                  alignment: Alignment(0, 0),
+                  child: Text(
+                    verification_message,
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 12,
+                    ),
                   ),
                 ),
-              ),
-              Container(
-                height: dev_height / 7.32,
-                child: Row(
-                  children: <Widget>[
-                    Container(
-                      alignment: Alignment(-1, 1),
-                      child: Container(
-                        width: dev_width / 5.70,
-                        height: dev_height / 14.64,
-                        alignment: Alignment(0, 0.2),
-                        child: Icon(
-                          IconData(57534, fontFamily: 'MaterialIcons'),
-                          color: Colors.white,
+                Container(
+                  height: dev_height / 7.32,
+                  child: Row(
+                    children: <Widget>[
+                      Container(
+                        alignment: Alignment(-1, 1),
+                        child: Container(
+                          width: dev_width / 5.70,
+                          height: dev_height / 14.64,
+                          alignment: Alignment(0, 0.2),
+                          child: Icon(
+                            IconData(57534, fontFamily: 'MaterialIcons'),
+                            color: Colors.white,
+                          ),
                         ),
                       ),
-                    ),
-                    Container(
-                      alignment: Alignment(1, 1),
-                      child: Container(
-                        width: dev_width / 1.5,
-                        height: dev_height / 14.64,
+                      Container(
                         alignment: Alignment(1, 1),
-                        child: TextFormField(
-                          onTap: () {},
-                          textInputAction: TextInputAction.next,
-                          onFieldSubmitted: _handleSubmitted,
-                          controller: _controller1,
-                          keyboardType: TextInputType.emailAddress,
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return 'Email is required';
-                            }
-                            return null;
-                          },
-                          decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: 'Email Address',
-                              hintStyle: TextStyle(
+                        child: Container(
+                          width: dev_width / 1.7,
+                          height: dev_height / 14.64,
+                          alignment: Alignment(1, 1),
+                          child: TextFormField(
+                            style: TextStyle(color: Colors.white,fontWeight: FontWeight.w100),
+                            onTap: () {},
+                            textInputAction: TextInputAction.next,
+                            onFieldSubmitted: _handleSubmitted,
+                            controller: _controller1,
+                            keyboardType: TextInputType.emailAddress,
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return 'Email is required';
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.white,
+                                    width: 0.5,
+                                  ),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.white,
+                                      width: 0.5
+                                  ),
+                                ),
+                                hintText: 'Email Address',
+                                hintStyle: TextStyle(
+                                  fontWeight: FontWeight.w100,
+                                  color: Colors.white,
+                                  fontSize: dev_height > dev_width
+                                      ? dev_height / 29.28
+                                      : dev_height / 16.48,
+                                )),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  height: dev_height / 7.32,
+                  child: Row(
+                    children: <Widget>[
+                      Container(
+                        alignment: Alignment(-1, 1),
+                        child: Container(
+                          width: dev_width / 5.70,
+                          height: dev_height / 14.64,
+                          alignment: Alignment(0, 0.2),
+                          child: Icon(
+                            IconData(59545, fontFamily: 'MaterialIcons'),
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        alignment: Alignment(1, 1),
+                        child: Container(
+                          width: dev_width / 1.7,
+                          height: dev_height / 14.64,
+                          alignment: Alignment(1, 1),
+                          child: TextFormField(
+                            style: TextStyle(color: Colors.white,fontWeight: FontWeight.w100),
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return 'Password is required';
+                              }
+                              return null;
+                            },
+                            textInputAction: TextInputAction.previous,
+                            onFieldSubmitted: _handleSubmitted,
+                            controller: _controller2,
+                            decoration: InputDecoration(
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.white,
+                                    width: 0.5,
+                                  ),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.white,
+                                      width: 0.5
+                                  ),
+                                ),
+                                hintText: 'Password',
+                                hintStyle: TextStyle(
+                                  fontWeight: FontWeight.w100,
+                                  color: Colors.white,
+                                  fontSize: dev_height > dev_width
+                                      ? dev_height / 29.28
+                                      : dev_height / 16.48,
+                                )),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  height: dev_height / 6,
+                  alignment: Alignment(0, 1),
+                  child: Container(
+                    height: dev_height / 73.2,
+                    child: OverflowBox(
+                      maxWidth: dev_width,
+                      maxHeight: dev_height / 5,
+                      child: FlatButton(
+                        splashColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onPressed: () {
+                          if (_formKey.currentState.validate()) {
+                            email = _controller1.text;
+                            password = _controller2.text;
+                            submit(context);
+                          }
+                        },
+                        child: Container(
+                          width: dev_width / 1.648,
+                          height: dev_height / 14,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.transparent,
+                              width: 0,
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                            gradient: LinearGradient(
+                              begin: Alignment(-1, -1),
+                              end: Alignment(1, 1),
+                              colors: [
+                                const Color.fromRGBO(236, 111, 102, 1),
+                                const Color.fromRGBO(243, 161, 131, 1),
+                              ], // whitish to gray
+                            ),
+                          ),
+                          child: Center(
+                            child: Text(
+                              'SIGN IN',
+                              style: TextStyle(
                                 fontWeight: FontWeight.w100,
                                 color: Colors.white,
                                 fontSize: dev_height > dev_width
-                                    ? dev_height / 29.28
-                                    : dev_height / 16.48,
-                              )),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                height: dev_height / 7.32,
-                child: Row(
-                  children: <Widget>[
-                    Container(
-                      alignment: Alignment(-1, 1),
-                      child: Container(
-                        width: dev_width / 5.70,
-                        height: dev_height / 14.64,
-                        alignment: Alignment(0, 0.2),
-                        child: Icon(
-                          IconData(59545, fontFamily: 'MaterialIcons'),
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      alignment: Alignment(1, 1),
-                      child: Container(
-                        width: dev_width / 1.5,
-                        height: dev_height / 14.64,
-                        alignment: Alignment(1, 1),
-                        child: TextFormField(
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return 'Password is required';
-                            }
-                            return null;
-                          },
-                          textInputAction: TextInputAction.previous,
-                          onFieldSubmitted: _handleSubmitted,
-                          controller: _controller2,
-                          decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: 'Password',
-                              hintStyle: TextStyle(
-                                fontWeight: FontWeight.w100,
-                                color: Colors.white,
-                                fontSize: dev_height > dev_width
-                                    ? dev_height / 29.28
-                                    : dev_height / 16.48,
-                              )),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                height: dev_height / 6,
-                alignment: Alignment(0, 1),
-                child: Container(
-                  height: dev_height / 73.2,
-                  child: OverflowBox(
-                    maxWidth: dev_width,
-                    maxHeight: dev_height / 5,
-                    child: FlatButton(
-                      splashColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onPressed: () {
-                        if (_formKey.currentState.validate()) {
-                          email = _controller1.text;
-                          password = _controller2.text;
-                          submit(context);
-                        }
-                      },
-                      child: Container(
-                        width: dev_width / 1.648,
-                        height: dev_height / 14,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.transparent,
-                            width: 0,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                          gradient: LinearGradient(
-                            begin: Alignment(-1, -1),
-                            end: Alignment(1, 1),
-                            colors: [
-                              const Color.fromRGBO(255, 155, 112, 1),
-                              const Color.fromRGBO(255, 74, 112, 1),
-                            ], // whitish to gray
-                          ),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'SIGN IN',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w100,
-                              color: Colors.white,
-                              fontSize: dev_height > dev_width
-                                  ? dev_height / 24.4
-                                  : dev_height / 13.74,
+                                    ? dev_height / 24.4
+                                    : dev_height / 13.74,
+                              ),
                             ),
                           ),
                         ),
@@ -435,8 +468,8 @@ class Login_ContainerState extends State<Login_Container> {
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -472,8 +505,8 @@ class Signup_ContainerState extends State<Signup_Container> {
       final response = await http.post(
           "${globals.MyGlobals.link_start}/api/register?name=$name&email=$email&password=$password&password_confirmation=$password");
       if (response.statusCode == 200) {
-        var reg =  Register.fromJson(json.decode(response.body));
-        if(reg.name == null || reg.email == null || reg.token == null){
+        var reg = Register.fromJson(json.decode(response.body));
+        if (reg.name == null || reg.email == null || reg.token == null) {
           correct_credentials = false;
           return Message.fromJson(json.decode(response.body));
         }
@@ -482,12 +515,12 @@ class Signup_ContainerState extends State<Signup_Container> {
         throw Exception('Failed to load Register');
       }
     }).then((value) async {
-      if(!correct_credentials){
+      if (!correct_credentials) {
         setState(() {
           correct_credentials = true;
           verification_message = value.message;
         });
-      }else{
+      } else {
         await Future<dynamic>(() async {
           globals.MyGlobals.api_token = value.token;
           final response = await http.get(
@@ -497,7 +530,7 @@ class Signup_ContainerState extends State<Signup_Container> {
           } else {
             throw Exception('Failed to load verify');
           }
-        }).then((value){
+        }).then((value) {
           verification_message = value.message;
           Navigator.push(
             context,
@@ -530,11 +563,11 @@ class Signup_ContainerState extends State<Signup_Container> {
       height: dev_height / 1.8,
       decoration: BoxDecoration(
         border: Border.all(
-          color: Colors.transparent,
-          width: 0,
+          color: Colors.white,
+          width: 0.5,
         ),
         borderRadius: BorderRadius.circular(10),
-        color: Colors.white.withOpacity(0.3),
+        color: Colors.transparent,
       ),
       child: Form(
         key: _formKey,
@@ -544,7 +577,7 @@ class Signup_ContainerState extends State<Signup_Container> {
             children: <Widget>[
               Container(
                 height: dev_height / 32,
-                alignment: Alignment(0,0),
+                alignment: Alignment(0, 0),
                 child: Text(
                   verification_message,
                   style: TextStyle(
@@ -572,10 +605,11 @@ class Signup_ContainerState extends State<Signup_Container> {
                     Container(
                       alignment: Alignment(1, 1),
                       child: Container(
-                        width: dev_width / 1.5,
+                        width: dev_width / 1.6,
                         height: dev_height / 14.62,
                         alignment: Alignment(1, 1),
                         child: TextFormField(
+                          style: TextStyle(color: Colors.white,fontWeight: FontWeight.w100),
                           onTap: () {
                             _auth_dynamicState.istopbarvisible = false;
                             auth_dynamic();
@@ -584,6 +618,18 @@ class Signup_ContainerState extends State<Signup_Container> {
                           onFieldSubmitted: _handleSubmitted,
                           controller: _controller1,
                           decoration: InputDecoration(
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                  width: 0.5,
+                                ),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.white,
+                                    width: 0.5
+                                ),
+                              ),
                               border: InputBorder.none,
                               hintText: 'Full  Name',
                               hintStyle: TextStyle(
@@ -617,24 +663,37 @@ class Signup_ContainerState extends State<Signup_Container> {
                     Container(
                       alignment: Alignment(1, 1),
                       child: Container(
-                        width: dev_width / 1.5,
+                        width: dev_width / 1.6,
                         height: dev_height / 14.62,
                         alignment: Alignment(1, 1),
                         child: TextFormField(
+                          style: TextStyle(color: Colors.white,fontWeight: FontWeight.w100),
                           textInputAction: TextInputAction.next,
                           onFieldSubmitted: _handleSubmitted,
                           controller: _controller2,
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: 'Email Address',
-                              hintStyle: TextStyle(
-                                fontWeight: FontWeight.w100,
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
                                 color: Colors.white,
-                                fontSize: dev_height > dev_width
-                                    ? dev_height / 29.28
-                                    : dev_height / 16.48,
-                              )),
+                                width: 0.5,
+                              ),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.white,
+                                width: 0.5
+                              ),
+                            ),
+                            hintText: 'Email Address',
+                            hintStyle: TextStyle(
+                              fontWeight: FontWeight.w100,
+                              color: Colors.white,
+                              fontSize: dev_height > dev_width
+                                  ? dev_height / 29.28
+                                  : dev_height / 16.48,
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -660,15 +719,27 @@ class Signup_ContainerState extends State<Signup_Container> {
                     Container(
                       alignment: Alignment(1, 1),
                       child: Container(
-                        width: dev_width / 1.5,
+                        width: dev_width / 1.6,
                         height: dev_height / 14.62,
                         alignment: Alignment(1, 1),
                         child: TextFormField(
+                          style: TextStyle(color: Colors.white,fontWeight: FontWeight.w100),
                           controller: _controller3,
                           keyboardType: TextInputType.visiblePassword,
                           textInputAction: TextInputAction.previous,
                           decoration: InputDecoration(
-                              border: InputBorder.none,
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                  width: 0.5,
+                                ),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.white,
+                                    width: 0.5
+                                ),
+                              ),
                               hintText: 'Password',
                               hintStyle: TextStyle(
                                 fontWeight: FontWeight.w100,
@@ -685,9 +756,9 @@ class Signup_ContainerState extends State<Signup_Container> {
               ),
               Container(
                 height: dev_height / 7.32,
-                alignment: Alignment(0, 1),
+                alignment: Alignment(0, 1.2),
                 child: Container(
-                  height: dev_height / 29.28,
+                  height: dev_height / 64,
                   child: OverflowBox(
                     maxWidth: dev_width / 1.648,
                     maxHeight: dev_height / 7,
@@ -715,8 +786,8 @@ class Signup_ContainerState extends State<Signup_Container> {
                             begin: Alignment(-1, -1),
                             end: Alignment(1, 1),
                             colors: [
-                              const Color.fromRGBO(255, 74, 105, 1),
-                              const Color.fromRGBO(255, 155, 112, 1),
+                              const Color.fromRGBO(236, 111, 102, 1),
+                              const Color.fromRGBO(243, 161, 131, 1),
                             ], // whitish to gray
                           ),
                         ),

@@ -118,6 +118,7 @@ class Simple_SearchState extends State<Simple_Search> with TickerProviderStateMi
                     child: Container(
                       width: dev_width * 0.8,
                       child: TextField(
+                        style: TextStyle(color: Colors.white,fontWeight: FontWeight.w100),
                         focusNode: _focus,
                         controller: ctrl,
                         cursorColor: globals.MyGlobals.lightcolor,
@@ -165,7 +166,7 @@ class Simple_SearchState extends State<Simple_Search> with TickerProviderStateMi
                                           .withOpacity(0),
                                       border: Border.all(
                                         color: globals.MyGlobals.lightcolor,
-                                        width: 0.5,
+                                        width: 0.3,
                                       ),
                                       borderRadius: BorderRadius.circular(10),
                                     ),
@@ -199,7 +200,7 @@ class Simple_SearchState extends State<Simple_Search> with TickerProviderStateMi
                                             //overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
                                               fontSize: 15,
-                                              fontWeight: FontWeight.w300,
+                                              fontWeight: FontWeight.w200,
                                                 color:
                                                 globals.MyGlobals.lightcolor),
                                           )),

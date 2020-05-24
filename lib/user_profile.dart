@@ -128,6 +128,7 @@ class user_profileState extends State<user_profile>
                               Container(
                                 width: 2 * dev_width / 3,
                                 child: TextFormField(
+                                  style: TextStyle(color: Colors.white,fontWeight: FontWeight.w100),
                                   controller: _controller,
                                   decoration: InputDecoration(
                                     focusedBorder: OutlineInputBorder(

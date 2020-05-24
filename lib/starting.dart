@@ -175,7 +175,8 @@ class Startup extends StatelessWidget {
               height: height,
               child: Image(
                 image: AssetImage('assets/images/HotPrice.png'),
-              )),
+              ),
+          ),
         ),
         ClipPath(
           clipper: clipping_home(),

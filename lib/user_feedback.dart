@@ -114,6 +114,7 @@ class User_FeedbackState extends State<User_Feedback> with TickerProviderStateMi
                                 fontSize: 30,
                                 fontWeight: FontWeight.w100,
                               ),
+                                textAlign: TextAlign.center,
                               ),
                               Divider(color: Colors.transparent,),
                               Text(
@@ -122,7 +123,7 @@ class User_FeedbackState extends State<User_Feedback> with TickerProviderStateMi
                                 fontSize: 15,
                                 fontWeight: FontWeight.w200,
                               ),
-
+                                textAlign: TextAlign.center,
                               ),
                             ],
                           ),
@@ -155,6 +156,7 @@ class User_FeedbackState extends State<User_Feedback> with TickerProviderStateMi
                                 fontSize: 30,
                                 fontWeight: FontWeight.w100,
                               ),
+                                textAlign: TextAlign.center,
                               ),
                               Divider(color: Colors.transparent,),
                               Text(
@@ -163,6 +165,7 @@ class User_FeedbackState extends State<User_Feedback> with TickerProviderStateMi
                                 fontSize: 15,
                                 fontWeight: FontWeight.w200,
                               ),
+                                textAlign: TextAlign.center,
                               ),
                             ],
                           ),
