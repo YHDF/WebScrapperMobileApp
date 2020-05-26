@@ -2,9 +2,11 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:pfe_mobile/background.dart';
+import 'package:pfe_mobile/check_feedbacks.dart';
 import 'package:pfe_mobile/device_dimensions.dart';
 import 'package:pfe_mobile/home.dart';
 import 'package:pfe_mobile/message.dart';
+import 'package:pfe_mobile/user_favorites.dart';
 import 'bottom_bar.dart';
 import 'side.dart';
 import 'Globals.dart' as globals;
@@ -204,11 +206,11 @@ class user_profileState extends State<user_profile>
                       Divider(),
                       viewable_container(
                           globals.MyGlobals.favorite_count.toString(),
-                          IconData(59517, fontFamily: 'MaterialIcons')),
+                          IconData(59517, fontFamily: 'MaterialIcons'),true),
                       Divider(),
                       viewable_container(
                           globals.MyGlobals.feedback_count.toString(),
-                          IconData(57534, fontFamily: 'MaterialIcons',),),
+                          IconData(57534, fontFamily: 'MaterialIcons',),false),
                       Divider(),
                       Container(
                         alignment: Alignment(0, 0),
@@ -223,7 +225,7 @@ class user_profileState extends State<user_profile>
                       ),
                       Divider(),
                       viewable_container(
-                          globals.MyGlobals.current_user.email, null),
+                          globals.MyGlobals.current_user.email, null,null),
                       Container(
                         height: dev_height / 12,
                         child: Visibility(
@@ -366,23 +368,27 @@ class editablecontainerState extends State<editablecontainer> {
 class viewable_container extends StatefulWidget {
   String data;
   IconData icon_data;
+  bool isit;
 
-  viewable_container(String data, IconData icon_data) {
+  viewable_container(String data, IconData icon_data,bool isit) {
     this.data = data;
     this.icon_data = icon_data;
+    this.isit = isit;
   }
 
   viewable_containerState createState() =>
-      viewable_containerState(data, icon_data);
+      viewable_containerState(data, icon_data,isit);
 }
 
 class viewable_containerState extends State<viewable_container> {
   String data;
   IconData icondata;
+  bool isit;
 
-  viewable_containerState(String data, IconData icondata) {
+  viewable_containerState(String data, IconData icondata, bool isit) {
     this.data = data;
     this.icondata = icondata;
+    this.isit = isit;
   }
 
   @override
@@ -432,7 +438,13 @@ class viewable_containerState extends State<viewable_container> {
               child: Container(
                 width: device_dimensions(context).dev_width / 8,
                 child: FlatButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => isit ? user_favorite() : Myfeedbacks()),
+                    );
+                  },
                   child: Container(
                     width: device_dimensions(context).dev_width / 8,
                     child: Icon(

@@ -1,8 +1,13 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:pfe_mobile/background.dart';
 import 'package:pfe_mobile/bottom_bar.dart';
+import 'package:pfe_mobile/check_feedbacks.dart';
+import 'package:pfe_mobile/feed.dart';
+import 'package:pfe_mobile/feeds.dart';
 import 'package:pfe_mobile/side.dart';
 import 'Globals.dart' as globals;
+import 'package:http/http.dart' as http;
 import 'create_feedback.dart';
 import 'device_dimensions.dart';
 
@@ -30,6 +35,23 @@ class User_FeedbackState extends State<User_Feedback> with TickerProviderStateMi
       });
     });
     opacity_animator.forward();
+  }
+
+  void get_feedbacks() async{
+      await Future<Feeds>(() async {
+        final response = await http.get('${globals.MyGlobals.link_start}/api/feedback?api_token=${globals.MyGlobals.api_token}');
+        if (response.statusCode == 200) {
+          return Feeds.fromJson(json.decode(response.body));
+        }else {
+          throw Exception('Failed to load Feedbacks');
+        }
+      }).then((value) {
+        globals.MyGlobals.feeds.clear();
+        value.feeds.forEach((element) {globals.MyGlobals.feeds.add(Feed.fromJson(element));
+        });
+        Navigator.push(context, MaterialPageRoute(builder: (context) => Myfeedbacks()));
+      }
+      );
   }
 
   void dispose(){
@@ -143,6 +165,9 @@ class User_FeedbackState extends State<User_Feedback> with TickerProviderStateMi
                       ),
                       child: FlatButton(
                         onPressed: (){
+                          setState(() {
+                            get_feedbacks();
+                          });
                         },
                         child: Column(
                           children: <Widget>[

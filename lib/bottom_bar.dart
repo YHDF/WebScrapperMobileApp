@@ -57,7 +57,7 @@ class bottom_barState extends State<bottom_bar> with TickerProviderStateMixin{
                         child: Container(
                           child: Icon(
                             IconData(58834, fontFamily: 'MaterialIcons'),
-                            color: globals.MyGlobals.lightcolor.withOpacity(0.8),
+                            color: globals.MyGlobals.lightcolor,
                           ),
                         ),
                       ),
@@ -84,7 +84,7 @@ class bottom_barState extends State<bottom_bar> with TickerProviderStateMixin{
                         child: Container(
                           child: Icon(
                             IconData(59530, fontFamily: 'MaterialIcons'),
-                            color: globals.MyGlobals.lightcolor.withOpacity(0.8),
+                            color: globals.MyGlobals.lightcolor,
                           ),
                         ),
                       ),
@@ -116,7 +116,7 @@ class bottom_barState extends State<bottom_bar> with TickerProviderStateMixin{
                         child: Container(
                           child: Icon(
                             IconData(59574, fontFamily: 'MaterialIcons'),
-                            color: globals.MyGlobals.lightcolor.withOpacity(0.8),
+                            color: globals.MyGlobals.lightcolor,
                           ),
                         ),
                       ),
@@ -130,7 +130,7 @@ class bottom_barState extends State<bottom_bar> with TickerProviderStateMixin{
                         child: Container(
                           child: Icon(
                             IconData(59564, fontFamily: 'MaterialIcons'),
-                            color: globals.MyGlobals.lightcolor.withOpacity(0.8),
+                            color: globals.MyGlobals.lightcolor,
                           ),
                         ),
                       ),

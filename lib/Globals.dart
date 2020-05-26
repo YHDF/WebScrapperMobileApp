@@ -1,6 +1,7 @@
 library globals;
 import 'package:flutter/material.dart';
 import 'package:pfe_mobile/favorite.dart';
+import 'package:pfe_mobile/feed.dart';
 import 'package:pfe_mobile/user.dart';
 import 'Group.dart';
 import 'package:pfe_mobile/Category.dart';
@@ -19,6 +20,7 @@ class MyGlobals{
   static List<Product> most_visited = List<Product>();
   static List<Product> all_products = List<Product>();
   static List<Product> search_result = List<Product>();
+  static List<Feed> feeds = List<Feed>();
   static String api_token = ' ';
   static List<Favorite> favourites = List<Favorite>();
   static User current_user = User(name: '',email: '');
@@ -27,7 +29,7 @@ class MyGlobals{
   static int categorie_length = 2;
   static int provider_length = 4;
   static int price_range_length = 4;
-  static String link_start = 'http://41.249.169.68';
+  static String link_start = 'http://160.179.198.27';
   String toString(){
     return
       """$islightmode

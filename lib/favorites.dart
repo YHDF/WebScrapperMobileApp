@@ -1,4 +1,3 @@
-
 class Favourites {
   final List<dynamic> favourites;
 

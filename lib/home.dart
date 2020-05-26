@@ -13,6 +13,7 @@ import 'package:pfe_mobile/side.dart';
 
 import 'favorite.dart';
 import 'favorites.dart';
+import 'main.dart';
 class Home extends StatefulWidget {
 
 
@@ -119,231 +120,240 @@ class HomeState extends State<Home> {
   Widget build(BuildContext context) {
     dev_width = MediaQuery.of(context).size.width;
     dev_height = MediaQuery.of(context).size.height;
-    return WillPopScope(
-        onWillPop: _onpress,
-        child: Scaffold(
-          body: Stack(
-            children: <Widget>[
-              Background(),
-              new Stack(
-                children: <Widget>[
-                  Container(
-                    height: dev_height / 10,
-                    alignment: Alignment(0,1),
-                    child: Container(
-                      height: dev_height / 18,
+    return GestureDetector(
+      onHorizontalDragCancel: (){
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => MyHomePage()),
+        );
+      },
+      child: WillPopScope(
+          onWillPop: _onpress,
+          child: Scaffold(
+            body: Stack(
+              children: <Widget>[
+                Background(),
+                new Stack(
+                  children: <Widget>[
+                    Container(
+                      height: dev_height / 10,
                       alignment: Alignment(0,1),
                       child: Container(
-                        width: 0.9 * dev_width,
                         height: dev_height / 18,
-                        decoration: BoxDecoration(
-                          color: globals.MyGlobals.lightcolor.withOpacity(0),
-                          border: Border.all(
-                            color: globals.MyGlobals.lightcolor,
-                            width: 0.3,
+                        alignment: Alignment(0,1),
+                        child: Container(
+                          width: 0.9 * dev_width,
+                          height: dev_height / 18,
+                          decoration: BoxDecoration(
+                            color: globals.MyGlobals.lightcolor.withOpacity(0),
+                            border: Border.all(
+                              color: globals.MyGlobals.lightcolor,
+                              width: 0.3,
+                            ),
+                            borderRadius: BorderRadius.circular(20),
                           ),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Row(
-                          children: <Widget>[
-                            Container(
-                              width: 0.9 * dev_width / 2.1,
-                              child: FlatButton(
-                                onPressed: () {
-                                  selected = true;
-                                  unselected = false;
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Home()),
-                                  );
-                                },
-                                child:Center(
-                                  child: Text(
-                                    'Our Choice',
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w300,
-                                      color: lst_selectedchoicecolor[0],
+                          child: Row(
+                            children: <Widget>[
+                              Container(
+                                width: 0.9 * dev_width / 2.1,
+                                child: FlatButton(
+                                  onPressed: () {
+                                    selected = true;
+                                    unselected = false;
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Home()),
+                                    );
+                                  },
+                                  child:Center(
+                                    child: Text(
+                                      'Our Choice',
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w300,
+                                        color: lst_selectedchoicecolor[0],
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                            VerticalDivider(width: dev_width / 41.2,color: globals.MyGlobals.lightcolor,indent: 8,endIndent: 8,),
-                            Container(
-                              width: 0.9 * dev_width / 2.1,
-                              child: FlatButton(
-                                onPressed: () {
-                                  selected = false;
-                                  unselected = true;
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Home()),
-                                  );
-                                },
-                                child: Center(
-                                  child: Text(
-                                    'Most Visited',
-                                    style: TextStyle(
-                                      fontSize: dev_height > dev_width ? dev_width / 27.46 : dev_height / 27.46,
-                                      fontWeight: FontWeight.w300,
-                                      color: lst_selectedchoicecolor[1],
+                              VerticalDivider(width: dev_width / 41.2,color: globals.MyGlobals.lightcolor,indent: 8,endIndent: 8,),
+                              Container(
+                                width: 0.9 * dev_width / 2.1,
+                                child: FlatButton(
+                                  onPressed: () {
+                                    selected = false;
+                                    unselected = true;
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Home()),
+                                    );
+                                  },
+                                  child: Center(
+                                    child: Text(
+                                      'Most Visited',
+                                      style: TextStyle(
+                                        fontSize: dev_height > dev_width ? dev_width / 27.46 : dev_height / 27.46,
+                                        fontWeight: FontWeight.w300,
+                                        color: lst_selectedchoicecolor[1],
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Container(
-                    alignment: Alignment(0, 0.25),
-                    child: Container(
-                      width: dev_width,
-                      height: 14.5 * dev_height / 18,
-                      child: ListView.separated(
-                        separatorBuilder: (BuildContext context, int index) =>
-                            Divider(color: globals.MyGlobals.lightcolor,indent: dev_height > dev_width ? dev_width / 16.48
-                              : dev_height / 16.48 ,endIndent: dev_height > dev_width ? dev_width / 16.48
-                                : dev_height / 16.48,),
-                        itemCount: selected ? globals.MyGlobals.best_products.length : globals.MyGlobals.most_visited.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return FlatButton(
-                            onPressed: (){
-                              if(selected){
-                                for(int i =0; i < globals.MyGlobals.all_products.length; i++){
-                                  if(globals.MyGlobals.all_products[i].id_product == globals.MyGlobals.best_products[index].id_product){
-                                    counter = i;
-                                    break;
+                    Container(
+                      alignment: Alignment(0, 0.25),
+                      child: Container(
+                        width: dev_width,
+                        height: 14.5 * dev_height / 18,
+                        child: ListView.separated(
+                          separatorBuilder: (BuildContext context, int index) =>
+                              Divider(color: globals.MyGlobals.lightcolor,indent: dev_height > dev_width ? dev_width / 16.48
+                                : dev_height / 16.48 ,endIndent: dev_height > dev_width ? dev_width / 16.48
+                                  : dev_height / 16.48,),
+                          itemCount: selected ? globals.MyGlobals.best_products.length : globals.MyGlobals.most_visited.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return FlatButton(
+                              onPressed: (){
+                                if(selected){
+                                  for(int i =0; i < globals.MyGlobals.all_products.length; i++){
+                                    if(globals.MyGlobals.all_products[i].id_product == globals.MyGlobals.best_products[index].id_product){
+                                      counter = i;
+                                      break;
+                                    }
+                                  }
+                                }else{
+                                  for(int i =0; i < globals.MyGlobals.all_products.length; i++){
+                                    if(globals.MyGlobals.all_products[i].id_product == globals.MyGlobals.most_visited[index].id_product){
+                                      counter = i;
+                                      break;
+                                    }
                                   }
                                 }
-                              }else{
-                                for(int i =0; i < globals.MyGlobals.all_products.length; i++){
-                                  if(globals.MyGlobals.all_products[i].id_product == globals.MyGlobals.most_visited[index].id_product){
-                                    counter = i;
-                                    break;
-                                  }
-                                }
-                              }
-                              first_counter = index;
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => product_detail(counter)),
-                              );
-                            },
-                            child: Container(
-                              height: dev_height / 8.13,
-                              decoration: BoxDecoration(
-                                color: globals.MyGlobals.lightcolor.withOpacity(0),
-                                border: Border.all(
-                                  color: Colors.transparent,
-                                  width: 0,
-                                ),
-                                borderRadius: BorderRadius.circular(dev_width / 41.2),
-                              ),
-                              child: Row(
-                                children: <Widget>[
-                                  VerticalDivider(width: dev_width / 41.2,color: Colors.transparent,),
-                                  Container(
-                                    width: dev_width / 5,
-                                    height: dev_height / 9.76,
-                                    child: Image.network(
-                                      selected ? globals.MyGlobals.best_products[index].image : globals.MyGlobals.most_visited[index].image,
-                                    ),
+                                first_counter = index;
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => product_detail(counter)),
+                                );
+                              },
+                              child: Container(
+                                height: dev_height / 8.13,
+                                decoration: BoxDecoration(
+                                  color: globals.MyGlobals.lightcolor.withOpacity(0),
+                                  border: Border.all(
+                                    color: Colors.transparent,
+                                    width: 0,
                                   ),
-                                  VerticalDivider(width: dev_width / 41.2,color: Colors.transparent,),
-                                  Container(
-                                    width: 2 * dev_width / 3.3,
-                                    child: Column(
-                                      children: <Widget>[
-                                        Container(
-                                          height: dev_height / 14.64,
-                                          child: Center(
-                                            child: Text(
-                                              selected ? globals.MyGlobals.best_products[index].name : globals.MyGlobals.most_visited[index].name,
-                                              style: TextStyle(
-                                                color: globals.MyGlobals.lightcolor,
-                                                fontWeight: FontWeight.w300,
+                                  borderRadius: BorderRadius.circular(dev_width / 41.2),
+                                ),
+                                child: Row(
+                                  children: <Widget>[
+                                    VerticalDivider(width: dev_width / 41.2,color: Colors.transparent,),
+                                    Container(
+                                      width: dev_width / 5,
+                                      height: dev_height / 9.76,
+                                      child: Image.network(
+                                        selected ? globals.MyGlobals.best_products[index].image : globals.MyGlobals.most_visited[index].image,
+                                      ),
+                                    ),
+                                    VerticalDivider(width: dev_width / 41.2,color: Colors.transparent,),
+                                    Container(
+                                      width: 2 * dev_width / 3.3,
+                                      child: Column(
+                                        children: <Widget>[
+                                          Container(
+                                            height: dev_height / 14.64,
+                                            child: Center(
+                                              child: Text(
+                                                selected ? globals.MyGlobals.best_products[index].name : globals.MyGlobals.most_visited[index].name,
+                                                style: TextStyle(
+                                                  color: globals.MyGlobals.lightcolor,
+                                                  fontWeight: FontWeight.w300,
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                        Container(
-                                          height: dev_height / 20.91,
-                                          child: Row(
-                                            children: <Widget>[
-                                              Container(
-                                                width: dev_width / 6,
-                                                alignment: Alignment(1,0),
-                                                child: Text(
-                                                  selected ? globals.MyGlobals.best_products[index].price.toString() + "\$" : globals.MyGlobals.most_visited[index].price.toString() + "\$",
-                                                  style: TextStyle(
-                                                    color: globals.MyGlobals.lightcolor,
-                                                    fontWeight: FontWeight.w300,
+                                          Container(
+                                            height: dev_height / 20.91,
+                                            child: Row(
+                                              children: <Widget>[
+                                                Container(
+                                                  width: dev_width / 6,
+                                                  alignment: Alignment(1,0),
+                                                  child: Text(
+                                                    selected ? globals.MyGlobals.best_products[index].price.toString() + "\$" : globals.MyGlobals.most_visited[index].price.toString() + "\$",
+                                                    style: TextStyle(
+                                                      color: globals.MyGlobals.lightcolor,
+                                                      fontWeight: FontWeight.w300,
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                              VerticalDivider(width : dev_height / 22,color: Colors.transparent,),
-                                              Container(
-                                                width: dev_width / 3,
-                                                alignment: Alignment(1,0),
-                                                child: FlatButton(
-                                                  onPressed: () {
-                                                    setState(() {
-                                                      _launched = _launchInBrowser(selected ? globals.MyGlobals.best_products[index].link.toString() : globals.MyGlobals.most_visited[index].link.toString());
-                                                    });
-                                                  },
-                                                  child: Stack(
-                                                    children: <Widget>[
-                                                      Container(
-                                                        alignment: Alignment(0,0),
-                                                        child: Text(
-                                                            'visit in website',
-                                                          style: TextStyle(
-                                                            color: globals.MyGlobals.lightcolor,
-                                                            fontWeight: FontWeight.w300,
+                                                VerticalDivider(width : dev_height / 22,color: Colors.transparent,),
+                                                Container(
+                                                  width: dev_width / 3,
+                                                  alignment: Alignment(1,0),
+                                                  child: FlatButton(
+                                                    onPressed: () {
+                                                      setState(() {
+                                                        _launched = _launchInBrowser(selected ? globals.MyGlobals.best_products[index].link.toString() : globals.MyGlobals.most_visited[index].link.toString());
+                                                      });
+                                                    },
+                                                    child: Stack(
+                                                      children: <Widget>[
+                                                        Container(
+                                                          alignment: Alignment(0,0),
+                                                          child: Text(
+                                                              'visit in website',
+                                                            style: TextStyle(
+                                                              color: globals.MyGlobals.lightcolor,
+                                                              fontWeight: FontWeight.w300,
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                      Container(
-                                                        alignment: Alignment(1,0),
-                                                        child: Icon(
-                                                            IconData(58849, fontFamily: 'MaterialIcons', matchTextDirection: true),
-                                                          color: globals.MyGlobals.lightcolor,
-                                                          size: dev_width / 41.2,
-                                                        ),
-                                                      )
-                                                    ],
+                                                        Container(
+                                                          alignment: Alignment(1,0),
+                                                          child: Icon(
+                                                              IconData(58849, fontFamily: 'MaterialIcons', matchTextDirection: true),
+                                                            color: globals.MyGlobals.lightcolor,
+                                                            size: dev_width / 41.2,
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                              FutureBuilder<void>(future: _launched, builder: _launchStatus),
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  )
-                                ],
+                                                FutureBuilder<void>(future: _launched, builder: _launchStatus),
+                                              ],
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
-                            ),
-                          );
-                        },
+                            );
+                          },
 
+                        ),
                       ),
-                    ),
-                  )
-                ],
-              ),
-              bottom_bar(),
-            ],
+                    )
+                  ],
+                ),
+                bottom_bar(),
+              ],
+            ),
+            drawer: side_bar(),
           ),
-          drawer: side_bar(),
-        ),
+      ),
     );
   }
 }
