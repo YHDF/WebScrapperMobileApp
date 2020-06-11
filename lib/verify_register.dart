@@ -19,6 +19,8 @@ class VerifyState extends State<Verify>{
   double dev_width , dev_height ;
   final _controller = TextEditingController();
   static String verify_message = '';
+  static bool visible = false;
+
   void verify_code() async{
     await Future<Message>(() async{
       final response = await http.post("${globals.MyGlobals.link_start}/api/verify?api_token=${globals.MyGlobals.api_token}&code=${_controller.text}");
@@ -29,6 +31,7 @@ class VerifyState extends State<Verify>{
       }
     }).then((value) async{
       if(value.message == "email verified successfully"){
+        globals.MyGlobals.api_token = globals.MyGlobals.temp_api_token;
         await session_token.defaultSessionWriter();
         await setting_variables.defaultConfigWriter();
         Future<setting_variables>((){
@@ -49,6 +52,7 @@ class VerifyState extends State<Verify>{
         });
       }else{
         setState(() {
+          visible = true;
           verify_message = value.message;
         });
       }
@@ -73,8 +77,8 @@ class VerifyState extends State<Verify>{
               begin: Alignment(-1, -1),
               end: Alignment(-1, 1),
               colors: [
-                const Color.fromRGBO(255, 155, 112, 1),
-                const Color.fromRGBO(255, 74, 105, 1),
+                const Color.fromRGBO(236, 111, 102, 1),
+                const Color.fromRGBO(243, 161, 131, 1),
               ], // whitish to gray
             ),
           ),
@@ -89,27 +93,21 @@ class VerifyState extends State<Verify>{
                   child: Text(
                     Signup_ContainerState.verification_message,
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 35,fontWeight: FontWeight.w400,color: Colors.white,),
+                    style: TextStyle(fontSize: 35,fontWeight: FontWeight.w100,color: Colors.white,),
                   ),
                 ),
               ),
-              Container(
-                alignment: Alignment(0,-0.2),
+              Visibility(
+                visible: visible,
                 child: Container(
-                  alignment: Alignment(0,0),
-                  width: dev_width * 0.9,
-                  height: dev_height / 16,
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.3),
-                    border: Border.all(color: Colors.transparent,width: 0.0,),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
+                  alignment: Alignment(0,-0.2),
                   child: Text(
                     verify_message,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Colors.red,
+                      color: Colors.white,
                       fontSize: 12,
+                      fontWeight: FontWeight.w200,
                     ),
                   ),
                 ),
@@ -120,9 +118,9 @@ class VerifyState extends State<Verify>{
                   width: 0.9 * dev_width,
                   height: dev_height / 14,
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.3),
-                    border: Border.all(color: Colors.transparent, width: 0),
-                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.transparent,
+                    border: Border.all(color: Colors.white, width: 0),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: Center(
                     child: Container(
@@ -191,8 +189,8 @@ class VerifyState extends State<Verify>{
                       width: dev_width < dev_height ? 0.125 * dev_width : 0.125 * dev_height,
                       height: dev_width < dev_height ? 0.125 * dev_width : 0.125 * dev_height,
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.3),
-                        border: Border.all(color: Colors.transparent,width: 0.0),
+                        color:Colors.transparent ,
+                        border: Border.all(color: Colors.white ,width: 0.0),
                         borderRadius: BorderRadius.circular(dev_width),
                       ),
                       child: Icon(
@@ -212,6 +210,7 @@ class VerifyState extends State<Verify>{
                   child: FlatButton(
                     onPressed: (){
                       Navigator.pop(context);
+                      visible = false;
                       //Navigator.pop(context);
                     },
                     child: Container(
@@ -219,8 +218,8 @@ class VerifyState extends State<Verify>{
                       width: dev_width < dev_height ? 0.125 * dev_width : 0.125 * dev_height,
                       height: dev_width < dev_height ? 0.125 * dev_width : 0.125 * dev_height,
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.3),
-                        border: Border.all(color: Colors.transparent,width: 0.0),
+                        color: Colors.transparent,
+                        border: Border.all(color:Colors.white ,width: 0.0),
                         borderRadius: BorderRadius.circular(dev_width),
                       ),
                       child: Icon(
@@ -238,6 +237,5 @@ class VerifyState extends State<Verify>{
       ),
     );
   }
-
 }
 

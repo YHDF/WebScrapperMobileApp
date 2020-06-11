@@ -31,10 +31,10 @@ $isdark""";
       configReader();
       if(globals.MyGlobals.islightmode == true && globals.MyGlobals.isdarkmode == false){
         globals.MyGlobals.lightcolor = Colors.white;
-        globals.MyGlobals.darkcolor = Colors.black;
+        globals.MyGlobals.darkcolor = Color.fromRGBO(59, 59, 59, 1);
       }
       if(globals.MyGlobals.islightmode == false && globals.MyGlobals.isdarkmode == true){
-        globals.MyGlobals.lightcolor = Colors.black;
+        globals.MyGlobals.lightcolor = Color.fromRGBO(59, 59, 59, 1);
         globals.MyGlobals.darkcolor = Colors.white;
       }
       Navigator.push(

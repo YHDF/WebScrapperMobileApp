@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pfe_mobile/animation.dart';
+import 'package:pfe_mobile/linear_animation.dart';
 import 'package:pfe_mobile/session_token.dart';
 import 'package:pfe_mobile/setting_variables.dart';
 import 'package:pfe_mobile/starting.dart';

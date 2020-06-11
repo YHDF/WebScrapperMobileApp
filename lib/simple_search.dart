@@ -107,7 +107,7 @@ class Simple_SearchState extends State<Simple_Search> with TickerProviderStateMi
                         style: TextStyle(
                           fontSize: 50,
                           fontWeight: FontWeight.w100,
-                          color: globals.MyGlobals.lightcolor.withOpacity(0.5),
+                          color: globals.MyGlobals.lightcolor,
                         ),
                       ),
                     ),

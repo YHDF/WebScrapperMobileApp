@@ -46,14 +46,14 @@ class _auth_dynamicState extends State<auth_dynamic> {
       body: GestureDetector(
         child: Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment(-1, -1),
-              end: Alignment(1, 1),
-              colors: [
-                const Color.fromRGBO(236, 111, 102, 1),
-                const Color.fromRGBO(243, 161, 131, 1),
-              ], // whitish to gray
-            ),
+              gradient: LinearGradient(
+                begin: Alignment(0, -1),
+                end: Alignment(0, 0.5),
+                colors: [
+                  const Color.fromRGBO(236, 111, 102, 1),
+                  const Color.fromRGBO(243, 161, 131, 1),
+                ], // whitish to gray
+              ),
           ),
           child: Stack(
             children: <Widget>[
@@ -254,13 +254,12 @@ class Login_ContainerState extends State<Login_Container> {
           }).then((value) {
             if (value.lightmode == true && value.darkmode == false) {
               globals.MyGlobals.lightcolor = Colors.white;
-              globals.MyGlobals.darkcolor = Color.fromRGBO(33, 33, 33, 1);
+              globals.MyGlobals.darkcolor = Color.fromRGBO(59, 59, 59, 1);
             }
             if (value.lightmode == false && value.darkmode == true) {
-              globals.MyGlobals.lightcolor = Colors.black;
-              globals.MyGlobals.darkcolor = Color.fromRGBO(33, 33, 33, 1);
+              globals.MyGlobals.lightcolor = Color.fromRGBO(59, 59, 59, 1);
+              globals.MyGlobals.darkcolor = Colors.white;
             }
-
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => Home()),
@@ -311,8 +310,9 @@ class Login_ContainerState extends State<Login_Container> {
                   child: Text(
                     verification_message,
                     style: TextStyle(
-                      color: Colors.red,
+                      color: Colors.white,
                       fontSize: 12,
+                      fontWeight: FontWeight.w200,
                     ),
                   ),
                 ),
@@ -442,7 +442,7 @@ class Login_ContainerState extends State<Login_Container> {
                   height: dev_height / 6,
                   alignment: Alignment(0, 1),
                   child: Container(
-                    height: dev_height / 73.2,
+                    height: dev_height / 32,
                     child: OverflowBox(
                       maxWidth: dev_width,
                       maxHeight: dev_height / 5,
@@ -545,7 +545,7 @@ class Signup_ContainerState extends State<Signup_Container> {
         });
       } else {
         await Future<dynamic>(() async {
-          globals.MyGlobals.api_token = value.token;
+          globals.MyGlobals.temp_api_token = value.token;
           final response = await http.get(
               "${globals.MyGlobals.link_start}/api/sendverify?api_token=${value.token}");
           if (response.statusCode == 200) {
@@ -604,8 +604,9 @@ class Signup_ContainerState extends State<Signup_Container> {
                 child: Text(
                   verification_message,
                   style: TextStyle(
-                    color: Colors.red,
+                    color: Colors.white,
                     fontSize: 12,
+                    fontWeight: FontWeight.w200
                   ),
                 ),
               ),
@@ -781,7 +782,7 @@ class Signup_ContainerState extends State<Signup_Container> {
                 height: dev_height / 7.32,
                 alignment: Alignment(0, 1.2),
                 child: Container(
-                  height: dev_height / 64,
+                  height: dev_height / 32,
                   child: OverflowBox(
                     maxWidth: dev_width / 1.648,
                     maxHeight: dev_height / 7,

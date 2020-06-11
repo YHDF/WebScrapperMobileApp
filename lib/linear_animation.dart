@@ -119,7 +119,7 @@ class LoadingAnimationState extends State<LoadingAnimation> with TickerProviderS
               child: Container(
                 width: line_length * dev_width,
                 height: dev_height / 300,
-                color: Color.fromRGBO(82, 82, 82, 1),
+                color: globals.MyGlobals.lightcolor,
               ),
             )
           ],

@@ -33,7 +33,7 @@ class user_profileState extends State<user_profile>
       super.initState();
       str = '';
       opacity_controller =
-          AnimationController(vsync: this, duration: Duration(seconds: 2));
+          AnimationController(vsync: this, duration: Duration(seconds: 1));
       opacity_anim = Tween<double>(begin: 0, end: 0.9).animate(CurvedAnimation(
         parent: opacity_controller,
         curve: Interval(0.5, 1, curve: Curves.linear),

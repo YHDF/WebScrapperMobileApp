@@ -10,13 +10,11 @@ import 'dart:io';
 import 'package:url_launcher/url_launcher.dart';
 import 'Globals.dart' as globals;
 import 'package:pfe_mobile/side.dart';
-
 import 'favorite.dart';
 import 'favorites.dart';
 import 'main.dart';
+
 class Home extends StatefulWidget {
-
-
   HomeState createState() {
     // TODO: implement createState
     return HomeState();
@@ -33,9 +31,10 @@ class HomeState extends State<Home> {
   static List<bool> lst_selectedchoice = new List<bool>();
   static List<Color> lst_selectedchoicecolor = new List<Color>();
   static Color computer_color, phone_color;
-  static bool computer_selected, phone_selected,phone_rotated;
+  static bool computer_selected, phone_selected, phone_rotated;
   static int counter = 0;
   static int first_counter = 0;
+
 
 
   void initState() {
@@ -49,11 +48,17 @@ class HomeState extends State<Home> {
           i, lst_selectedchoice[i] ? selectedcolor : unselectedcolor);
     }
     computer_selected = phone_selected = true;
-    computer_color = phone_color =  globals.MyGlobals.darkcolor;
+    computer_color = phone_color = globals.MyGlobals.darkcolor;
   }
-  void getfavorites() async{
-    await Future<Favourites> (() async {
-      final response = await http.get('${globals.MyGlobals.link_start}/api/favourite?api_token=${globals.MyGlobals.api_token}');
+
+  void dispose() {
+    super.dispose();
+  }
+
+  void getfavorites() async {
+    await Future<Favourites>(() async {
+      final response = await http.get(
+          '${globals.MyGlobals.link_start}/api/favourite?api_token=${globals.MyGlobals.api_token}');
       if (response.statusCode == 200) {
         return Favourites.fromJson(json.decode(response.body));
       } else {
@@ -67,9 +72,10 @@ class HomeState extends State<Home> {
     });
   }
 
-  static void get_user_data() async{
+  static void get_user_data() async {
     await Future<Profile>(() async {
-      final response = await http.get('${globals.MyGlobals.link_start}/api/user?api_token=${globals.MyGlobals.api_token}');
+      final response = await http.get(
+          '${globals.MyGlobals.link_start}/api/user?api_token=${globals.MyGlobals.api_token}');
       if (response.statusCode == 200) {
         return Profile.fromJson(json.decode(response.body));
       } else {
@@ -108,6 +114,12 @@ class HomeState extends State<Home> {
       throw 'Could not launch $url';
     }
   }
+  Future<void> _refresh() async{
+    await Future.delayed(Duration(seconds: 3),() async{
+      await main();
+    });
+}
+
   Widget _launchStatus(BuildContext context, AsyncSnapshot<void> snapshot) {
     if (snapshot.hasError) {
       print('Error: ${snapshot.error}');
@@ -116,32 +128,64 @@ class HomeState extends State<Home> {
       return const Text('');
     }
   }
+
   @override
   Widget build(BuildContext context) {
     dev_width = MediaQuery.of(context).size.width;
     dev_height = MediaQuery.of(context).size.height;
-    return GestureDetector(
-      onHorizontalDragCancel: (){
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => MyHomePage()),
-        );
-      },
-      child: WillPopScope(
-          onWillPop: _onpress,
-          child: Scaffold(
-            body: Stack(
-              children: <Widget>[
-                Background(),
-                new Stack(
+    return WillPopScope(
+      onWillPop: _onpress,
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+
+        body: Stack(
+          children: <Widget>[
+            Background(),
+            Container(
+              child: Dismissible(
+                resizeDuration: Duration(milliseconds: 500 ),
+                key: UniqueKey(),
+                direction: DismissDirection.down,
+                background: Stack(
+                  children: <Widget>[
+                    Background(),
+                    Container(
+                      alignment: Alignment(0,0),
+                      child: Container(
+                        width: dev_width / 4,
+                        height: dev_width / 4,
+                        child: CircularProgressIndicator(
+                          backgroundColor: Colors.transparent,
+                            valueColor: AlwaysStoppedAnimation<Color>(globals.MyGlobals.lightcolor),
+                          strokeWidth: 1,
+
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                onDismissed: (direction){
+                  setState(() {
+                    main();
+                  });
+                },
+                /*onDismissed: (_) {
+                  setState(() {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MyHomePage()),
+                    );
+                  });
+
+                },*/
+                child: Stack(
                   children: <Widget>[
                     Container(
                       height: dev_height / 10,
-                      alignment: Alignment(0,1),
+                      alignment: Alignment(0, 1),
                       child: Container(
                         height: dev_height / 18,
-                        alignment: Alignment(0,1),
+                        alignment: Alignment(0, 1),
                         child: Container(
                           width: 0.9 * dev_width,
                           height: dev_height / 18,
@@ -167,7 +211,7 @@ class HomeState extends State<Home> {
                                           builder: (context) => Home()),
                                     );
                                   },
-                                  child:Center(
+                                  child: Center(
                                     child: Text(
                                       'Our Choice',
                                       style: TextStyle(
@@ -179,7 +223,12 @@ class HomeState extends State<Home> {
                                   ),
                                 ),
                               ),
-                              VerticalDivider(width: dev_width / 41.2,color: globals.MyGlobals.lightcolor,indent: 8,endIndent: 8,),
+                              VerticalDivider(
+                                width: dev_width / 41.2,
+                                color: globals.MyGlobals.lightcolor,
+                                indent: 8,
+                                endIndent: 8,
+                              ),
                               Container(
                                 width: 0.9 * dev_width / 2.1,
                                 child: FlatButton(
@@ -196,7 +245,9 @@ class HomeState extends State<Home> {
                                     child: Text(
                                       'Most Visited',
                                       style: TextStyle(
-                                        fontSize: dev_height > dev_width ? dev_width / 27.46 : dev_height / 27.46,
+                                        fontSize: dev_height > dev_width
+                                            ? dev_width / 27.46
+                                            : dev_height / 27.46,
                                         fontWeight: FontWeight.w300,
                                         color: lst_selectedchoicecolor[1],
                                       ),
@@ -214,145 +265,233 @@ class HomeState extends State<Home> {
                       child: Container(
                         width: dev_width,
                         height: 14.5 * dev_height / 18,
-                        child: ListView.separated(
-                          separatorBuilder: (BuildContext context, int index) =>
-                              Divider(color: globals.MyGlobals.lightcolor,indent: dev_height > dev_width ? dev_width / 16.48
-                                : dev_height / 16.48 ,endIndent: dev_height > dev_width ? dev_width / 16.48
-                                  : dev_height / 16.48,),
-                          itemCount: selected ? globals.MyGlobals.best_products.length : globals.MyGlobals.most_visited.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return FlatButton(
-                              onPressed: (){
-                                if(selected){
-                                  for(int i =0; i < globals.MyGlobals.all_products.length; i++){
-                                    if(globals.MyGlobals.all_products[i].id_product == globals.MyGlobals.best_products[index].id_product){
-                                      counter = i;
-                                      break;
+                        child: RefreshIndicator(
+                          backgroundColor: globals.MyGlobals.lightcolor,
+                          color: globals.MyGlobals.darkcolor,
+                          strokeWidth: 2,
+                          onRefresh: _refresh,
+                          child: ListView.separated(
+                            separatorBuilder: (BuildContext context, int index) =>
+                                Divider(
+                              color: globals.MyGlobals.lightcolor,
+                              indent: dev_height > dev_width
+                                  ? dev_width / 16.48
+                                  : dev_height / 16.48,
+                              endIndent: dev_height > dev_width
+                                  ? dev_width / 16.48
+                                  : dev_height / 16.48,
+                            ),
+                            itemCount: selected
+                                ? globals.MyGlobals.best_products.length
+                                : globals.MyGlobals.most_visited.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return FlatButton(
+                                onPressed: () {
+                                  if (selected) {
+                                    for (int i = 0;
+                                        i < globals.MyGlobals.all_products.length;
+                                        i++) {
+                                      if (globals.MyGlobals.all_products[i]
+                                              .id_product ==
+                                          globals.MyGlobals.best_products[index]
+                                              .id_product) {
+                                        counter = i;
+                                        break;
+                                      }
+                                    }
+                                  } else {
+                                    for (int i = 0;
+                                        i < globals.MyGlobals.all_products.length;
+                                        i++) {
+                                      if (globals.MyGlobals.all_products[i]
+                                              .id_product ==
+                                          globals.MyGlobals.most_visited[index]
+                                              .id_product) {
+                                        counter = i;
+                                        break;
+                                      }
                                     }
                                   }
-                                }else{
-                                  for(int i =0; i < globals.MyGlobals.all_products.length; i++){
-                                    if(globals.MyGlobals.all_products[i].id_product == globals.MyGlobals.most_visited[index].id_product){
-                                      counter = i;
-                                      break;
-                                    }
-                                  }
-                                }
-                                first_counter = index;
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => product_detail(counter)),
-                                );
-                              },
-                              child: Container(
-                                height: dev_height / 8.13,
-                                decoration: BoxDecoration(
-                                  color: globals.MyGlobals.lightcolor.withOpacity(0),
-                                  border: Border.all(
-                                    color: Colors.transparent,
-                                    width: 0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(dev_width / 41.2),
-                                ),
-                                child: Row(
-                                  children: <Widget>[
-                                    VerticalDivider(width: dev_width / 41.2,color: Colors.transparent,),
-                                    Container(
-                                      width: dev_width / 5,
-                                      height: dev_height / 9.76,
-                                      child: Image.network(
-                                        selected ? globals.MyGlobals.best_products[index].image : globals.MyGlobals.most_visited[index].image,
-                                      ),
+                                  first_counter = index;
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            product_detail(counter)),
+                                  );
+                                },
+                                child: Container(
+                                  height: dev_height / 8.13,
+                                  decoration: BoxDecoration(
+                                    color:
+                                        globals.MyGlobals.lightcolor.withOpacity(0),
+                                    border: Border.all(
+                                      color: Colors.transparent,
+                                      width: 0,
                                     ),
-                                    VerticalDivider(width: dev_width / 41.2,color: Colors.transparent,),
-                                    Container(
-                                      width: 2 * dev_width / 3.3,
-                                      child: Column(
-                                        children: <Widget>[
-                                          Container(
-                                            height: dev_height / 14.64,
-                                            child: Center(
-                                              child: Text(
-                                                selected ? globals.MyGlobals.best_products[index].name : globals.MyGlobals.most_visited[index].name,
-                                                style: TextStyle(
-                                                  color: globals.MyGlobals.lightcolor,
-                                                  fontWeight: FontWeight.w300,
+                                    borderRadius:
+                                        BorderRadius.circular(dev_width / 41.2),
+                                  ),
+                                  child: Row(
+                                    children: <Widget>[
+                                      VerticalDivider(
+                                        width: dev_width / 41.2,
+                                        color: Colors.transparent,
+                                      ),
+                                      Container(
+                                        width: dev_width / 5,
+                                        height: dev_height / 9.76,
+                                        child: Image.network(
+                                          selected
+                                              ? globals.MyGlobals
+                                                  .best_products[index].image
+                                              : globals.MyGlobals
+                                                  .most_visited[index].image,
+                                        ),
+                                      ),
+                                      VerticalDivider(
+                                        width: dev_width / 41.2,
+                                        color: Colors.transparent,
+                                      ),
+                                      Container(
+                                        width: 2 * dev_width / 3.3,
+                                        child: Column(
+                                          children: <Widget>[
+                                            Container(
+                                              height: dev_height / 14.64,
+                                              child: Center(
+                                                child: Text(
+                                                  selected
+                                                      ? globals.MyGlobals
+                                                          .best_products[index].name
+                                                      : globals.MyGlobals
+                                                          .most_visited[index].name,
+                                                  style: TextStyle(
+                                                    color: globals
+                                                        .MyGlobals.lightcolor,
+                                                    fontWeight: FontWeight.w300,
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                          Container(
-                                            height: dev_height / 20.91,
-                                            child: Row(
-                                              children: <Widget>[
-                                                Container(
-                                                  width: dev_width / 6,
-                                                  alignment: Alignment(1,0),
-                                                  child: Text(
-                                                    selected ? globals.MyGlobals.best_products[index].price.toString() + "\$" : globals.MyGlobals.most_visited[index].price.toString() + "\$",
-                                                    style: TextStyle(
-                                                      color: globals.MyGlobals.lightcolor,
-                                                      fontWeight: FontWeight.w300,
+                                            Container(
+                                              height: dev_height / 20.91,
+                                              child: Row(
+                                                children: <Widget>[
+                                                  Container(
+                                                    width: dev_width / 6,
+                                                    alignment: Alignment(1, 0),
+                                                    child: Text(
+                                                      selected
+                                                          ? globals
+                                                                  .MyGlobals
+                                                                  .best_products[
+                                                                      index]
+                                                                  .price
+                                                                  .toString() +
+                                                              "\$"
+                                                          : globals
+                                                                  .MyGlobals
+                                                                  .most_visited[
+                                                                      index]
+                                                                  .price
+                                                                  .toString() +
+                                                              "\$",
+                                                      style: TextStyle(
+                                                        color: globals
+                                                            .MyGlobals.lightcolor,
+                                                        fontWeight: FontWeight.w300,
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                                VerticalDivider(width : dev_height / 22,color: Colors.transparent,),
-                                                Container(
-                                                  width: dev_width / 3,
-                                                  alignment: Alignment(1,0),
-                                                  child: FlatButton(
-                                                    onPressed: () {
-                                                      setState(() {
-                                                        _launched = _launchInBrowser(selected ? globals.MyGlobals.best_products[index].link.toString() : globals.MyGlobals.most_visited[index].link.toString());
-                                                      });
-                                                    },
-                                                    child: Stack(
-                                                      children: <Widget>[
-                                                        Container(
-                                                          alignment: Alignment(0,0),
-                                                          child: Text(
+                                                  VerticalDivider(
+                                                    width: dev_height / 22,
+                                                    color: Colors.transparent,
+                                                  ),
+                                                  Container(
+                                                    width: dev_width / 3,
+                                                    alignment: Alignment(1, 0),
+                                                    child: FlatButton(
+                                                      onPressed: () {
+                                                        setState(() {
+                                                          _launched = _launchInBrowser(
+                                                              selected
+                                                                  ? globals
+                                                                      .MyGlobals
+                                                                      .best_products[
+                                                                          index]
+                                                                      .link
+                                                                      .toString()
+                                                                  : globals
+                                                                      .MyGlobals
+                                                                      .most_visited[
+                                                                          index]
+                                                                      .link
+                                                                      .toString());
+                                                        });
+                                                      },
+                                                      child: Stack(
+                                                        children: <Widget>[
+                                                          Container(
+                                                            alignment:
+                                                                Alignment(0, 0),
+                                                            child: Text(
                                                               'visit in website',
-                                                            style: TextStyle(
-                                                              color: globals.MyGlobals.lightcolor,
-                                                              fontWeight: FontWeight.w300,
+                                                              style: TextStyle(
+                                                                color: globals
+                                                                    .MyGlobals
+                                                                    .lightcolor,
+                                                                fontWeight:
+                                                                    FontWeight.w300,
+                                                              ),
                                                             ),
                                                           ),
-                                                        ),
-                                                        Container(
-                                                          alignment: Alignment(1,0),
-                                                          child: Icon(
-                                                              IconData(58849, fontFamily: 'MaterialIcons', matchTextDirection: true),
-                                                            color: globals.MyGlobals.lightcolor,
-                                                            size: dev_width / 41.2,
-                                                          ),
-                                                        )
-                                                      ],
+                                                          Container(
+                                                            alignment:
+                                                                Alignment(1, 0),
+                                                            child: Icon(
+                                                              IconData(58849,
+                                                                  fontFamily:
+                                                                      'MaterialIcons',
+                                                                  matchTextDirection:
+                                                                      true),
+                                                              color: globals
+                                                                  .MyGlobals
+                                                                  .lightcolor,
+                                                              size:
+                                                                  dev_width / 41.2,
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                                FutureBuilder<void>(future: _launched, builder: _launchStatus),
-                                              ],
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    )
-                                  ],
+                                                  FutureBuilder<void>(
+                                                      future: _launched,
+                                                      builder: _launchStatus),
+                                                ],
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
-
+                              );
+                            },
+                          ),
                         ),
                       ),
                     )
                   ],
                 ),
-                bottom_bar(),
-              ],
+              ),
             ),
-            drawer: side_bar(),
-          ),
+            bottom_bar(),
+          ],
+        ),
+        drawer: side_bar(),
       ),
     );
   }

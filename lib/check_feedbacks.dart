@@ -120,7 +120,7 @@ class MyfeedbacksState extends State<Myfeedbacks>{
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontSize: dev_height > dev_width ? dev_height / 20.91 : dev_width / 20.91,
-                                          color: globals.MyGlobals.darkcolor,
+                                          color: globals.MyGlobals.lightcolor,
                                           fontWeight: FontWeight.w200,
                                         ),
                                       ),
@@ -151,7 +151,7 @@ class MyfeedbacksState extends State<Myfeedbacks>{
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontSize: 35,
-                                          color: globals.MyGlobals.darkcolor,
+                                          color: globals.MyGlobals.lightcolor,
                                           fontWeight: FontWeight.w200,
                                         ),
                                       ),

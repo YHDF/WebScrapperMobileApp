@@ -35,8 +35,8 @@ class ResetState extends State<Reset>{
               begin: Alignment(-1, -1),
               end: Alignment(-1, 1),
               colors: [
-                const Color.fromRGBO(255, 155, 112, 1),
-                const Color.fromRGBO(255, 74, 105, 1),
+                const Color.fromRGBO(236, 111, 102, 1),
+                const Color.fromRGBO(243, 161, 131, 1),
               ], // whitish to gray
             ),
           ),
@@ -48,37 +48,32 @@ class ResetState extends State<Reset>{
                   height: dev_height / 12,
                   child: Row(
                     children: <Widget>[
-                      Container(
-                        width: dev_width / 5,
-                        height: dev_height / 10,
-                        child: FlatButton(
-                          onPressed: (){
-                            Navigator.pop(context);
-                          },
-                          child: Container(
-                            width: dev_width < dev_height ?  dev_width / 10 :  dev_height / 10,
-                            height: dev_width < dev_height ? dev_width / 10 :  dev_height / 10,
-                            decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.5),
-                              border: Border.all(color: Colors.transparent,width: 0.0),
-                              borderRadius: BorderRadius.circular(dev_width),
-                            ),
-                            child: Icon(
-                              IconData(58820, fontFamily: 'MaterialIcons', matchTextDirection: true),
-                              color: Colors.white,
+                      Column(
+                        children: <Widget>[
+                          Divider(height: dev_height / 64,),
+                          Container(
+                            width: dev_width / 5,
+                            height: dev_height / 16,
+                            child: FlatButton(
+                              onPressed: (){
+                                Navigator.pop(context);
+                              },
+                              child: Icon(
+                                IconData(58820, fontFamily: 'MaterialIcons', matchTextDirection: true),
+                                color: Colors.white,
+                              ),
                             ),
                           ),
-                        ),
+                        ],
                       ),
-                      VerticalDivider(width: dev_width / 128,),
+                      VerticalDivider(width: dev_width / 128,color: Colors.transparent,),
                       Container(
                         alignment: Alignment(0,0),
                         width: 3 * dev_width / 4,
                         height: dev_height / 16,
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.5),
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(color: Colors.transparent, width: 0.0),
+                          color: Colors.transparent ,
+                          border: Border(bottom: BorderSide(color: Colors.white,width: 0.5)),
                         ),
                         child:Text(
                           "Enter your email address :",
@@ -97,60 +92,62 @@ class ResetState extends State<Reset>{
               Container(
                 alignment: Alignment(0,0.2),
                 child: Container(
-                  width: 0.9 * dev_width,
-                  height: dev_height / 14,
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.5),
-                    border: Border.all(color: Colors.transparent, width: 0),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Center(
-                    child: Container(
-                      height: dev_height / 8,
-                      child: Row(
-                        children: <Widget>[
-                          Container(
-                            alignment: Alignment(-1, 0),
-                            child: Container(
-                              width: dev_width / 5.70,
-                              height: dev_height / 14.64,
-                              alignment: Alignment(0, 0.2),
-                              child: Icon(
-                                IconData(57534, fontFamily: 'MaterialIcons'),
-                                color: Colors.white,
-                              ),
-                            ),
+                  height: dev_height / 8,
+                  child: Row(
+                    children: <Widget>[
+                      Container(
+                        alignment: Alignment(-1, 0),
+                        child: Container(
+                          width: dev_width / 5.70,
+                          height: dev_height / 14.64,
+                          alignment: Alignment(0, 0.2),
+                          child: Icon(
+                            IconData(57534, fontFamily: 'MaterialIcons'),
+                            color: Colors.white,
                           ),
-                          Container(
-                            alignment: Alignment(1, 0),
-                            child: Container(
-                              width: dev_width / 1.5,
-                              height: dev_height / 14.64,
-                              alignment: Alignment(1, 1),
-                              child: TextFormField(
-                                controller: _controller,
-                                textInputAction: TextInputAction.next,
-                                keyboardType: TextInputType.emailAddress,
-                                validator: (value) {
-                                  if (value.isEmpty) {
-                                    return 'Email is required';
-                                  }
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: 'Email Address',
-                                    hintStyle: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: dev_height > dev_width ? dev_height/ 29.28 : dev_height / 16.48,
-                                    )
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
+                      Container(
+                        alignment: Alignment(1, 0),
+                        child: Container(
+                          width: dev_width / 1.3,
+                          height: dev_height / 14.64,
+                          alignment: Alignment(1, 1),
+                          child: TextFormField(
+                            controller: _controller,
+                            textInputAction: TextInputAction.next,
+                            keyboardType: TextInputType.emailAddress,
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return 'Email is required';
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.white,
+                                    width: 0.5,
+                                  ),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.white,
+                                      width: 0.5
+                                  ),
+                                ),
+                                hintText: 'Password',
+                                hintStyle: TextStyle(
+                                  fontWeight: FontWeight.w100,
+                                  color: Colors.white,
+                                  fontSize: dev_height > dev_width
+                                      ? dev_height / 29.28
+                                      : dev_height / 16.48,
+                                )),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -166,20 +163,10 @@ class ResetState extends State<Reset>{
                       FocusScope.of(context).requestFocus(FocusNode());
                       //Navigator.pop(context);
                     },
-                    child: Container(
-                      alignment: Alignment(0,0),
-                      width: dev_width < dev_height ? 0.12 * dev_width : 0.12 * dev_height,
-                      height: dev_width < dev_height ? 0.12 * dev_width : 0.12 * dev_height,
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.5),
-                        border: Border.all(color: Colors.transparent,width: 0.0),
-                        borderRadius: BorderRadius.circular(dev_width),
-                      ),
-                      child: Icon(
-                          IconData(58826, fontFamily: 'MaterialIcons'),
-                        size: 35,
-                        color: Colors.white,
-                      ),
+                    child: Icon(
+                        IconData(58826, fontFamily: 'MaterialIcons'),
+                      size: 35,
+                      color: Colors.white,
                     ),
                   ),
                 ),

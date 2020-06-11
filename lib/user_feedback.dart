@@ -23,7 +23,7 @@ class User_FeedbackState extends State<User_Feedback> with TickerProviderStateMi
 
   void initState(){
     super.initState();
-    opacity_animator = AnimationController(vsync: this, duration: Duration(seconds: 2));
+    opacity_animator = AnimationController(vsync: this, duration: Duration(seconds: 1));
     opacity_animation = Tween<double>(begin: 0,end: 0.6).animate(
         CurvedAnimation(
           parent: opacity_animator,
