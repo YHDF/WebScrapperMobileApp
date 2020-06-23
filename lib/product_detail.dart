@@ -200,7 +200,7 @@ class product_detailState extends State<product_detail> {
                                           ),
                                         )
                                       ],
-                                    )
+                                    ),
                                 ),
                               ),
                             ),

@@ -338,15 +338,64 @@ class HomeState extends State<Home> {
                                         width: dev_width / 41.2,
                                         color: Colors.transparent,
                                       ),
-                                      Container(
-                                        width: dev_width / 5,
-                                        height: dev_height / 9.76,
-                                        child: Image.network(
-                                          selected
-                                              ? globals.MyGlobals
-                                                  .best_products[index].image
-                                              : globals.MyGlobals
-                                                  .most_visited[index].image,
+                                      Visibility(
+                                        visible: true,
+                                        child: Column(
+                                          children: <Widget>[
+                                            Container(
+                                              width: dev_height > dev_width
+                                                  ? dev_width / 5
+                                                  : dev_height / 5,
+                                              height: dev_height > dev_width
+                                                  ? dev_width / 5
+                                                  : dev_height / 5,
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      color: globals.MyGlobals.lightcolor, width: 1.0),
+                                                  borderRadius:
+                                                  BorderRadius.circular(dev_width / 8),
+                                                ),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                  BorderRadius.circular(dev_width),
+                                                  child: Stack(
+                                                    children: <Widget>[
+                                                      Container(
+                                                        width: dev_height > dev_width
+                                                            ? dev_width / 4
+                                                            : dev_height / 4,
+                                                        height: dev_height > dev_width
+                                                            ? dev_width / 4
+                                                            : dev_height / 4,
+                                                        child: Image.network(
+                                                          selected
+                                                              ? globals.MyGlobals
+                                                              .best_products[index].image
+                                                              : globals.MyGlobals
+                                                              .most_visited[index].image,
+                                                          fit: BoxFit.fill,
+                                                        ),
+                                                      ),
+                                                      Container(
+                                                        width: dev_height > dev_width
+                                                            ? dev_width / 4
+                                                            : dev_height / 4,
+                                                        height: dev_height > dev_width
+                                                            ? dev_width / 4
+                                                            : dev_height / 4,
+                                                        child: FlatButton(
+                                                          onPressed: (){
+                                                          },
+                                                          child: null,
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                       VerticalDivider(

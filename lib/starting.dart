@@ -19,7 +19,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   Animation<double> secondico_Anim;
   Animation<double> welcomeAnim;
   Animation<double> BgColorAnim;
-  final double minG = 120;
+  final double minG = 140;
+  final double minB = 140;
+  final double minR = 140;
   final double maxheight = 200;
   final double maxwidth = 500;
   final double maxOpacity = 1;
@@ -34,6 +36,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   double firstAlignment = 0;
   double secondAlignment = 0;
   double G = 0;
+  double B = 0;
+  double R = 0;
   PageController _controller = PageController(
     initialPage: 0,
   );
@@ -58,6 +62,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     BgColor_controller.addListener(() {
       setState(() {
         G = minG + BgColorAnim.value / 2;
+        B = minB + BgColorAnim.value / 2;
+        R = minR + BgColorAnim.value / 2;
       });
     });
     BgColor_controller.repeat(reverse: true);
@@ -143,6 +149,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         firstAlignment: firstAlignment,
         secondAlignment: secondAlignment,
         BgColorG: G,
+        BgColorB: B,
+        BgColorR: R,
       ),
     );
   }
@@ -150,7 +158,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
 class Startup extends StatelessWidget {
   final double width, height, ico_opacity, txt_opacity, dev_height, dev_width,wt_opacity,
-  firstAlignment, secondAlignment,BgColorG;
+  firstAlignment, secondAlignment,BgColorG,BgColorB,BgColorR;
 
   Startup({
     this.width,
@@ -163,6 +171,8 @@ class Startup extends StatelessWidget {
     this.firstAlignment,
     this.secondAlignment,
     this.BgColorG,
+    this.BgColorB,
+    this.BgColorR,
   });
 
   Widget build(BuildContext context) {
@@ -183,7 +193,7 @@ class Startup extends StatelessWidget {
           child: Container(
             width: dev_width,
             height: dev_height,
-            color: Color.fromRGBO(255, BgColorG.round(), 107, 0.8),
+            color: Color.fromRGBO(BgColorR.round(), BgColorG.round(), BgColorB.round(), 1),
           ),
         ),
         Container(

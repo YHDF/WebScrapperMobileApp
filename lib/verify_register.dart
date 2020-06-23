@@ -77,8 +77,8 @@ class VerifyState extends State<Verify>{
               begin: Alignment(-1, -1),
               end: Alignment(-1, 1),
               colors: [
-                const Color.fromRGBO(236, 111, 102, 1),
-                const Color.fromRGBO(243, 161, 131, 1),
+                const Color.fromRGBO(134, 143, 150, 1),
+                const Color.fromRGBO(89, 97, 100, 1),
               ], // whitish to gray
             ),
           ),

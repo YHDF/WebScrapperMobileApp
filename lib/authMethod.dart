@@ -12,9 +12,13 @@ class _authMethod_dynamicState extends State<authMethod_dynamic> with TickerProv
   AnimationController quoteTextController;
   Animation<double> BgColorAnim;
   Animation<double> quoteTextAnim;
-  final double minG = 120;
+  final double minG = 140;
+  final double minB = 140;
+  final double minR = 140;
   final double maxOpacity = 1;
   double G = 0;
+  double B = 0;
+  double R = 0;
   double qt_opacity = 0;
 
   PageController _controller = PageController(
@@ -36,7 +40,9 @@ class _authMethod_dynamicState extends State<authMethod_dynamic> with TickerProv
     ));
     BgColor_controller.addListener(() {
       setState(() {
-        G = minG +   BgColorAnim.value / 2;
+        G = minG + BgColorAnim.value / 2;
+        B = minB + BgColorAnim.value / 2;
+        R = minR + BgColorAnim.value / 2;
       });
     });
     BgColor_controller.repeat(reverse: true);
@@ -60,6 +66,8 @@ class _authMethod_dynamicState extends State<authMethod_dynamic> with TickerProv
       child: authMethod_static(
         qt_opacity : qt_opacity,
         G: G,
+        R: R,
+        B: B,
       ),
     );
 
@@ -68,10 +76,14 @@ class _authMethod_dynamicState extends State<authMethod_dynamic> with TickerProv
 class authMethod_static extends StatelessWidget{
   final double qt_opacity;
   final double G;
+  final double B;
+  final double R;
 
   authMethod_static({
     this.qt_opacity,
     this.G,
+    this.B,
+    this.R,
   });
   
   @override
@@ -84,7 +96,7 @@ class authMethod_static extends StatelessWidget{
             clipper: clipping_auth(),
             child: Container(
               alignment: Alignment(0, -0.8),
-              color: Color.fromRGBO(255, G.round(), 107, 0.8),
+              color: Color.fromRGBO(R.round(), G.round(), B.round(), 0.8),
               child : Container(
                 alignment: Alignment(0,-0.8),
                 width: dev_width * 0.95 ,
@@ -122,7 +134,7 @@ class authMethod_static extends StatelessWidget{
                         decoration: BoxDecoration(
                           border: Border.all(
                             width: 1.0,
-                            color: Color.fromRGBO(235, G.round(), 74, 0.8),
+                            color: Color.fromRGBO(R.round(), G.round(), B.round(), 1),
                           ),
                           borderRadius: BorderRadius.circular(20.0)
                         ),
@@ -130,7 +142,7 @@ class authMethod_static extends StatelessWidget{
                           child: Text(
                               "Set up your account",
                             style: TextStyle(
-                              color: Color.fromRGBO(235, G.round(), 74, 0.8),
+                              color: Color.fromRGBO(R.round(), G.round(), B.round(), 1),
                               fontWeight: FontWeight.w200,
                               fontSize: dev_height > dev_width ? dev_height/36.6 : dev_height / 20.6,
                             ),
