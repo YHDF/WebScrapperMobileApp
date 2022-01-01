@@ -69,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     if(globals.MyGlobals.api_token == ' '){
       return Scaffold(
-        resizeToAvoidBottomPadding: false,
+        resizeToAvoidBottomInset: false,
         appBar: null,
         body: PageView(
           controller: _controller,
